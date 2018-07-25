@@ -27,6 +27,7 @@ cc.Class({
         //         this._bar = value;
         //     }
         // },
+        a:0
     },
 
     // LIFE-CYCLE CALLBACKS:
