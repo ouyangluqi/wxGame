@@ -1,17 +1,42 @@
 const Singleton = require('Singleton')
+const Scene = require('Scene')
+const Log = require('Log')
 
-cc.Class({
+var BootScene = cc.Class({
     extends: cc.Component,
 
-    properties: {
+    onLoad: function() {
+        Log.logD("The bootScene is start")
+        this._isRawAssetComplete = false
+        this._isAnimationComplete = false
     },
 
-    // LIFE-CYCLE CALLBACKS:
-    // onLoad () {},
-    // start () {},
-    // update (dt) {},
-
+    //init
     start () {
-        Singleton.init();
+        Singleton.init()
+        this._loadRawAsset()
+        this.scheduleOnce(this._animationCompleteHandler.bind(this), 2)
     },
+
+    _loadRawAsset: function () {
+        Log.logD("_loadRawAsset")
+        this._rawAssetCompleteHandler.bind(this)
+    },
+
+    _rawAssetCompleteHandler: function (error) {
+        this._isRawAssetComplete = true
+        this._checkAllComplete()
+    },
+
+    _animationCompleteHandler: function (dt) {
+        Log.logD("_animationCompleteHandler")
+        this._isAnimationComplete = true
+        this._checkAllComplete()
+    },
+
+    _checkAllComplete: function () {
+        if (this._isAnimationComplete && this._isRawAssetComplete) {
+            cc.director.loadScene(Scene.HALL)
+        }
+    }
 });
