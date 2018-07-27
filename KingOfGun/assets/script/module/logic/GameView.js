@@ -4,11 +4,6 @@ var GameView = cc.Class({
     extends: BaseView,
 
     properties: {
-        rootNode: {
-            name: "锚点为左下角的根节点",
-            default: null,
-            type: cc.Node
-        },
         background: {
             name: "游戏背景",
             default: null,
