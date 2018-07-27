@@ -7,6 +7,6 @@ var Res = cc.Class({
     },
 
     statics: {
-
+        CONFIG_STAGE_PATH: "config/stage"
     }
 })
