@@ -58,7 +58,7 @@ var BaseLoader = cc.Class({
             this._isLoading = true
             this._progressFunc = progressCallBack
             this._completeFunc = completeCallBack
-            cc.loader.loadResArray(this._pathList, this._getResType(), this._progressCallBack.bind(this), this.completeCallBack.bind(this))
+            cc.loader.loadResArray(this._pathList, this._getResType(), this._progressCallBack.bind(this), this._completeCallBack.bind(this))
         }
     },
 
