@@ -2,7 +2,12 @@
     "stageCount": 1,
     "stage": {
         "1":{
-            
+            "items":["1","2","3"],
+            "timeLimit":30,
+            "leftBullet":25,
+            "lvdai":{
+                ""
+            }
         },
         "2":{
 
