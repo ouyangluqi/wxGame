@@ -44,6 +44,7 @@ var GameScene = cc.Class({
     onLoad () {
         var self = this;
         this._initScene();
+        this._initListener();
     },
 
     start () {
@@ -71,6 +72,13 @@ var GameScene = cc.Class({
         4、结束画面
         5、restart()
         */
+    },
+
+    //初始化监听
+    _initListener: function() {
+        this.node.on(cc.Node.EventType.TOUCH_START, function (event) {
+            cc.log("listent click");
+        })
     },
 
     //再来一局
