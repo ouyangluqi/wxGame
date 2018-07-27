@@ -20,10 +20,12 @@ var BootScene = cc.Class({
 
     _loadRawAsset: function () {
         Log.logD("_loadRawAsset")
-        this._rawAssetCompleteHandler.bind(this)
+        // this._rawAssetCompleteHandler.bind(this)
+        this._rawAssetCompleteHandler()
     },
 
     _rawAssetCompleteHandler: function (error) {
+        Log.logD("_rawAssetCompleteHandler")
         this._isRawAssetComplete = true
         this._checkAllComplete()
     },
@@ -36,6 +38,7 @@ var BootScene = cc.Class({
 
     _checkAllComplete: function () {
         if (this._isAnimationComplete && this._isRawAssetComplete) {
+            Log.logD("go to hall")
             cc.director.loadScene(Scene.HALL)
         }
     }

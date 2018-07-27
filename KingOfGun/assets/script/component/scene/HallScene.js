@@ -1,13 +1,11 @@
+const Log = require('Log')
+
 var HallScene = cc.Class({
     extends: cc.Component,
 
-    properties: {
-        
+    onLoad: function() {
+        Log.logD("The HallScene is start")
     },
-
-    // LIFE-CYCLE CALLBACKS:
-
-    // onLoad () {},
 
     start () {
 
