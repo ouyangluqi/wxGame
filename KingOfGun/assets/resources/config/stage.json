@@ -1,284 +1,294 @@
 {
     "stageCount": 1,
+    "itemWidth": {
+        "1":79,
+        "2":105,
+        "3":56,
+        "4":76,
+        "5":176,
+        "6":178,
+        "7":226,
+        "8":79
+    },
     "stage": {
         "1": {
-            "items": {
-                "1": 5
-            },
+            "items": [
+                {"itemName": 1, "itemNum":5}
+            ],
             "timeLimit": 0,
             "leftBullet": 0,
-            "lvdai": {
-                "1": 1
-            }
+            "lvdai": [
+                {"lvdaiId":1,"speed": 1}
+            ]
         },
         "2": {
-            "items": {
-                "1": 5,
-                "3": 2
-            },
+            "items": [
+                {"itemName":1,"itemNum": 5},
+                {"itemName":3,"itemNum": 2}
+            ],
             "timeLimit": 0,
             "leftBullet": 25,
-            "lvdai": {
-                "1": 1
-            }
+            "lvdai": [
+                {"lvdaiId":1,"speed": 1}
+            ]
         },
         "3": {
-            "items": {
-                "1": 5,
-                "3": 3,
-                "4": 1
-            },
+            "items": [
+                {"itemName":1,"itemNum": 5},
+                {"itemName":3,"itemNum": 3},
+                {"itemName":4,"itemNum": 1}
+            ],
             "timeLimit": 0,
             "leftBullet": 15,
-            "lvdai": {
-                "1": 1
-            }
+            "lvdai": [
+                {"lvdaiId":1,"speed": 1}
+            ]
         },
         "4": {
-            "items": {
-                "1": 5,
-                "3": 4,
-                "4": 1
-            },
+            "items": [
+                {"itemName":1,"itemNum": 5},
+                {"itemName":3,"itemNum": 4},
+                {"itemName":4,"itemNum": 1}
+            ],
             "timeLimit": 0,
             "leftBullet": 15,
-            "lvdai": {
-                "1": 1
-            }
+            "lvdai": [
+                {"lvdaiId":1,"speed": 1}
+            ]
         },
         "5": {
-            "items": {
-                "1": 3,
-                "2": 2,
-                "3": 2,
-                "4": 2
-            },
+            "items": [
+                {"itemName":1,"itemNum": 3},
+                {"itemName":2,"itemNum": 2},
+                {"itemName":3,"itemNum": 2},
+                {"itemName":4,"itemNum": 2}
+            ],
             "timeLimit": 0,
             "leftBullet": 15,
-            "lvdai": {
-                "1": 1
-            }
+            "lvdai": [
+                {"lvdaiId":1,"speed": 1}
+            ]
         },
         "6": {
-            "items": {
-                "1": 4,
-                "2": 2,
-                "3": 2,
-                "4": 2
-            },
+            "items": [
+                {"itemName":1,"itemNum": 4},
+                {"itemName":2,"itemNum": 2},
+                {"itemName":3,"itemNum": 2},
+                {"itemName":4,"itemNum": 2}
+            ],
             "timeLimit": 0,
             "leftBullet": 15,
-            "lvdai": {
-                "1": 1
-            }
+            "lvdai": [
+                {"lvdaiId":1,"speed": 1}
+            ]
         },
         "7": {
-            "items": {
-                "1": 4,
-                "2": 4,
-                "3": 2,
-                "4": 2
-            },
+            "items": [
+                {"itemName":1,"itemNum": 4},
+                {"itemName":2,"itemNum": 4},
+                {"itemName":3,"itemNum": 2},
+                {"itemName":4,"itemNum": 2}
+            ],
             "timeLimit": 0,
             "leftBullet": 15,
-            "lvdai": {
-                "1": 1
-            }
+            "lvdai": [
+                {"lvdaiId":1,"speed": 1}
+            ]
         },
         "8": {
-            "items": {
-                "1": 3,
-                "2": 3,
-                "3": 2,
-                "4": 2,
-                "8": 1
-            },
+            "items": [
+                {"itemName":1,"itemNum": 3},
+                {"itemName":2,"itemNum": 3},
+                {"itemName":3,"itemNum": 2},
+                {"itemName":4,"itemNum": 2},
+                {"itemName":8,"itemNum": 1}
+            ],
             "timeLimit": 0,
             "leftBullet": 20,
-            "lvdai": {
-                "1": 1,
-                "2": 1
-            }
+            "lvdai": [
+                {"lvdaiId":1,"speed": 1},
+                {"lvdaiId":2,"speed": 1}
+            ]
         },
         "9": {
-            "items": {
-                "1": 4,
-                "2": 4,
-                "3": 2,
-                "4": 2,
-                "8": 1
-            },
+            "items": [
+                {"itemName":1,"itemNum": 4},
+                {"itemName":2,"itemNum": 4},
+                {"itemName":3,"itemNum": 2},
+                {"itemName":4,"itemNum": 2},
+                {"itemName":8,"itemNum": 1}
+            ],
             "timeLimit": 0,
             "leftBullet": 20,
-            "lvdai": {
-                "1": 1,
-                "2": 1
-            }
+            "lvdai": [
+                {"lvdaiId":1,"speed": 1},
+                {"lvdaiId":2,"speed": 1}
+            ]
         },
         "10": {
-            "items": {
-                "1": 4,
-                "2": 4,
-                "3": 2,
-                "4": 3,
-                "8": 1
-            },
+            "items": [
+                {"itemName":1,"itemNum": 4},
+                {"itemName":2,"itemNum": 4},
+                {"itemName":3,"itemNum": 2},
+                {"itemName":4,"itemNum": 3},
+                {"itemName":8,"itemNum": 1}
+            ],
             "timeLimit": 0,
             "leftBullet": 20,
-            "lvdai": {
-                "1": 1.2,
-                "2": 1
-            }
+            "lvdai": [
+                {"lvdaiId":1,"speed": 1.2},
+                {"lvdaiId":2,"speed": 1}
+            ]
         },
         "11": {
-            "items": {
-                "1": 4,
-                "2": 3,
-                "3": 3,
-                "4": 3,
-                "8": 1
-            },
+            "items": [
+                {"itemName":1,"itemNum": 4},
+                {"itemName":2,"itemNum": 3},
+                {"itemName":3,"itemNum": 3},
+                {"itemName":4,"itemNum": 3},
+                {"itemName":8,"itemNum": 1}
+            ],
             "timeLimit": 0,
             "leftBullet": 25,
-            "lvdai": {
-                "1": 1.2,
-                "2": -1
-            }
+            "lvdai": [
+                {"lvdaiId":1,"speed": 1.2},
+                {"lvdaiId":2,"speed": -1}
+            ]
         },
         "12": {
-            "items": {
-                "1": 4,
-                "2": 3,
-                "3": 3,
-                "4": 3,
-                "8": 1
-            },
+            "items": [
+                {"itemName":1,"itemNum": 4},
+                {"itemName":2,"itemNum": 3},
+                {"itemName":3,"itemNum": 3},
+                {"itemName":4,"itemNum": 3},
+                {"itemName":8,"itemNum": 1}
+            ],
             "timeLimit": 30,
             "leftBullet": 25,
-            "lvdai": {
-                "1": 1.2,
-                "2": -1
-            }
+            "lvdai": [
+                {"lvdaiId":1,"speed": 1.2},
+                {"lvdaiId":2,"speed": -1}
+            ]
         },
         "13": {
-            "items": {
-                "1": 3,
-                "2": 2,
-                "3": 3,
-                "4": 5,
-                "8": 1
-            },
+            "items": [
+                {"itemName":1,"itemNum": 3},
+                {"itemName":2,"itemNum": 2},
+                {"itemName":3,"itemNum": 3},
+                {"itemName":4,"itemNum": 5},
+                {"itemName":8,"itemNum": 1}
+            ],
             "timeLimit": 30,
             "leftBullet": 25,
-            "lvdai": {
-                "1": 1.2,
-                "2": -1
-            }
+            "lvdai": [
+                {"lvdaiId":1,"speed": 1.2},
+                {"lvdaiId":2,"speed": -1}
+            ]
         },
         "14": {
-            "items": {
-                "1": 2,
-                "2": 5,
-                "3": 2,
-                "4": 4,
-                "8": 2
-            },
+            "items": [
+                {"itemName":1,"itemNum": 2},
+                {"itemName":2,"itemNum": 5},
+                {"itemName":3,"itemNum": 2},
+                {"itemName":4,"itemNum": 4},
+                {"itemName":8,"itemNum": 2}
+            ],
             "timeLimit": 30,
             "leftBullet": 25,
-            "lvdai": {
-                "1": 1.2,
-                "2": -1
-            }
+            "lvdai": [
+                {"lvdaiId":1,"speed": 1.2},
+                {"lvdaiId":2,"speed": -1}
+            ]
         },
         "15": {
-            "items": {
-                "1": 5,
-                "2": 6,
-                "3": 3,
-                "4": 4,
-                "8": 2
-            },
+            "items": [
+                {"itemName":1,"itemNum": 5},
+                {"itemName":2,"itemNum": 6},
+                {"itemName":3,"itemNum": 3},
+                {"itemName":4,"itemNum": 4},
+                {"itemName":8,"itemNum": 2}
+            ],
             "timeLimit": 30,
             "leftBullet": 25,
-            "lvdai": {
-                "1": 1.2,
-                "2": -1.2
-            }
+            "lvdai": [
+                {"lvdaiId":1,"speed": 1.2},
+                {"lvdaiId":2,"speed": -1.2}
+            ]
         },
         "16": {
-            "items": {
-                "1": 6,
-                "2": 3,
-                "3": 4,
-                "4": 4,
-                "8": 3
-            },
+            "items": [
+                {"itemName":1,"itemNum": 6},
+                {"itemName":2,"itemNum": 3},
+                {"itemName":3,"itemNum": 4},
+                {"itemName":4,"itemNum": 4},
+                {"itemName":8,"itemNum": 3}
+            ],
             "timeLimit": 30,
             "leftBullet": 25,
-            "lvdai": {
-                "1": 2,
-                "2": -1.5
-            }
+            "lvdai": [
+                {"lvdaiId":1,"speed": 2},
+                {"lvdaiId":2,"speed": -1.5}
+            ]
         },
         "17": {
-            "items": {
-                "1": 6,
-                "2": 3,
-                "3": 4,
-                "4": 4,
-                "8": 3
-            },
+            "items": [
+                {"itemName":1,"itemNum": 6},
+                {"itemName":2,"itemNum": 3},
+                {"itemName":3,"itemNum": 4},
+                {"itemName":4,"itemNum": 4},
+                {"itemName":8,"itemNum": 3}
+            ],
             "timeLimit": 30,
             "leftBullet": 25,
-            "lvdai": {
-                "1": 2,
-                "2": -1.5
-            }
+            "lvdai": [
+                {"lvdaiId":1,"speed": 2},
+                {"lvdaiId":2,"speed": -1.5}
+            ]
         },
         "18": {
-            "items": {
-                "1": 3,
-                "2": 5,
-                "3": 4,
-                "4": 4,
-                "8": 4
-            },
+            "items": [
+                {"itemName":1,"itemNum": 3},
+                {"itemName":2,"itemNum": 5},
+                {"itemName":3,"itemNum": 4},
+                {"itemName":4,"itemNum": 4},
+                {"itemName":8,"itemNum": 4}
+            ],
             "timeLimit": 30,
             "leftBullet": 25,
-            "lvdai": {
-                "1": 2,
-                "2": -2
-            }
+            "lvdai": [
+                {"lvdaiId":1,"speed": 2},
+                {"lvdaiId":2,"speed": -2}
+            ]
         },
         "19": {
-            "items": {
-                "1": 5,
-                "2": 5,
-                "3": 4,
-                "4": 4,
-                "8": 4
-            },
+            "items": [
+                {"itemName":1,"itemNum": 5},
+                {"itemName":2,"itemNum": 5},
+                {"itemName":3,"itemNum": 4},
+                {"itemName":4,"itemNum": 4},
+                {"itemName":8,"itemNum": 4}
+            ],
             "timeLimit": 30,
             "leftBullet": 25,
-            "lvdai": {
-                "1": 2,
-                "2": -2
-            }
+            "lvdai": [
+                {"lvdaiId":1,"speed": 2},
+                {"lvdaiId":2,"speed": -2}
+            ]
         },
         "20": {
-            "items": {
-                "1": 5,
-                "2": 5,
-                "3": 4,
-                "4": 4,
-                "8": 4
-            },
+            "items": [
+                {"itemName":1,"itemNum": 5},
+                {"itemName":2,"itemNum": 5},
+                {"itemName":3,"itemNum": 4},
+                {"itemName":4,"itemNum": 4},
+                {"itemName":8,"itemNum": 4}
+            ],
             "timeLimit": 30,
             "leftBullet": 25,
-            "lvdai": {
-                "1": 2,
-                "2": -2
-            }
+            "lvdai": [
+                {"lvdaiId":1,"speed": 2},
+                {"lvdaiId":2,"speed": -2}
+            ]
         }
     }
 }
