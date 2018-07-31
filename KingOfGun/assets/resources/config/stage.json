@@ -8,7 +8,7 @@
         "5":176,
         "6":178,
         "7":226,
-        "8":79
+        "8":198
     },
     "stage": {
         "1": {
@@ -18,7 +18,7 @@
             "timeLimit": 0,
             "leftBullet": 0,
             "lvdai": [
-                {"lvdaiId":1,"speed": 1}
+                {"lvdaiId":1,"speed": 3}
             ]
         },
         "2": {
@@ -29,7 +29,7 @@
             "timeLimit": 0,
             "leftBullet": 25,
             "lvdai": [
-                {"lvdaiId":1,"speed": 1}
+                {"lvdaiId":1,"speed": 3}
             ]
         },
         "3": {
@@ -41,7 +41,7 @@
             "timeLimit": 0,
             "leftBullet": 15,
             "lvdai": [
-                {"lvdaiId":1,"speed": 1}
+                {"lvdaiId":1,"speed": 3}
             ]
         },
         "4": {
@@ -53,7 +53,7 @@
             "timeLimit": 0,
             "leftBullet": 15,
             "lvdai": [
-                {"lvdaiId":1,"speed": 1}
+                {"lvdaiId":1,"speed": 3}
             ]
         },
         "5": {
@@ -66,7 +66,7 @@
             "timeLimit": 0,
             "leftBullet": 15,
             "lvdai": [
-                {"lvdaiId":1,"speed": 1}
+                {"lvdaiId":1,"speed": 3}
             ]
         },
         "6": {
@@ -79,7 +79,7 @@
             "timeLimit": 0,
             "leftBullet": 15,
             "lvdai": [
-                {"lvdaiId":1,"speed": 1}
+                {"lvdaiId":1,"speed": 3}
             ]
         },
         "7": {
@@ -92,7 +92,7 @@
             "timeLimit": 0,
             "leftBullet": 15,
             "lvdai": [
-                {"lvdaiId":1,"speed": 1}
+                {"lvdaiId":1,"speed": 3}
             ]
         },
         "8": {
@@ -106,8 +106,8 @@
             "timeLimit": 0,
             "leftBullet": 20,
             "lvdai": [
-                {"lvdaiId":1,"speed": 1},
-                {"lvdaiId":2,"speed": 1}
+                {"lvdaiId":1,"speed": 3},
+                {"lvdaiId":2,"speed": 3}
             ]
         },
         "9": {
@@ -121,8 +121,8 @@
             "timeLimit": 0,
             "leftBullet": 20,
             "lvdai": [
-                {"lvdaiId":1,"speed": 1},
-                {"lvdaiId":2,"speed": 1}
+                {"lvdaiId":1,"speed": 3},
+                {"lvdaiId":2,"speed": 3}
             ]
         },
         "10": {
@@ -136,8 +136,8 @@
             "timeLimit": 0,
             "leftBullet": 20,
             "lvdai": [
-                {"lvdaiId":1,"speed": 1.2},
-                {"lvdaiId":2,"speed": 1}
+                {"lvdaiId":1,"speed": 3.2},
+                {"lvdaiId":2,"speed": 3}
             ]
         },
         "11": {
@@ -151,8 +151,8 @@
             "timeLimit": 0,
             "leftBullet": 25,
             "lvdai": [
-                {"lvdaiId":1,"speed": 1.2},
-                {"lvdaiId":2,"speed": -1}
+                {"lvdaiId":1,"speed": 3.2},
+                {"lvdaiId":2,"speed": -3}
             ]
         },
         "12": {
@@ -166,8 +166,8 @@
             "timeLimit": 30,
             "leftBullet": 25,
             "lvdai": [
-                {"lvdaiId":1,"speed": 1.2},
-                {"lvdaiId":2,"speed": -1}
+                {"lvdaiId":1,"speed": 3.2},
+                {"lvdaiId":2,"speed": -3}
             ]
         },
         "13": {
@@ -181,8 +181,8 @@
             "timeLimit": 30,
             "leftBullet": 25,
             "lvdai": [
-                {"lvdaiId":1,"speed": 1.2},
-                {"lvdaiId":2,"speed": -1}
+                {"lvdaiId":1,"speed": 3.2},
+                {"lvdaiId":2,"speed": -3}
             ]
         },
         "14": {
@@ -196,8 +196,8 @@
             "timeLimit": 30,
             "leftBullet": 25,
             "lvdai": [
-                {"lvdaiId":1,"speed": 1.2},
-                {"lvdaiId":2,"speed": -1}
+                {"lvdaiId":1,"speed": 3.2},
+                {"lvdaiId":2,"speed": -3}
             ]
         },
         "15": {
@@ -211,8 +211,8 @@
             "timeLimit": 30,
             "leftBullet": 25,
             "lvdai": [
-                {"lvdaiId":1,"speed": 1.2},
-                {"lvdaiId":2,"speed": -1.2}
+                {"lvdaiId":1,"speed": 3.2},
+                {"lvdaiId":2,"speed": -3.2}
             ]
         },
         "16": {
@@ -226,8 +226,8 @@
             "timeLimit": 30,
             "leftBullet": 25,
             "lvdai": [
-                {"lvdaiId":1,"speed": 2},
-                {"lvdaiId":2,"speed": -1.5}
+                {"lvdaiId":1,"speed": 5},
+                {"lvdaiId":2,"speed": -3.5}
             ]
         },
         "17": {
@@ -241,8 +241,8 @@
             "timeLimit": 30,
             "leftBullet": 25,
             "lvdai": [
-                {"lvdaiId":1,"speed": 2},
-                {"lvdaiId":2,"speed": -1.5}
+                {"lvdaiId":1,"speed": 4},
+                {"lvdaiId":2,"speed": -3.5}
             ]
         },
         "18": {
@@ -256,8 +256,8 @@
             "timeLimit": 30,
             "leftBullet": 25,
             "lvdai": [
-                {"lvdaiId":1,"speed": 2},
-                {"lvdaiId":2,"speed": -2}
+                {"lvdaiId":1,"speed": 5},
+                {"lvdaiId":2,"speed": -5}
             ]
         },
         "19": {
@@ -271,8 +271,8 @@
             "timeLimit": 30,
             "leftBullet": 25,
             "lvdai": [
-                {"lvdaiId":1,"speed": 2},
-                {"lvdaiId":2,"speed": -2}
+                {"lvdaiId":1,"speed": 5},
+                {"lvdaiId":2,"speed": -5}
             ]
         },
         "20": {
@@ -286,8 +286,8 @@
             "timeLimit": 30,
             "leftBullet": 25,
             "lvdai": [
-                {"lvdaiId":1,"speed": 2},
-                {"lvdaiId":2,"speed": -2}
+                {"lvdaiId":1,"speed": 5},
+                {"lvdaiId":2,"speed": -5}
             ]
         }
     }

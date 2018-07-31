@@ -13,20 +13,20 @@ cc.Class({
     // onLoad () {},
 
     start () {
-        var windowSize=cc.view.getVisibleSize();
-        this.node.width += windowSize.width;
+        
     },
 
     update (dt) {
         this.node.x += this.speed;   
-      //  cc.log("this.node.x " + this.node.x + "  " + "this.node.width "+ this.node.width)
         if (this.node.x>=this.node.width || this.node.x<=-1*this.node.width) {
             this.node.x = 0;
         }
     },
 
     setSpeedAndData: function(speed, dataArr) {
+        var windowSize=cc.view.getVisibleSize();
         this.speed = speed;
+        this.node.width = 0;
 
         var dir = speed > 0 ? -1 : 1; 
         var self = this;
@@ -36,7 +36,7 @@ cc.Class({
         var padWidth;
         var prefabNode;
         dataArr.forEach(element => {
-            padWidth = Random.getRandom(10,20);
+            padWidth = Random.getRandom(20,60);
             itemWidth = itemWidthCfg[element];
 
             var prefab = Singleton.RawAssetLoader.getRes(Res.PREFAB_TARGET_ITEM_PATH);
@@ -46,9 +46,9 @@ cc.Class({
             self.node.addChild(prefabNode);
             prefabNode.y = 0;
             prefabNode.x = startPos + (padWidth + itemWidth/2)*dir;
-            cc.log("prefabNode.x "+ prefabNode.x)
             startPos += (padWidth + itemWidth)*dir;
             this.node.width = Math.abs(startPos);
         });
+        this.node.width += windowSize.width;
     }
 });

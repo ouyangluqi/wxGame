@@ -19,7 +19,6 @@ cc.Class({
         var self = this;
         var boxC = this.node.getComponent(cc.BoxCollider);
         var cSprite = this.node.getComponent(cc.Sprite);
-        cc.log("texture/item/item_"+itemId);
         cc.loader.loadRes("texture/item/item_"+itemId, cc.SpriteFrame, function (err, spriteFrame) {
             cSprite.spriteFrame = spriteFrame;
             boxC.size.width = self.node.width;
@@ -27,6 +26,9 @@ cc.Class({
     },
 
     onCollisionEnter: function (other) {
+        var eventParam = new cc.Event.EventCustom("hitTarget",true);
+        //eventParam.setUserData(this.touchingNumber);
+        this.node.dispatchEvent(eventParam);
         this.node.destroy();
     },
 
