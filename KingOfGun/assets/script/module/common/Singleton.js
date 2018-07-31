@@ -1,6 +1,7 @@
 const BaseLoader = require('BaseLoader')
 const RawAssetLoader = require('RawAssetLoader')
 const Config = require('Config')
+const Random = require('Random')
 
 var Singleton = cc.Class({
     ctor: function () {

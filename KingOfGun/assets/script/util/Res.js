@@ -7,6 +7,7 @@ var Res = cc.Class({
     },
 
     statics: {
-        CONFIG_STAGE_PATH: "config/stage"
+        CONFIG_STAGE_PATH: "config/stage",
+        PREFAB_TARGET_ITEM_PATH: "prefab/game/targetItem"
     }
 })

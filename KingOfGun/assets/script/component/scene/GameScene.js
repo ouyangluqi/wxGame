@@ -31,8 +31,8 @@ var GameScene = cc.Class({
     //加载json
     _loadRawAsset: function () {
         Log.logD("gamescene load config start")
-        Log.logD(Res.CONFIG_STAGE_PATH)
         Singleton.RawAssetLoader.addRes(Res.CONFIG_STAGE_PATH);
+        Singleton.RawAssetLoader.addRes(Res.PREFAB_TARGET_ITEM_PATH);
         Singleton.RawAssetLoader.startLoad(false, this._rawAssetCompleteHandler.bind(this))
     },
 

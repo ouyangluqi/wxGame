@@ -1,6 +1,7 @@
 const BaseView = require('BaseView')
 const Singleton = require('Singleton')
 const Log = require('Log')
+const Random = require('Random')
 
 var GameView = cc.Class({
     extends: BaseView,
@@ -85,7 +86,7 @@ var GameView = cc.Class({
     },
 
     start () {
-        this._loadStage(15);
+        this._loadStage(20);
     },
 
     onDestroy () {
@@ -196,8 +197,8 @@ var GameView = cc.Class({
         itemContainer.y = posY;
 
         var containerComponent = itemContainer.getComponent("ItemContainer");
-        this._getItemArr(dataArr);
-        containerComponent.setSpeedAndData(speed,dataArr);
+        var itemList = this._getItemArr(dataArr)
+        containerComponent.setSpeedAndData(speed,itemList);
         itemContainer.active = true;
     },
 
@@ -212,11 +213,13 @@ var GameView = cc.Class({
             itemDic[element.itemName] = 0;
         });
 
-        return this._buildItemArr(dataArr, itemDic, itemCount, itemLen, newArr);
+        this._buildItemArr(dataArr, itemDic, itemCount, itemLen, newArr);
+
+        return newArr;
     },
 
     _buildItemArr: function (dataArr, itemDic, itemCount, itemLen, newArr) {
-        var randomValue = this._getRandom(0,itemLen-1);
+        var randomValue = Random.getRandom(0,itemLen-1);
         var randomKey = dataArr[randomValue].itemName;
         var itemLimit = dataArr[randomValue].itemNum;
         if(itemDic[randomKey]<itemLimit) {
@@ -229,9 +232,4 @@ var GameView = cc.Class({
             return newArr;
         }
     },
-
-    //获取start到end之间的随机数
-    _getRandom:function(start,end) {
-        return Math.round(cc.random0To1()*(end-start)+start);
-    }
 });
