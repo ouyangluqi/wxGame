@@ -20,6 +20,7 @@ var BaseLoader = cc.Class({
     },
 
     _completeCallBack: function (error, assets) {
+        cc.log("The assets is " + assets)
         this._isLoading = false
         let callback = this._completeFunc
         this._progressFunc = null
@@ -27,6 +28,7 @@ var BaseLoader = cc.Class({
         if (error == null) {
             if (this._pathList.length == assets.length) {
                 for (let i = 0, len = assets.length; i < len; i++) {
+                    cc.log("this._pathList: +++++++++++++ " + this._pathList[i])
                     this._resDic[this._pathList[i]] = assets[i]
                 }
             } else {
@@ -40,6 +42,7 @@ var BaseLoader = cc.Class({
     },
 
     addRes: function (path) {
+        cc.log("addRes: +++++++++++" + path)
         if (!path) {
             Log.logE("path error")
         }

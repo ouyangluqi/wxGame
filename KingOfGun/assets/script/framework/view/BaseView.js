@@ -1,15 +1,19 @@
-const Log = require('Log');
+const Log = require('Log')
+const Singleton = require('Singleton')
 
 var BaseView = cc.Class({
-
     extends: cc.Component,
 
-    init:function(prefabName, parentNode) {
-        cc.loader.loadRes("prefab/game/"+prefabName, cc.Prefab, function(err, prefab) {
-            Log.logD("init view " + prefabName);
-            var gameObj = cc.instantiate(prefab);
-            gameObj.parent = parentNode;
-        });
-    }
+    init: function(prefabPath, parentNode) {
+        var prefabAsset = Singleton.PrefabLoader.getRes(prefabPath)
+        if (prefabAsset) {
+            var newNode = cc.instantiate(prefabAsset)
+            newNode.parent = parentNode
+            this._onInit()
+        }
+    },
 
+    _onInit: function () {
+
+    }
 })

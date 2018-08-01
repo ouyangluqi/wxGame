@@ -1,6 +1,7 @@
 const Singleton = require('Singleton')
 const Scene = require('Scene')
 const Log = require('Log')
+const Res = require('Res')
 
 var BootScene = cc.Class({
     extends: cc.Component,
@@ -15,13 +16,13 @@ var BootScene = cc.Class({
     start () {
         Singleton.init()
         this._loadRawAsset()
-        this.scheduleOnce(this._animationCompleteHandler.bind(this), 2)
+        this.scheduleOnce(this._animationCompleteHandler.bind(this), 1)
     },
 
     _loadRawAsset: function () {
         Log.logD("_loadRawAsset")
-        // this._rawAssetCompleteHandler.bind(this)
-        this._rawAssetCompleteHandler()
+        Singleton.RawAssetLoader.addRes(Res.CONFIG_STAGE_PATH)
+        Singleton.RawAssetLoader.startLoad(false, this._rawAssetCompleteHandler.bind(this))
     },
 
     _rawAssetCompleteHandler: function (error) {
@@ -32,6 +33,7 @@ var BootScene = cc.Class({
 
     _animationCompleteHandler: function (dt) {
         Log.logD("_animationCompleteHandler")
+        Singleton.Config.initStage(Singleton.RawAssetLoader.getRes(Res.CONFIG_STAGE_PATH))
         this._isAnimationComplete = true
         this._checkAllComplete()
     },

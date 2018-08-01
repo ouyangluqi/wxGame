@@ -3187,7 +3187,9 @@
     "isBulletNoLimit": false,
     "isTimeNoLimit": false,
     "leftBulletNum": 0,
-    "curStage": 1
+    "curStage": 1,
+    "commobNum": 0,
+    "commobTag": 0
   },
   {
     "__type__": "cc.PrefabInfo",
