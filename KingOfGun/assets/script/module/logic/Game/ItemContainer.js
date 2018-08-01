@@ -39,7 +39,7 @@ cc.Class({
             padWidth = Random.getRandom(20,60);
             itemWidth = itemWidthCfg[element].width;
 
-            var prefab = Singleton.RawAssetLoader.getRes(Res.PREFAB_TARGET_ITEM_PATH);
+            var prefab = Singleton.PrefabLoader.getRes(Res.PREFAB_TARGET_ITEM_PATH);
             prefabNode = cc.instantiate(prefab);
             var targetItemComponent = prefabNode.getComponent("TargetItem");
             targetItemComponent.setItem(element);
