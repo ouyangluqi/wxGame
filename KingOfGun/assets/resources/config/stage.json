@@ -16,7 +16,7 @@
                 {"itemName": 1, "itemNum":5}
             ],
             "timeLimit": 0,
-            "leftBullet": 0,
+            "initbullet": 0,
             "lvdai": [
                 {"lvdaiId":1,"speed": 3}
             ]
@@ -27,9 +27,9 @@
                 {"itemName":3,"itemNum": 2}
             ],
             "timeLimit": 0,
-            "leftBullet": 25,
+            "initbullet": 0,
             "lvdai": [
-                {"lvdaiId":1,"speed": 3}
+                {"lvdaiId":1,"speed": 4}
             ]
         },
         "3": {
@@ -39,9 +39,9 @@
                 {"itemName":4,"itemNum": 1}
             ],
             "timeLimit": 0,
-            "leftBullet": 15,
+            "initbullet": 25,
             "lvdai": [
-                {"lvdaiId":1,"speed": 3}
+                {"lvdaiId":1,"speed": 5}
             ]
         },
         "4": {
@@ -51,7 +51,7 @@
                 {"itemName":4,"itemNum": 1}
             ],
             "timeLimit": 0,
-            "leftBullet": 15,
+            "initbullet": 15,
             "lvdai": [
                 {"lvdaiId":1,"speed": 3}
             ]
@@ -64,9 +64,9 @@
                 {"itemName":4,"itemNum": 2}
             ],
             "timeLimit": 0,
-            "leftBullet": 15,
+            "initbullet": 15,
             "lvdai": [
-                {"lvdaiId":1,"speed": 3}
+                {"lvdaiId":1,"speed": 4}
             ]
         },
         "6": {
@@ -77,9 +77,9 @@
                 {"itemName":4,"itemNum": 2}
             ],
             "timeLimit": 0,
-            "leftBullet": 15,
+            "initbullet": 15,
             "lvdai": [
-                {"lvdaiId":1,"speed": 3}
+                {"lvdaiId":1,"speed": -3}
             ]
         },
         "7": {
@@ -90,9 +90,9 @@
                 {"itemName":4,"itemNum": 2}
             ],
             "timeLimit": 0,
-            "leftBullet": 15,
+            "initbullet": 15,
             "lvdai": [
-                {"lvdaiId":1,"speed": 3}
+                {"lvdaiId":1,"speed": -4}
             ]
         },
         "8": {
@@ -104,10 +104,10 @@
                 {"itemName":8,"itemNum": 1}
             ],
             "timeLimit": 0,
-            "leftBullet": 20,
+            "initbullet": 15,
             "lvdai": [
                 {"lvdaiId":1,"speed": 3},
-                {"lvdaiId":2,"speed": 3}
+                {"lvdaiId":2,"speed": 4}
             ]
         },
         "9": {
@@ -119,10 +119,10 @@
                 {"itemName":8,"itemNum": 1}
             ],
             "timeLimit": 0,
-            "leftBullet": 20,
+            "initbullet": 20,
             "lvdai": [
-                {"lvdaiId":1,"speed": 3},
-                {"lvdaiId":2,"speed": 3}
+                {"lvdaiId":1,"speed": 5},
+                {"lvdaiId":2,"speed": 4}
             ]
         },
         "10": {
@@ -134,10 +134,10 @@
                 {"itemName":8,"itemNum": 1}
             ],
             "timeLimit": 0,
-            "leftBullet": 20,
+            "initbullet": 20,
             "lvdai": [
-                {"lvdaiId":1,"speed": 3.2},
-                {"lvdaiId":2,"speed": 3}
+                {"lvdaiId":1,"speed": 4},
+                {"lvdaiId":2,"speed": -3}
             ]
         },
         "11": {
@@ -149,10 +149,10 @@
                 {"itemName":8,"itemNum": 1}
             ],
             "timeLimit": 0,
-            "leftBullet": 25,
+            "initbullet": 20,
             "lvdai": [
-                {"lvdaiId":1,"speed": 3.2},
-                {"lvdaiId":2,"speed": -3}
+                {"lvdaiId":1,"speed": -5},
+                {"lvdaiId":2,"speed": 4}
             ]
         },
         "12": {
@@ -164,9 +164,9 @@
                 {"itemName":8,"itemNum": 1}
             ],
             "timeLimit": 30,
-            "leftBullet": 25,
+            "initbullet": 25,
             "lvdai": [
-                {"lvdaiId":1,"speed": 3.2},
+                {"lvdaiId":1,"speed": -4},
                 {"lvdaiId":2,"speed": -3}
             ]
         },
@@ -179,10 +179,10 @@
                 {"itemName":8,"itemNum": 1}
             ],
             "timeLimit": 30,
-            "leftBullet": 25,
+            "initbullet": 25,
             "lvdai": [
-                {"lvdaiId":1,"speed": 3.2},
-                {"lvdaiId":2,"speed": -3}
+                {"lvdaiId":1,"speed": 5},
+                {"lvdaiId":2,"speed": -4}
             ]
         },
         "14": {
@@ -194,10 +194,10 @@
                 {"itemName":8,"itemNum": 2}
             ],
             "timeLimit": 30,
-            "leftBullet": 25,
+            "initbullet": 25,
             "lvdai": [
-                {"lvdaiId":1,"speed": 3.2},
-                {"lvdaiId":2,"speed": -3}
+                {"lvdaiId":1,"speed": 5},
+                {"lvdaiId":2,"speed": -5}
             ]
         },
         "15": {
@@ -209,10 +209,10 @@
                 {"itemName":8,"itemNum": 2}
             ],
             "timeLimit": 30,
-            "leftBullet": 25,
+            "initbullet": 25,
             "lvdai": [
-                {"lvdaiId":1,"speed": 3.2},
-                {"lvdaiId":2,"speed": -3.2}
+                {"lvdaiId":1,"speed": -4},
+                {"lvdaiId":2,"speed": -5}
             ]
         },
         "16": {
@@ -224,10 +224,10 @@
                 {"itemName":8,"itemNum": 3}
             ],
             "timeLimit": 30,
-            "leftBullet": 25,
+            "initbullet": 25,
             "lvdai": [
                 {"lvdaiId":1,"speed": 5},
-                {"lvdaiId":2,"speed": -3.5}
+                {"lvdaiId":2,"speed": -3}
             ]
         },
         "17": {
@@ -239,10 +239,10 @@
                 {"itemName":8,"itemNum": 3}
             ],
             "timeLimit": 30,
-            "leftBullet": 25,
+            "initbullet": 25,
             "lvdai": [
-                {"lvdaiId":1,"speed": 4},
-                {"lvdaiId":2,"speed": -3.5}
+                {"lvdaiId":1,"speed": 3},
+                {"lvdaiId":2,"speed": -5}
             ]
         },
         "18": {
@@ -254,7 +254,7 @@
                 {"itemName":8,"itemNum": 4}
             ],
             "timeLimit": 30,
-            "leftBullet": 25,
+            "initbullet": 25,
             "lvdai": [
                 {"lvdaiId":1,"speed": 5},
                 {"lvdaiId":2,"speed": -5}
@@ -269,10 +269,10 @@
                 {"itemName":8,"itemNum": 4}
             ],
             "timeLimit": 30,
-            "leftBullet": 25,
+            "initbullet": 25,
             "lvdai": [
-                {"lvdaiId":1,"speed": 5},
-                {"lvdaiId":2,"speed": -5}
+                {"lvdaiId":1,"speed": -5},
+                {"lvdaiId":2,"speed": 5}
             ]
         },
         "20": {
@@ -284,10 +284,10 @@
                 {"itemName":8,"itemNum": 4}
             ],
             "timeLimit": 30,
-            "leftBullet": 25,
+            "initbullet": 25,
             "lvdai": [
-                {"lvdaiId":1,"speed": 5},
-                {"lvdaiId":2,"speed": -5}
+                {"lvdaiId":1,"speed": 6},
+                {"lvdaiId":2,"speed": -6}
             ]
         }
     }
