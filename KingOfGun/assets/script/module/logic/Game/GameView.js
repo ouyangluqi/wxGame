@@ -47,6 +47,36 @@ var GameView = cc.Class({
             default: null,
             type: cc.Label
         },
+        commobNumTxt: {
+            name: "连击动画",
+            default: null,
+            type: cc.Label
+        },
+        sumViewBg: {
+            name: "结算界面背景",
+            default: null,
+            type: cc.Node
+        },
+        sumView: {
+            name: "结算界面",
+            default: null,
+            type: cc.Node
+        },
+        restartBtn: {
+            name: "再来一次按钮",
+            default: null,
+            type: cc.Button
+        },
+        challgeBtn: {
+            name: "挑战好友按钮",
+            default: null,
+            type: cc.Button
+        },
+        sumScoreTxt: {
+            name: "结算界面分数",
+            default: null,
+            type: cc.Label
+        },
         bulletNode: {
             default: null,
             type: cc.Node
@@ -83,7 +113,7 @@ var GameView = cc.Class({
         isBulletNoLimit : false,
         isTimeNoLimit : false,
         leftBulletNum : 0,
-        curStage : 7,
+        curStage : 1,
         commobNum : 0,
         commobTag : 0
     },
@@ -125,6 +155,8 @@ var GameView = cc.Class({
         */
        this.lvdaiUpNode.active = false;
        this.lvdaiDownNode.active = false;
+       this.itemUpContainer.removeAllChildren();
+       this.itemDownContainer.removeAllChildren();
        this.itemUpContainer.active = false;
        this.itemDownContainer.active = false;
 
@@ -132,6 +164,13 @@ var GameView = cc.Class({
        this.curScoreTxt.string = 0;
        this.leftBulletNum = 0;
        this.commobNum = 0;
+
+       this.isBulletNoLimit = false,
+       this.isTimeNoLimit = false,
+       this.leftBulletNum = 0,
+       this.curStage = 1,
+       this.commobNum = 0,
+       this.commobTag = 0
     },
 
     //初始化监听
@@ -146,33 +185,59 @@ var GameView = cc.Class({
             if (self.isBulletNoLimit==false && self.leftBulletNum>0) {
                 self.leftBulletNum = self.leftBulletNum - 1;
                 self.bulletLeftNumTxt.string = "子弹：" + self.leftBulletNum;
+                if(self.leftBulletNum==0) {
+                    self._showSumView();
+                }
             }
             self.commobTag += 1;
-        })
+        });
 
         //注册目标被击中事件监听
         this.node.on("hitTarget",function(event){
-            var leftNum = self.bottleNumTxt.string;
-            self.bottleNumTxt.string = leftNum - 1;
-            if (leftNum<=1) {
+            var lifeNum = event.getUserData();
+
+            if (lifeNum == 0) {
+                var leftNum = self.bottleNumTxt.string;
                 self.bottleNumTxt.string = leftNum - 1;
-                self.curStage += 1;
-                self.curStage = self.curStage>20 ? 20 : self.curStage;
-                self._loadStage(self.curStage);
+                if (leftNum<=1) {
+                    self.bottleNumTxt.string = leftNum - 1;
+                    self.curStage += 1;
+                    self.curStage = self.curStage>20 ? 20 : self.curStage;
+                    self._loadStage(self.curStage);
+                }
             }
 
             self.commobTag -= 1;
 
             if (self.commobTag == 0) {
-                self.commobNum += 1;
-                cc.log(self.commobNum);
+                self.commobNum += 1;            
             } else {
-                self.commobNum = 0;
+                self.commobNum = 1;
                 self.commobTag = 0;
             }
 
-            self.curScoreTxt.string = self.curScoreTxt.string + 1;
-        })
+            self._showCommobEff(self.commobNum);
+
+            self.curScoreTxt.string = self.curScoreTxt.string + self.commobNum;
+        });
+
+        //注册按钮监听事件
+        this.restartBtn.node.on('click', this._onRestartBtnClick, this);
+        this.challgeBtn.node.on('click', this._onChanngleBtnClick, this);
+    },
+
+    //显示连击数量
+    _showCommobEff:function(commobNum) {
+        this.commobNumTxt.node.y = 318;
+        this.commobNumTxt.node.opacity = 0;
+        this.commobNumTxt.node.active = true;
+        var preStr = commobNum==1 ? "+" : "连击+";
+        this.commobNumTxt.string = preStr + commobNum;
+
+        cc.spawn(cc.moveBy(0.5,0,200),cc.fadeIn(0.5));
+
+        var seq = cc.sequence(cc.spawn(cc.moveBy(0.5,0,+100),cc.fadeIn(0.5)),cc.delayTime(1),cc.fadeOut(0.5));
+        this.commobNumTxt.node.runAction(seq);
     },
 
     //再来一局
@@ -323,6 +388,7 @@ var GameView = cc.Class({
         }
     },
 
+    //暂停界面
     _pauseView: function () {
         this.lvdaiUpNode.active = false;
         this.lvdaiDownNode.active = false;
@@ -330,6 +396,7 @@ var GameView = cc.Class({
         this.itemDownContainer.active = false;
     },
 
+    //展示过关动画
     _showStagePass: function (stageNum) {
         this._pauseView();
         this.stagePassTxt.node.opacity = 0;
@@ -338,5 +405,27 @@ var GameView = cc.Class({
         this.stagePassTxt.string = "第 " + stageNum + " 关";
         var seq = cc.sequence(cc.spawn(cc.moveBy(0.5, -300, 0), cc.fadeIn(0.5)),cc.delayTime(1),cc.spawn(cc.moveBy(0.5, -300, 0), cc.fadeOut(0.5)),);
         this.stagePassTxt.node.runAction(seq);
+    },
+
+    //展示结算界面
+    _showSumView: function () {
+        this._pauseView();
+        this.sumView.y = 630;
+        this.sumScoreTxt.string = this.curScoreTxt.string;
+        this.sumViewBg.active = true;
+        var action = cc.moveBy(0.2, 0, -630);
+        this.sumView.runAction(action);
+    },
+
+    //点击再来一局
+    _onRestartBtnClick: function (event) {
+        this.sumViewBg.active = false;
+        this._initScene();
+        this._loadStage(1);
+    },
+
+    //点击挑战好友
+    _onChanngleBtnClick: function (event) {
+
     }
 });

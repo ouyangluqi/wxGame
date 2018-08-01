@@ -30,14 +30,14 @@ cc.Class({
 
         var dir = speed > 0 ? -1 : 1; 
         var self = this;
-        var itemWidthCfg = Singleton.Config.stage.itemWidth;
+        var itemWidthCfg = Singleton.Config.stage.itemInfo;
         var startPos = 0;
         var itemWidth;
         var padWidth;
         var prefabNode;
         dataArr.forEach(element => {
             padWidth = Random.getRandom(20,60);
-            itemWidth = itemWidthCfg[element];
+            itemWidth = itemWidthCfg[element].width;
 
             var prefab = Singleton.RawAssetLoader.getRes(Res.PREFAB_TARGET_ITEM_PATH);
             prefabNode = cc.instantiate(prefab);
