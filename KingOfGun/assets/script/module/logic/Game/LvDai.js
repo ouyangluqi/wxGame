@@ -11,7 +11,7 @@ cc.Class({
 
     start () {
         var windowSize=cc.view.getVisibleSize();
-        this.resetPosY = windowSize.width/2;
+        this.resetPosY = 50*7;
         if (this.speed>0) {
             this.dir = 1;
         } 
@@ -23,7 +23,7 @@ cc.Class({
     update (dt) {
         this.node.x = this.node.x + this.speed;
         if(this.node.x>=this.resetPosY || this.node.x<=this.resetPosY*(-1)) {
-            this.node.x = 75*this.dir;
+            this.node.x = 0;
         }
     },
 

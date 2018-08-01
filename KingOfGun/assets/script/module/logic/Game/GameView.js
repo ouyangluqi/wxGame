@@ -42,6 +42,11 @@ var GameView = cc.Class({
             default: null,
             type: cc.Label
         },
+        stagePassTxt: {
+            name: "关卡动画",
+            default: null,
+            type: cc.Label
+        },
         bulletNode: {
             default: null,
             type: cc.Node
@@ -79,6 +84,8 @@ var GameView = cc.Class({
         isTimeNoLimit : false,
         leftBulletNum : 0,
         curStage : 7,
+        commobNum : 0,
+        commobTag : 0
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -124,6 +131,7 @@ var GameView = cc.Class({
        this.historyScoreTxt.string = 0;
        this.curScoreTxt.string = 0;
        this.leftBulletNum = 0;
+       this.commobNum = 0;
     },
 
     //初始化监听
@@ -135,23 +143,32 @@ var GameView = cc.Class({
             setTimeout(function() {
                 self.bulletNode.scale = 0;
             }.bind(self),17);
-            cc.log("self.isBulletNoLimit " + self.isBulletNoLimit);
             if (self.isBulletNoLimit==false && self.leftBulletNum>0) {
                 self.leftBulletNum = self.leftBulletNum - 1;
                 self.bulletLeftNumTxt.string = "子弹：" + self.leftBulletNum;
             }
+            self.commobTag += 1;
         })
 
         //注册目标被击中事件监听
         this.node.on("hitTarget",function(event){
             var leftNum = self.bottleNumTxt.string;
-            if (leftNum>1) {
+            self.bottleNumTxt.string = leftNum - 1;
+            if (leftNum<=1) {
                 self.bottleNumTxt.string = leftNum - 1;
-            }
-            else {
                 self.curStage += 1;
                 self.curStage = self.curStage>20 ? 20 : self.curStage;
                 self._loadStage(self.curStage);
+            }
+
+            self.commobTag -= 1;
+
+            if (self.commobTag == 0) {
+                self.commobNum += 1;
+                cc.log(self.commobNum);
+            } else {
+                self.commobNum = 0;
+                self.commobTag = 0;
             }
 
             self.curScoreTxt.string = self.curScoreTxt.string + 1;
@@ -163,8 +180,16 @@ var GameView = cc.Class({
 
     },
 
-    //加载关卡
     _loadStage: function(stageNum) {
+        var self = this;
+        this._showStagePass(stageNum);
+        setTimeout(function() {
+            self._realLoadStage(stageNum);
+        }.bind(self),2000);
+    },
+
+    //加载关卡
+    _realLoadStage: function(stageNum) {
         //初始化
         if (stageNum == 0) {
             this.leftBulletNum = 0;
@@ -173,14 +198,15 @@ var GameView = cc.Class({
         var stageConfig = Singleton.Config.stage;
         var curStageCfg = stageConfig.stage[stageNum];
         
+        cc.log("curStageCfg.initBullet " + curStageCfg.initBullet)
         //设置剩余子弹数量
-        if (curStageCfg.leftBullet == 0) {
+        if (curStageCfg.initBullet == 0) {
             this.isBulletNoLimit = true;
-            this.bulletLeftNumTxt.string = "子弹：∞";
+            this.bulletLeftNumTxt.string = "子弹：无限";
         }
         else {
             this.isBulletNoLimit = false;
-            this.leftBulletNum += curStageCfg.leftBullet;
+            this.leftBulletNum += curStageCfg.initBullet;
             this.bulletLeftNumTxt.string = "子弹：" + this.leftBulletNum;
         }
 
@@ -296,4 +322,21 @@ var GameView = cc.Class({
             return newArr;
         }
     },
+
+    _pauseView: function () {
+        this.lvdaiUpNode.active = false;
+        this.lvdaiDownNode.active = false;
+        this.itemUpContainer.active = false;
+        this.itemDownContainer.active = false;
+    },
+
+    _showStagePass: function (stageNum) {
+        this._pauseView();
+        this.stagePassTxt.node.opacity = 0;
+        this.stagePassTxt.node.x = 300;
+        this.stagePassTxt.node.active = true;
+        this.stagePassTxt.string = "第 " + stageNum + " 关";
+        var seq = cc.sequence(cc.spawn(cc.moveBy(0.5, -300, 0), cc.fadeIn(0.5)),cc.delayTime(1),cc.spawn(cc.moveBy(0.5, -300, 0), cc.fadeOut(0.5)),);
+        this.stagePassTxt.node.runAction(seq);
+    }
 });

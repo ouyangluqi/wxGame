@@ -31,20 +31,23 @@
       },
       {
         "__id__": 89
+      },
+      {
+        "__id__": 95
       }
     ],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 95
+        "__id__": 98
       },
       {
-        "__id__": 96
+        "__id__": 99
       }
     ],
     "_prefab": {
-      "__id__": 97
+      "__id__": 100
     },
     "_id": "",
     "_opacity": 255,
@@ -209,7 +212,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "827c4824-41e5-4d1d-af68-8a6c546a4e42"
+      "__uuid__": "e6286415-35a9-4c96-b96b-4fb1a1866ecb"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -1033,8 +1036,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 40,
-      "height": 557
+      "width": 79,
+      "height": 335
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -1043,7 +1046,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 0
+      "y": 196
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -1061,7 +1064,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "e50dc339-92d5-4609-a599-80aa3e5d0351"
+      "__uuid__": "0496b3d2-aa4d-4991-b16c-16aa050a7220"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -2910,6 +2913,93 @@
     "sync": false
   },
   {
+    "__type__": "cc.Node",
+    "_name": "stagePassTxt",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 1
+    },
+    "_children": [],
+    "_tag": -1,
+    "_active": false,
+    "_components": [
+      {
+        "__id__": 96
+      }
+    ],
+    "_prefab": {
+      "__id__": 97
+    },
+    "_id": "",
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 194,
+      "g": 85,
+      "b": 0,
+      "a": 255
+    },
+    "_cascadeOpacityEnabled": true,
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 294,
+      "height": 120
+    },
+    "_rotationX": 0,
+    "_rotationY": 0,
+    "_scaleX": 1,
+    "_scaleY": 1,
+    "_position": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 335
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_localZOrder": 0,
+    "_globalZOrder": 0,
+    "_opacityModifyRGB": false,
+    "groupIndex": 0
+  },
+  {
+    "__type__": "cc.Label",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 95
+    },
+    "_enabled": true,
+    "_useOriginalSize": false,
+    "_actualFontSize": 120,
+    "_fontSize": 120,
+    "_lineHeight": 120,
+    "_enableWrapText": true,
+    "_N$file": null,
+    "_isSystemFontUsed": true,
+    "_spacingX": 0,
+    "_N$string": "Label",
+    "_N$horizontalAlign": 1,
+    "_N$verticalAlign": 1,
+    "_N$fontFamily": "",
+    "_N$overflow": 0
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__uuid__": "9d5b963c-ca70-4db6-b5b0-b09cc775fe99"
+    },
+    "fileId": "d1cddH/doRNQ4Aodz8556bh",
+    "sync": false
+  },
+  {
     "__type__": "cc.Widget",
     "_name": "",
     "_objFlags": 0,
@@ -2963,6 +3053,9 @@
     },
     "bottleNumTxt": {
       "__id__": 12
+    },
+    "stagePassTxt": {
+      "__id__": 96
     },
     "bulletNode": {
       "__id__": 73
