@@ -1,14 +1,14 @@
 {
   "ver": "1.0.0",
-  "uuid": "442c84cb-8267-451c-93b3-e6787ece232a",
+  "uuid": "e432703c-5f3b-4c5a-a137-274d81882b7c",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
   "subMetas": {
-    "结算页面": {
+    "video": {
       "ver": "1.0.3",
-      "uuid": "43ae82b1-4032-473b-806a-835ff39b6303",
-      "rawTextureUuid": "442c84cb-8267-451c-93b3-e6787ece232a",
+      "uuid": "9a0c6f73-032c-41af-af4f-dcecd463314d",
+      "rawTextureUuid": "e432703c-5f3b-4c5a-a137-274d81882b7c",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,
@@ -16,10 +16,10 @@
       "offsetY": 0,
       "trimX": 0,
       "trimY": 0,
-      "width": 750,
-      "height": 1334,
-      "rawWidth": 750,
-      "rawHeight": 1334,
+      "width": 100,
+      "height": 100,
+      "rawWidth": 100,
+      "rawHeight": 100,
       "borderTop": 0,
       "borderBottom": 0,
       "borderLeft": 0,

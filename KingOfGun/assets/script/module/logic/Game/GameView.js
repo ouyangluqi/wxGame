@@ -127,6 +127,7 @@ var GameView = cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
+        cc.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" + this.nameX)
         var self = this;
         this._initScene();
         this._initListener();
@@ -135,6 +136,7 @@ var GameView = cc.Class({
     },
 
     start () {
+        cc.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" + this.nameX)
         this._loadStage(this.curStage);
     },
 
@@ -190,7 +192,7 @@ var GameView = cc.Class({
             }.bind(self),17);
             if (self.isBulletNoLimit==false && self.leftBulletNum>0) {
                 self.leftBulletNum = self.leftBulletNum - 1;
-                self.bulletLeftNumTxt.string = "子弹：" + self.leftBulletNum;
+                self.bulletLeftNumTxt.string = self.leftBulletNum;
                 if(self.leftBulletNum==0) {
                     self._showSumView();
                 }
@@ -275,12 +277,12 @@ var GameView = cc.Class({
         //设置剩余子弹数量
         if (curStageCfg.initBullet == 0) {
             this.isBulletNoLimit = true;
-            this.bulletLeftNumTxt.string = "子弹：无限";
+            this.bulletLeftNumTxt.string = "无限";
         }
         else {
             this.isBulletNoLimit = false;
             this.leftBulletNum += curStageCfg.initBullet;
-            this.bulletLeftNumTxt.string = "子弹：" + this.leftBulletNum;
+            this.bulletLeftNumTxt.string = this.leftBulletNum;
         }
 
         //设置履带及道具的挂载container

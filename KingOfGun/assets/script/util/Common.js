@@ -1,35 +1,6 @@
 var Common = cc.Class({
 
     statics: {
-        getHistoryScore:function () {
-            var result = this._readData('historyScore');
-            if(result == null) {
-                this._saveData('historyScore', 0);
-                return 0;
-            }
-            return result;
-        },
-
-        checkScoreAndSave:function (scoreNum) {
-            var result = this._readData('historyScore');
-            if(scoreNum > result) {
-                this._saveData('historyScore', scoreNum);
-            }
-        },
-
-        //////////////////////////////////////////////////////////////////
-
-        _readData:function(keyStr) {
-            cc.sys.localStorage.getItem(keyStr);
-        },
-
-        _saveData:function(keyStr, data) {
-            cc.sys.localStorage.setItem(keyStr, data);
-            if(CC_WECHATGAME) {
-                _uploadWXData(keyStr, data);
-            }
-        },
-
         _uploadWXData: function (keyStr, valueData) { //上报到微信服务器：历史最高分
             var kvDataList = new Array();
             kvDataList.push({
@@ -39,6 +10,42 @@ var Common = cc.Class({
             wx.setUserCloudStorage({
                 KVDataList: kvDataList
             })
+        },
+
+        getHistoryScore:function () {
+            var result = cc.sys.localStorage.getItem('historyScore');
+            if(result == null) {
+                cc.sys.localStorage.setItem('historyScore', 0);
+                if(CC_WECHATGAME) {
+                    var kvDataList = new Array();
+                    kvDataList.push({
+                        key: historyScore,
+                        value: "0"
+                    });
+                    wx.setUserCloudStorage({
+                        KVDataList: kvDataList
+                    })
+                }
+                return 0;
+            }
+            return result;
+        },
+
+        checkScoreAndSave:function (scoreNum) {
+            var result = cc.sys.localStorage.getItem('historyScore');
+            if(scoreNum > result) {
+               cc.sys.localStorage.setItem('historyScore', scoreNum);
+               if(CC_WECHATGAME) {
+                var kvDataList = new Array();
+                kvDataList.push({
+                    key: historyScore,
+                    value: scoreNum
+                });
+                wx.setUserCloudStorage({
+                    KVDataList: kvDataList
+                })
+            }
+           }
         },
     }
 })
