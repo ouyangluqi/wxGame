@@ -15,6 +15,7 @@ var Res = cc.Class({
         PREFAB_GAME_GUN_EFF_PATH: "prefab/game/gunEff",
         PREFAB_GAME_HIT_EFF_PATH: "prefab/game/hitEff",
         PREFAB_HALL_VIEW_PATH: "prefab/home/homeView",
+        PREFAB_RANK_VIEW_PATH: "prefab/home/rankView",
 
         //Atals
         ATLAS_EFF_PATH: "atlas/game/effAtlas",
