@@ -438,8 +438,10 @@ var GameView = cc.Class({
 
     //播放枪口特效
     _showGunEff: function() {
-        var effNode = Singleton.PrefabPool.getNodeFromPool(Res.PREFAB_GAME_GUN_EFF_PATH);
-        if(effNode) {
+        //var effNode = Singleton.PrefabPool.getNodeFromPool(Res.PREFAB_GAME_GUN_EFF_PATH);
+        var prefabAsset = Singleton.PrefabLoader.getRes(Res.PREFAB_GAME_GUN_EFF_PATH);
+        if (prefabAsset) {
+            var effNode = cc.instantiate(prefabAsset)
             effNode.parent = this.gunNode;
             effNode.x = -2;
             effNode.y = 400;
