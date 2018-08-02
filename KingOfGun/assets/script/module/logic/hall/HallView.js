@@ -32,9 +32,7 @@ var HallView = cc.Class({
         if (this.rankView == null) {
             this.rankView = new RankView()
             this.rankView.init(Res.PREFAB_RANK_VIEW_PATH, this.node)
-            // this.rankViewNode = this.rankView.node
         } else {
-            cc.log("this.rankView +++++++++++++++++" + this.rankView.node)
             if (this.rankView.isActive) {
                 this.rankView.isActive = false
             } else {
