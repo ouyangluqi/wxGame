@@ -127,6 +127,7 @@ var GameView = cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
+        cc.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" + this.nameX)
         var self = this;
         this._initScene();
         this._initListener();
@@ -135,6 +136,7 @@ var GameView = cc.Class({
     },
 
     start () {
+        cc.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" + this.nameX)
         this._loadStage(this.curStage);
     },
 
