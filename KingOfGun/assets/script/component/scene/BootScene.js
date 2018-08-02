@@ -22,7 +22,6 @@ var BootScene = cc.Class({
     _loadRawAsset: function () {
         Log.logD("_loadRawAsset")
         Singleton.RawAssetLoader.addRes(Res.CONFIG_STAGE_PATH)
-        Singleton.RawAssetLoader.addRes(Res.ATLAS_EFF_PATH);
         Singleton.RawAssetLoader.startLoad(false, this._rawAssetCompleteHandler.bind(this))
     },
 
