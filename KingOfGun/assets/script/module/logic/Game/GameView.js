@@ -2,6 +2,7 @@ const BaseView = require('BaseView')
 const Singleton = require('Singleton')
 const Log = require('Log')
 const Random = require('Random')
+const Res = require('Res')
 
 var GameView = cc.Class({
     extends: BaseView,
@@ -76,6 +77,10 @@ var GameView = cc.Class({
             name: "结算界面分数",
             default: null,
             type: cc.Label
+        },
+        gunNode: {
+            default: null,
+            type: cc.Node
         },
         bulletNode: {
             default: null,
@@ -189,6 +194,8 @@ var GameView = cc.Class({
                     self._showSumView();
                 }
             }
+
+            self._showGunEff();
             self.commobTag += 1;
         });
 
@@ -427,5 +434,15 @@ var GameView = cc.Class({
     //点击挑战好友
     _onChanngleBtnClick: function (event) {
 
+    },
+
+    //播放枪口特效
+    _showGunEff: function() {
+        var effNode = Singleton.PrefabPool.getNodeFromPool(Res.PREFAB_GAME_GUN_EFF_PATH);
+        if(effNode) {
+            effNode.parent = this.gunNode;
+            effNode.x = -2;
+            effNode.y = 400;
+        }
     }
 });

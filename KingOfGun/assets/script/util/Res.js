@@ -12,6 +12,7 @@ var Res = cc.Class({
         // prefab
         PREFAB_TARGET_ITEM_PATH: "prefab/game/targetItem",
         PREFAB_GAME_VIEW_PATH: "prefab/game/gameView",
+        PREFAB_GAME_GUN_EFF_PATH: "prefab/game/gunEff",
         PREFAB_HALL_VIEW_PATH: "prefab/home/homeView",
     }
 })

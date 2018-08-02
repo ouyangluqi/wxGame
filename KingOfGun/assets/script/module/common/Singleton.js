@@ -3,6 +3,7 @@ const RawAssetLoader = require('RawAssetLoader')
 const PrefabLoader = require('PrefabLoader')
 const Config = require('Config')
 const Random = require('Random')
+const PrefabPool = require('PrefabPool');
 
 var Singleton = cc.Class({
     ctor: function () {
@@ -14,6 +15,7 @@ var Singleton = cc.Class({
             Singleton.BaseLoader = new BaseLoader();
             Singleton.RawAssetLoader = new RawAssetLoader();
             Singleton.PrefabLoader = new PrefabLoader();
+            Singleton.PrefabPool = new PrefabPool();
         }
     }
 })

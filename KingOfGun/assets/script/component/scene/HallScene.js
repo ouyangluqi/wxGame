@@ -21,6 +21,7 @@ var HallScene = cc.Class({
         Singleton.PrefabLoader.addRes(Res.PREFAB_HALL_VIEW_PATH)
         Singleton.PrefabLoader.addRes(Res.PREFAB_GAME_VIEW_PATH)
         Singleton.PrefabLoader.addRes(Res.PREFAB_TARGET_ITEM_PATH)
+        Singleton.PrefabLoader.addRes(Res.PREFAB_GAME_GUN_EFF_PATH)
         Singleton.PrefabLoader.startLoad(false, this._completeLoadPrefabHandler.bind(this))
     },
 

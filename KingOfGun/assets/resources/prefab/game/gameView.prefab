@@ -1049,7 +1049,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 196
+      "y": 147
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -2428,7 +2428,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 0,
+      "x": -2,
       "y": 0
     },
     "_skewX": 0,
@@ -2475,8 +2475,8 @@
     "isAlignOnce": true,
     "_target": null,
     "_alignFlags": 45,
-    "_left": 0,
-    "_right": 0,
+    "_left": -2,
+    "_right": 2,
     "_top": 0,
     "_bottom": 0,
     "_verticalCenter": 0,
@@ -4055,6 +4055,9 @@
     },
     "sumScoreTxt": {
       "__id__": 101
+    },
+    "gunNode": {
+      "__id__": 31
     },
     "bulletNode": {
       "__id__": 73
