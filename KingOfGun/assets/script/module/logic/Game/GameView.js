@@ -127,7 +127,6 @@ var GameView = cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
-        cc.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" + this.nameX)
         var self = this;
         this._initScene();
         this._initListener();
@@ -136,7 +135,6 @@ var GameView = cc.Class({
     },
 
     start () {
-        cc.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" + this.nameX)
         this._loadStage(this.curStage);
     },
 
@@ -420,11 +418,11 @@ var GameView = cc.Class({
     //展示结算界面
     _showSumView: function () {
         this._pauseView();
-        this.sumView.y = 630;
+        this.sumView.y = 404;
         this.sumScoreTxt.string = this.curScoreTxt.string;
         Common.checkScoreAndSave(this.curScoreTxt.string);
         this.sumViewBg.active = true;
-        var action = cc.moveBy(0.2, 0, -630);
+        var action = cc.moveBy(0.2, 0, -781);
         this.sumView.runAction(action);
     },
 
