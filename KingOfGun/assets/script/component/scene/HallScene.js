@@ -24,7 +24,8 @@ var HallScene = cc.Class({
         Singleton.PrefabLoader.addRes(Res.PREFAB_GAME_VIEW_PATH)
         Singleton.PrefabLoader.addRes(Res.PREFAB_TARGET_ITEM_PATH)
         Singleton.PrefabLoader.addRes(Res.PREFAB_GAME_GUN_EFF_PATH)
-        Singleton.PrefabLoader.addRes(Res.PREFAB_GAME_HIT_EFF_PATH);
+        Singleton.PrefabLoader.addRes(Res.PREFAB_GAME_HIT_EFF_PATH)
+        Singleton.PrefabLoader.addRes(Res.PREFAB_RANK_VIEW_PATH)
         Singleton.PrefabLoader.startLoad(false, this._completeLoadPrefabHandler.bind(this))
     },
 
@@ -46,11 +47,15 @@ var HallScene = cc.Class({
     },
 
     _checkAllLoadComplete:function () {
-        if(this._isSpriteAtlasComplete && this._isPrefabComplete) {
+        if (this._isSpriteAtlasComplete && this._isPrefabComplete) {
             if (this._hallView == null) {
                 this._hallView = new HallView()
                 this._hallView.init(Res.PREFAB_HALL_VIEW_PATH, this.node)
             }
         }
+    },
+
+    onDestroy: function () {
+        this._hallView = null
     }
 });

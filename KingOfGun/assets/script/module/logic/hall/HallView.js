@@ -2,18 +2,21 @@ const BaseView = require('BaseView')
 const Scene = require('Scene')
 const Log = require('Log')
 const RankView = require('RankView')
+const Res = require('Res')
 
 var HallView = cc.Class({
     extends: BaseView,
 
     onLoad: function() {
-        cc.log("onInit is call" + this.node)
+        cc.log("HallView.onInit is call" + this.node)
         
         this.startBtn = this.node.getChildByName("startGame").getComponent(cc.Button)
         this.startBtn.node.on(cc.Node.EventType.TOUCH_END, this._startClickHandler.bind(this))
 
         this.rankBtn = this.node.getChildByName("rankBtn").getComponent(cc.Button)
-        this.rankBtn.Node.onabort(cc.Node.EventType.TOUCH_END, this._rankClickHandler.bind(this))
+        this.rankBtn.node.on(cc.Node.EventType.TOUCH_END, this._rankClickHandler.bind(this))
+
+        this.rankView = null
     },
 
     onStart: function() {
@@ -26,5 +29,17 @@ var HallView = cc.Class({
 
     _rankClickHandler: function() {
         Log.logD("click rank")
-    }
+        if (this.rankView == null) {
+            this.rankView = new RankView()
+            this.rankView.init(Res.PREFAB_RANK_VIEW_PATH, this.node)
+            // this.rankViewNode = this.rankView.node
+        } else {
+            cc.log("this.rankView +++++++++++++++++" + this.rankView.node)
+            if (this.rankView.isActive) {
+                this.rankView.isActive = false
+            } else {
+                this.rankView.isActive = true
+            }
+        }
+    },
 })

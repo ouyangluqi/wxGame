@@ -5,16 +5,15 @@ var BaseView = cc.Class({
     extends: cc.Component,
 
     init: function(prefabPath, parentNode) {
-        cc.log()
         var prefabAsset = Singleton.PrefabLoader.getRes(prefabPath)
         if (prefabAsset) {
-            var newNode = cc.instantiate(prefabAsset)
-            newNode.parent = parentNode
-            this._onInit()
+            var go = cc.instantiate(prefabAsset)
+            go.parent = parentNode
+            this._onInit(go)
         }
     },
 
-    _onInit: function () {
+    _onInit: function (rootNode) {
 
     }
 })
