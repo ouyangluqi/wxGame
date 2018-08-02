@@ -1,3 +1,5 @@
+const Singleton = require('Singleton')
+const Res = require('Res')
 cc.Class({
     extends: cc.Component,
 
@@ -37,11 +39,8 @@ cc.Class({
                     return;
                 }
             }
-            cc.loader.loadRes("texture/animalFrame/"+this.framePre+"_"+this._frameIndex, cc.SpriteFrame, function (err, spriteFrame) {
-                if(self.cSprite){
-                    self.cSprite.spriteFrame = spriteFrame;
-                }
-            });
+            var atlas = Singleton.SpriteAtlasLoader.getRes(Res.ATLAS_EFF_PATH);
+            self.cSprite.spriteFrame = atlas.getSpriteFrame(this.framePre+"_"+this._frameIndex);
         }
         this._dtCount = this._dtCount + 1;
     },

@@ -11,7 +11,7 @@ cc.Class({
 
     start () {
         var windowSize=cc.view.getVisibleSize();
-        this.resetPosY = 50*7;
+        this.resetPosY = 72*7;
         if (this.speed>0) {
             this.dir = 1;
         } 

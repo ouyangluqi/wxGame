@@ -9,11 +9,13 @@ var HallScene = cc.Class({
     onLoad: function() {
         Log.logD("The HallScene is start")
         this._isPrefabComplete = false
+        this._isSpriteAtlasComplete = false
         this._hallView = null
     },
 
     start () {
         this._startLoadPrefabHandler()
+        this._startLoadSpriteAtlasHandler()
     },
 
     _startLoadPrefabHandler: function () {
@@ -22,14 +24,33 @@ var HallScene = cc.Class({
         Singleton.PrefabLoader.addRes(Res.PREFAB_GAME_VIEW_PATH)
         Singleton.PrefabLoader.addRes(Res.PREFAB_TARGET_ITEM_PATH)
         Singleton.PrefabLoader.addRes(Res.PREFAB_GAME_GUN_EFF_PATH)
+        Singleton.PrefabLoader.addRes(Res.PREFAB_GAME_HIT_EFF_PATH);
         Singleton.PrefabLoader.startLoad(false, this._completeLoadPrefabHandler.bind(this))
     },
 
     _completeLoadPrefabHandler: function () {
         Log.logD("complete load prefab")
-        if (this._hallView == null) {
-            this._hallView = new HallView()
-            this._hallView.init(Res.PREFAB_HALL_VIEW_PATH, this.node)
+        this._isPrefabComplete = true;
+        this._checkAllLoadComplete();
+    },
+
+    _startLoadSpriteAtlasHandler: function () {
+        Singleton.SpriteAtlasLoader.addRes(Res.ATLAS_EFF_PATH)
+        Singleton.SpriteAtlasLoader.startLoad(false, this._completeLoadSpriteAtlasHandler.bind(this))
+    },
+
+    _completeLoadSpriteAtlasHandler: function () {
+        Log.logD("complete load SpriteAtlas")
+        this._isSpriteAtlasComplete = true;
+        this._checkAllLoadComplete();
+    },
+
+    _checkAllLoadComplete:function () {
+        if(this._isSpriteAtlasComplete && this._isPrefabComplete) {
+            if (this._hallView == null) {
+                this._hallView = new HallView()
+                this._hallView.init(Res.PREFAB_HALL_VIEW_PATH, this.node)
+            }
         }
     }
 });

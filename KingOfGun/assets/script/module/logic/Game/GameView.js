@@ -3,6 +3,7 @@ const Singleton = require('Singleton')
 const Log = require('Log')
 const Random = require('Random')
 const Res = require('Res')
+const Common = require('Common')
 
 var GameView = cc.Class({
     extends: BaseView,
@@ -165,7 +166,7 @@ var GameView = cc.Class({
        this.itemUpContainer.active = false;
        this.itemDownContainer.active = false;
 
-       this.historyScoreTxt.string = 0;
+       this.historyScoreTxt.string = Common.getHistoryScore();
        this.curScoreTxt.string = 0;
        this.leftBulletNum = 0;
        this.commobNum = 0;
@@ -345,7 +346,7 @@ var GameView = cc.Class({
         var itemContainer;
         var posY;
         itemContainer = index==1 ? this.itemUpContainer : this.itemDownContainer;
-        posY = index==1 ? -257 : -560;
+        posY = index==1 ? -218 : -486;
         
         itemContainer.parent = speed>0 ? this.leftTopNode : this.rightTopNode;
 
@@ -419,6 +420,7 @@ var GameView = cc.Class({
         this._pauseView();
         this.sumView.y = 630;
         this.sumScoreTxt.string = this.curScoreTxt.string;
+        Common.checkScoreAndSave(this.curScoreTxt.string);
         this.sumViewBg.active = true;
         var action = cc.moveBy(0.2, 0, -630);
         this.sumView.runAction(action);
@@ -441,10 +443,17 @@ var GameView = cc.Class({
         //var effNode = Singleton.PrefabPool.getNodeFromPool(Res.PREFAB_GAME_GUN_EFF_PATH);
         var prefabAsset = Singleton.PrefabLoader.getRes(Res.PREFAB_GAME_GUN_EFF_PATH);
         if (prefabAsset) {
-            var effNode = cc.instantiate(prefabAsset)
-            effNode.parent = this.gunNode;
-            effNode.x = -2;
-            effNode.y = 400;
+            var gunEffNode = cc.instantiate(prefabAsset)
+            gunEffNode.parent = this.gunNode;
+            gunEffNode.x = 5;
+            gunEffNode.y = 410;
         }
-    }
+        prefabAsset = Singleton.PrefabLoader.getRes(Res.PREFAB_GAME_HIT_EFF_PATH);
+        if (prefabAsset) {
+            var hitEffNode = cc.instantiate(prefabAsset)
+            hitEffNode.parent = this.centerTopNode;
+            hitEffNode.x = 0;
+            hitEffNode.y = 0;
+        }
+    },
 });

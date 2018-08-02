@@ -10,7 +10,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "gunEff",
+    "_name": "hitEff",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
@@ -40,12 +40,12 @@
     "_anchorPoint": {
       "__type__": "cc.Vec2",
       "x": 0.5,
-      "y": 0.5
+      "y": 0.7
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 89,
-      "height": 288
+      "width": 140,
+      "height": 173
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -53,8 +53,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -2,
-      "y": 393
+      "x": 0,
+      "y": 0
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -98,8 +98,8 @@
     },
     "_enabled": true,
     "isLoop": false,
-    "framePre": "guneff",
-    "frameCount": 4,
+    "framePre": "hiteff",
+    "frameCount": 3,
     "speed": 2,
     "cSprite": {
       "__id__": 2
@@ -113,9 +113,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "1cb0cb5f-ac20-492d-a910-51c9e683ca41"
+      "__uuid__": "181cbba7-8a98-4ef7-ac9e-7971e07282e9"
     },
-    "fileId": "2cbdA4HLVCDqNdyU64SWjd",
+    "fileId": "3aUAVYXYNCyaI8X/keO837",
     "sync": false
   }
 ]
