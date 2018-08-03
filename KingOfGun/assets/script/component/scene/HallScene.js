@@ -14,6 +14,9 @@ var HallScene = cc.Class({
     },
 
     start () {
+        if (CC_WECHATGAME) {
+            
+        }
         this._startLoadPrefabHandler()
         this._startLoadSpriteAtlasHandler()
     },

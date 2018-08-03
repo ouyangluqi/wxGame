@@ -26,8 +26,8 @@
     "orientation": "portrait"
   },
   "renderMode": "1",
-  "startScene": "",
-  "title": "KingOfGun",
+  "startScene": "e8537792-fc37-4256-b9c3-b9c4a67ad63e",
+  "title": "KingOfGun_OpenData",
   "webOrientation": "auto",
   "wechatgame": {
     "REMOTE_SERVER_ROOT": "",
