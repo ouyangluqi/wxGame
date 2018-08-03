@@ -34,6 +34,7 @@ cc.Class({
                     texture.handleLoadedTexture()
                     this.avatarImgSprite.spriteFrame = new cc.SpriteFrame(texture)
                 }
+                image.src = avatarUrl
             } catch (e) {
                 cc.log(e)
                 this.avatarImgSprite.node.active = false

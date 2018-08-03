@@ -80,9 +80,10 @@ cc.Class({
                             for (let i = 0; i < data.length; i++) {
                                 var playerInfo = data[i]
                                 var item = cc.instantiate(this.prefabRankItem)
-                                console.log("The data is " + i + " === " + playerInfo)
                                 item.getComponent('RankItem').init(i, playerInfo)
                                 this.scrollViewContent.addChild(item)
+                                item.width = 710
+                                item.height = 120
                             }
                             if (data.length <= 8) {
                                 let layout = this.scrollViewContent.getComponent(cc.Layout)

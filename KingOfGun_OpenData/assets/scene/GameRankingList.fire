@@ -336,11 +336,11 @@
     "_enabled": true,
     "_layoutSize": {
       "__type__": "cc.Size",
-      "width": 300,
-      "height": 200
+      "width": 714,
+      "height": 120
     },
     "_resize": 1,
-    "_N$layoutType": 1,
+    "_N$layoutType": 2,
     "_N$padding": 0,
     "_N$cellSize": {
       "__type__": "cc.Size",
@@ -353,7 +353,7 @@
     "_N$paddingTop": 0,
     "_N$paddingBottom": 0,
     "_N$spacingX": 0,
-    "_N$spacingY": 0,
+    "_N$spacingY": 2,
     "_N$verticalDirection": 1,
     "_N$horizontalDirection": 1
   },
