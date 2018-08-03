@@ -115,6 +115,10 @@ var GameView = cc.Class({
             default:null,
             type: cc.Node
         },
+        audioSource: {
+            type: cc.AudioSource,
+            default: null
+        },
 
         isBulletNoLimit : false,
         isTimeNoLimit : false,
@@ -197,6 +201,7 @@ var GameView = cc.Class({
             }
 
             self._showGunEff();
+            self.audioSource.play();
             self.commobTag += 1;
         });
 
@@ -228,6 +233,11 @@ var GameView = cc.Class({
 
             self.curScoreTxt.string = self.curScoreTxt.string + self.commobNum;
         });
+
+        //注册打中炸弹事件监听
+        this.node.on("hitBoom",function(event){
+            self._showSumView();
+        })
 
         //注册按钮监听事件
         this.restartBtn.node.on('click', this._onRestartBtnClick, this);
@@ -290,7 +300,16 @@ var GameView = cc.Class({
         this.itemDownContainer.active = false;
 
         var itemList = this._getItemArr(curStageCfg.items);
-        this.bottleNumTxt.string = itemList.length;
+
+        var tarBottleNum = 0;
+
+        itemList.forEach(element => {
+            if(element!="8") {
+                tarBottleNum = tarBottleNum + 1;
+            }
+        });
+
+        this.bottleNumTxt.string = tarBottleNum;
 
         //如果有两天履带则需要分割数据
         var disItem = {};

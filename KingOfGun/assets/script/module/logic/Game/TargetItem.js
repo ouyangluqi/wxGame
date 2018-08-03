@@ -41,6 +41,10 @@ cc.Class({
     onCollisionEnter: function (other) {
         this.lifeNum = this.lifeNum - 1;
 
+        if (this.itemId == 8) {
+            var eventParam = new cc.Event.EventCustom("hitBoom",true);
+            this.node.dispatchEvent(eventParam);
+        }
         if (this.lifeNum == 0) {
             var eventParam = new cc.Event.EventCustom("hitTarget",true);
             eventParam.setUserData(this.lifeNum);
