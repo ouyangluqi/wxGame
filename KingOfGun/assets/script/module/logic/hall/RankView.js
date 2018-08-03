@@ -18,7 +18,6 @@ var RankView = cc.Class({
     },
 
     _onInit: function(rootNode) {
-        console.log("_onInit this is ============== " + this)
         this.go = rootNode
         this.tex = new cc.Texture2D()
         this.backBtn = this.go.getChildByName("backBtn").getComponent(cc.Button)
@@ -43,7 +42,6 @@ var RankView = cc.Class({
     },
 
     _backClickHandler: function() {
-        cc.log('back click call')
         this.go.active = false
         clearInterval(this.times)
     },
