@@ -4,6 +4,7 @@ const Log = require('Log')
 const Random = require('Random')
 const Res = require('Res')
 const Common = require('Common')
+const Scene = require('Scene')
 
 var GameView = cc.Class({
     extends: BaseView,
@@ -74,6 +75,11 @@ var GameView = cc.Class({
             default: null,
             type: cc.Button
         },
+        homeBtn: {
+            name: "返回主界面按钮",
+            default: null,
+            type: cc.Button
+        },
         sumScoreTxt: {
             name: "结算界面分数",
             default: null,
@@ -119,6 +125,10 @@ var GameView = cc.Class({
             type: cc.AudioSource,
             default: null
         },
+        bgmAudio: {
+            type: cc.AudioSource,
+            default: null
+        },
         rankSprite: {
             default: null,
             type: cc.Sprite
@@ -145,6 +155,7 @@ var GameView = cc.Class({
     },
 
     start () {
+        this._checkBgmAudio();
         this._loadStage(this.curStage);
     },
 
@@ -213,7 +224,9 @@ var GameView = cc.Class({
 
             self._showGunEff();
             self._showGunAction();
-            self.audioSource.play();
+            if(Common.canPlayAudioTag){
+                self.audioSource.play();
+            }
             self.commobTag += 1;
         });
 
@@ -254,6 +267,7 @@ var GameView = cc.Class({
         //注册按钮监听事件
         this.restartBtn.node.on('click', this._onRestartBtnClick, this);
         this.challgeBtn.node.on('click', this._onChanngleBtnClick, this);
+        this.homeBtn.node.on('click', this._onHomeBtnClick, this);
     },
 
     //显示连击数量
@@ -454,7 +468,8 @@ var GameView = cc.Class({
         this.sumScoreTxt.string = this.curScoreTxt.string;
         Common.checkScoreAndSave(this.curScoreTxt.string);
         this.sumViewBg.active = true;
-        var action = cc.moveBy(0.2, 0, -781);
+        var action = cc.moveBy(0.8, 0, -781);
+        action.easing(cc.easeBackInOut(0.8));
         this.sumView.runAction(action);
 
         if (CC_WECHATGAME) {
@@ -478,6 +493,11 @@ var GameView = cc.Class({
     //点击挑战好友
     _onChanngleBtnClick: function (event) {
 
+    },
+
+    //点击返回主界面
+    _onHomeBtnClick: function (event) {
+        cc.director.loadScene(Scene.HALL);
     },
 
     //播放枪口特效
@@ -521,4 +541,8 @@ var GameView = cc.Class({
             this.rankSprite.spriteFrame = new cc.SpriteFrame(this.rankTex)
         }
     },
+
+    _checkBgmAudio:function() {
+        Common.canPlayAudioTag ? this.bgmAudio.play() : this.bgmAudio.pause();
+    }
 });

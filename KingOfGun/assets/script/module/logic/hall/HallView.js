@@ -25,6 +25,8 @@ var HallView = cc.Class({
         this.historyScoreTxt = this.node.getChildByName("scoreLabel").getComponent(cc.Label)
         this.historyScoreTxt.string = "最高分数："+Common.getHistoryScore();
 
+        this.audio = this.node.getChildByName("voiceNode").getComponent(cc.AudioSource);
+
         this.rankView = null
     },
 
@@ -52,9 +54,15 @@ var HallView = cc.Class({
 
     _voiceClickHandler: function() {
         Common.canPlayAudioTag = !Common.canPlayAudioTag;
+        this._checkBgmAudio();
+
         var self = this;
         cc.loader.loadRes("atlas/hall/hall", cc.SpriteAtlas, function(err, atlas) {
             self.voiceSprie.spriteFrame = atlas.getSpriteFrame(Common.canPlayAudioTag==true ? "hall_voice" : "hall_voice_stop");
         });
+    },
+
+    _checkBgmAudio:function() {
+        Common.canPlayAudioTag ? this.audio.play() : this.audio.pause();
     }
 })
