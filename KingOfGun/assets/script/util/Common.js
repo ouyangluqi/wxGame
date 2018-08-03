@@ -1,3 +1,5 @@
+const Log = require("Log")
+
 var Common = cc.Class({
 
     statics: {
@@ -13,32 +15,58 @@ var Common = cc.Class({
         },
 
         getHistoryScore:function () {
-            var result = cc.sys.localStorage.getItem('historyScore');
+            Log.logD("getHistroyScore")
+            var result = cc.sys.localStorage.getItem('xw_miniGame_x1');
             if(result == null) {
-                cc.sys.localStorage.setItem('historyScore', 0);
+                Log.logD("The result is null")
+                cc.sys.localStorage.setItem('xw_miniGame_x1', 0);
                 if(CC_WECHATGAME) {
                     var kvDataList = new Array();
                     kvDataList.push({
-                        key: historyScore,
+                        key: "xw_miniGame_x1",
                         value: "0"
                     });
                     wx.setUserCloudStorage({
-                        KVDataList: kvDataList
+                        KVDataList: kvDataList,
+                        success: function() {
+                            Log.logD("reset score success")
+                        },
+                        fail: function() {
+                            Log.logD("reset score fail")
+                        }
                     })
                 }
                 return 0;
+            } else {
+                Log.logD("The result is not null")
+                if(CC_WECHATGAME) {
+                    var kvDataList = new Array();
+                    kvDataList.push({
+                        key: "xw_miniGame_x1",
+                        value: "0"
+                    });
+                    wx.setUserCloudStorage({
+                        KVDataList: kvDataList,
+                        success: function() {
+                            Log.logD("reset score success")
+                        },
+                        fail: function() {
+                            Log.logD("reset score fail")
+                        }
+                    })
+                }
+                return result;
             }
-            return result;
         },
 
         checkScoreAndSave:function (scoreNum) {
-            var result = cc.sys.localStorage.getItem('historyScore');
+            var result = cc.sys.localStorage.getItem('xw_miniGame_x1');
             if(scoreNum > result) {
-               cc.sys.localStorage.setItem('historyScore', scoreNum);
+               cc.sys.localStorage.setItem('xw_miniGame_x1', scoreNum);
                if(CC_WECHATGAME) {
                 var kvDataList = new Array();
                 kvDataList.push({
-                    key: historyScore,
+                    key: "xw_miniGame_x1",
                     value: scoreNum
                 });
                 wx.setUserCloudStorage({
