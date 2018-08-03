@@ -3,6 +3,8 @@ const Log = require("Log")
 var Common = cc.Class({
 
     statics: {
+        canPlayAudioTag : true,
+
         _uploadWXData: function (keyStr, valueData) { //上报到微信服务器：历史最高分
             var kvDataList = new Array();
             kvDataList.push({
@@ -37,13 +39,19 @@ var Common = cc.Class({
                     })
                 }
                 return 0;
-            } else {
-                Log.logD("The result is not null")
+            } 
+            return result;
+        },
+
+        checkScoreAndSave:function (scoreNum) {
+            var result = cc.sys.localStorage.getItem('xw_miniGame_x1');
+            if(scoreNum > result) {
+                cc.sys.localStorage.setItem('xw_miniGame_x1', scoreNum);
                 if(CC_WECHATGAME) {
                     var kvDataList = new Array();
                     kvDataList.push({
                         key: "xw_miniGame_x1",
-                        value: "0"
+                        value: scoreNum+""
                     });
                     wx.setUserCloudStorage({
                         KVDataList: kvDataList,
@@ -55,25 +63,7 @@ var Common = cc.Class({
                         }
                     })
                 }
-                return result;
             }
-        },
-
-        checkScoreAndSave:function (scoreNum) {
-            var result = cc.sys.localStorage.getItem('xw_miniGame_x1');
-            if(scoreNum > result) {
-               cc.sys.localStorage.setItem('xw_miniGame_x1', scoreNum);
-               if(CC_WECHATGAME) {
-                var kvDataList = new Array();
-                kvDataList.push({
-                    key: "xw_miniGame_x1",
-                    value: scoreNum
-                });
-                wx.setUserCloudStorage({
-                    KVDataList: kvDataList
-                })
-            }
-           }
-        },
+        }
     }
 })

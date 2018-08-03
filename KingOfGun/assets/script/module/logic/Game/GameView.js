@@ -119,13 +119,19 @@ var GameView = cc.Class({
             type: cc.AudioSource,
             default: null
         },
+        rankSprite: {
+            default: null,
+            type: cc.Sprite
+        },
 
         isBulletNoLimit : false,
         isTimeNoLimit : false,
         leftBulletNum : 0,
         curStage : 1,
         commobNum : 0,
-        commobTag : 0
+        commobTag : 0,
+        rankTex : false,
+        summingTag : false
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -147,7 +153,9 @@ var GameView = cc.Class({
     },
 
     update (dt) {
-
+        if(this.summingTag) {
+            this._updateSubDomainCanvas();
+        } 
     },
 
     // up 生命周期函数
@@ -188,10 +196,13 @@ var GameView = cc.Class({
          //注册鼠标点击事件
         var self = this;
         this.node.on(cc.Node.EventType.TOUCH_END, function (event) {
+            if(self.summingTag){
+                return;
+            }
             self.bulletNode.scale = 1
             setTimeout(function() {
                 self.bulletNode.scale = 0;
-            }.bind(self),17);
+            }.bind(self),20);
             if (self.isBulletNoLimit==false && self.leftBulletNum>0) {
                 self.leftBulletNum = self.leftBulletNum - 1;
                 self.bulletLeftNumTxt.string = self.leftBulletNum;
@@ -201,6 +212,7 @@ var GameView = cc.Class({
             }
 
             self._showGunEff();
+            self._showGunAction();
             self.audioSource.play();
             self.commobTag += 1;
         });
@@ -436,6 +448,7 @@ var GameView = cc.Class({
 
     //展示结算界面
     _showSumView: function () {
+        this.summingTag = true;
         this._pauseView();
         this.sumView.y = 404;
         this.sumScoreTxt.string = this.curScoreTxt.string;
@@ -443,10 +456,20 @@ var GameView = cc.Class({
         this.sumViewBg.active = true;
         var action = cc.moveBy(0.2, 0, -781);
         this.sumView.runAction(action);
+
+        if (CC_WECHATGAME) {
+            window.wx.postMessage({// 发消息给子域
+                messageType: 2,
+                mainMenuNum: "xw_miniGame_x1"
+            });
+        } else {
+            cc.log("获取结算展示排行榜数据。xw_miniGame_x1");
+        }
     },
 
     //点击再来一局
     _onRestartBtnClick: function (event) {
+        this.summingTag = false;
         this.sumViewBg.active = false;
         this._initScene();
         this._loadStage(1);
@@ -473,6 +496,29 @@ var GameView = cc.Class({
             hitEffNode.parent = this.centerTopNode;
             hitEffNode.x = 0;
             hitEffNode.y = 0;
+        }
+    },
+
+    //播放后座动画
+    _showGunAction: function() {
+        var act1 = cc.moveBy(0.08, 0, -20);
+        act1.easing(cc.easeIn(0.08));
+        var act2 = cc.moveBy(0.08, 0, 20);
+        act2.easing(cc.easeOut(0.08));
+        var seq = cc.sequence(act1, act2);
+        this.gunNode.runAction(seq);
+    },
+
+    _updateSubDomainCanvas: function () {
+        if (this.rankTex==false) {
+            this.rankTex = new cc.Texture2D();
+        }
+        if (CC_WECHATGAME) {
+            var openDataContext = window.wx.getOpenDataContext()
+            var sharedCanvas = openDataContext.canvas
+            this.rankTex.initWithElement(sharedCanvas)
+            this.rankTex.handleLoadedTexture()
+            this.rankSprite.spriteFrame = new cc.SpriteFrame(this.rankTex)
         }
     },
 });

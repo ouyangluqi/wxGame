@@ -3,6 +3,7 @@ const Scene = require('Scene')
 const Log = require('Log')
 const RankView = require('RankView')
 const Res = require('Res')
+const Common = require('Common')
 
 var HallView = cc.Class({
     extends: BaseView,
@@ -15,6 +16,14 @@ var HallView = cc.Class({
 
         this.rankBtn = this.node.getChildByName("rankBtn").getComponent(cc.Button)
         this.rankBtn.node.on(cc.Node.EventType.TOUCH_END, this._rankClickHandler.bind(this))
+
+        this.voiceBtn = this.node.getChildByName("voiceBtn").getComponent(cc.Button)
+        this.voiceBtn.node.on(cc.Node.EventType.TOUCH_END, this._voiceClickHandler.bind(this))
+
+        this.voiceSprie = this.node.getChildByName("voiceBtn").getComponent(cc.Sprite)
+
+        this.historyScoreTxt = this.node.getChildByName("scoreLabel").getComponent(cc.Label)
+        this.historyScoreTxt.string = "最高分数："+Common.getHistoryScore();
 
         this.rankView = null
     },
@@ -40,4 +49,12 @@ var HallView = cc.Class({
             }
         }
     },
+
+    _voiceClickHandler: function() {
+        Common.canPlayAudioTag = !Common.canPlayAudioTag;
+        var self = this;
+        cc.loader.loadRes("atlas/hall/hall", cc.SpriteAtlas, function(err, atlas) {
+            self.voiceSprie.spriteFrame = atlas.getSpriteFrame(Common.canPlayAudioTag==true ? "hall_voice" : "hall_voice_stop");
+        });
+    }
 })
