@@ -30,7 +30,7 @@
   "title": "KingOfGun",
   "webOrientation": "auto",
   "wechatgame": {
-    "REMOTE_SERVER_ROOT": "",
+    "REMOTE_SERVER_ROOT": "https://shxingwan-down.oss-cn-shenzhen.aliyuncs.com/wechatGame/cocosGameRes/TheKingOfGun",
     "appid": "wx474adf766b53e103",
     "isSubdomain": false,
     "orientation": "portrait",
