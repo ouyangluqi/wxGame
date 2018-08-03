@@ -1,6 +1,5 @@
 cc.Class({
     extends: cc.Component,
-    name: "RankItem",
 
     properties: {
         bgSprite: cc.Node,
@@ -18,14 +17,6 @@ cc.Class({
         let avatarUrl = data.avatarUrl
         let nick = data.nickname
         let grade = data.KVDataList.length != 0 ? data.KVDataList[0].value : 0
-        
-        if (rank == 0) {
-
-        } else if (rank == 1) {
-
-        } else if (rank == 2) {
-
-        }
 
         this.rankLabel.string = (rank + 1).toString()
         this.createImage(avatarUrl)

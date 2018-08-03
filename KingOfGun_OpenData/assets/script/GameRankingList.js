@@ -12,7 +12,7 @@ cc.Class({
         this._removeChild()
         if (CC_WECHATGAME) {
             window.wx.onMessage(data => {
-                cc.log("接收主域发来的消息:", data)
+                console.log("接收主域发来的消息:", data)
                 if (data.messageType == 0) {
                     this._removeChild()
                 } else if(data.messageType == 1) {
@@ -40,17 +40,16 @@ cc.Class({
                 keyList: ["xw_miniGame_x1"],
                 success: res => {
                     var dList = res.KVDataList
-                    console.log("自己的托管数据");
-                    console.log("自己的托管数据1:dList.length=" + dList.length);
+                    console.log("getUserCloudStorage success");
                     for(var i = 0; i < dList.length; i++) {
                         if (dList[i].key == "xw_miniGame_x1") {
-                            console.log("自己的托管数据1:" + dList[i].value);
+                            console.log("getUserCloudStorage value: " + dList[i].value);
                             break;
                         }
                     }
                 },
                 fail: res => {
-
+                    console.log("getUserCloudStorage fail");
                 }
             })
 
@@ -81,14 +80,16 @@ cc.Class({
                             for (let i = 0; i < data.length; i++) {
                                 var playerInfo = data[i]
                                 var item = cc.instantiate(this.prefabRankItem)
-                                cc.log("The data is " + i + " === " + playerInfo)
+                                console.log("The data is " + i + " === " + playerInfo)
                                 item.getComponent('RankItem').init(i, playerInfo)
                                 this.scrollViewContent.addChild(item)
                             }
                             if (data.length <= 8) {
-                                // let layout = this.scrollViewContent.getComponent(cc.Layout)
-                                // layout.resizeMode = cc.Layout.ResizeMode.NONE
+                                let layout = this.scrollViewContent.getComponent(cc.Layout)
+                                layout.resizeMode = cc.Layout.ResizeMode.NONE
                             }
+
+                            console.log("The scrollViewContent child Count: " + this.scrollViewContent.childrenCount)
                         },
                         fail: res => {
                             console.log("wx.getFriendCloudStorage fail", res);
