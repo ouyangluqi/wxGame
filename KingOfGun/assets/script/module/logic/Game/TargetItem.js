@@ -52,6 +52,7 @@ cc.Class({
             var userData = {};
             userData["lifeNum"] = this.lifeNum;
             userData["itemId"] = this.itemId;
+            userData["parentIndex"] = this._getParentIndex();
             eventParam.setUserData(userData);
             this.node.dispatchEvent(eventParam);
             this.node.destroy();
@@ -61,9 +62,14 @@ cc.Class({
             var userData = {};
             userData["lifeNum"] = this.lifeNum;
             userData["itemId"] = this.itemId;
+            userData["parentIndex"] = this._getParentIndex();
             eventParam.setUserData(userData);
             this.node.dispatchEvent(eventParam);
         }
+    },
+
+    _getParentIndex:function() {
+        return this.node.parent.y>-300 ? 1 : 2;
     },
 
     onCollisionStay: function (other) {

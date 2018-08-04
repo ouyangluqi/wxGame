@@ -150,6 +150,14 @@ var GameView = cc.Class({
             default:null,
             type: cc.Node
         },
+        brokeContainerUp: {
+            default:null,
+            type: cc.Node
+        },
+        brokeContainerDown: {
+            default:null,
+            type: cc.Node
+        },
 
         isBulletNoLimit : false,
         isTimeNoLimit : false,
@@ -267,6 +275,14 @@ var GameView = cc.Class({
             self.brokeAudio.play();
             var lifeNum = event.getUserData()["lifeNum"];
             var itemId = event.getUserData()["itemId"];
+            var parentIndex = event.getUserData()["parentIndex"];
+
+            var brokerContainer = parentIndex == 1 ? self.brokeContainerUp : self.brokeContainerDown;
+            var prefabAsset = Singleton.PrefabLoader.getRes("prefab/effect/eff_broke"+itemId+"_"+lifeNum);
+            if (prefabAsset) {
+                var go = cc.instantiate(prefabAsset)
+                go.parent = brokerContainer;
+            }
 
             if (lifeNum == 0) {
                 var leftNum = self.bottleNumTxt.string;

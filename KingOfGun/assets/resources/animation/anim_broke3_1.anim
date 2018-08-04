@@ -1,6 +1,6 @@
 {
   "__type__": "cc.AnimationClip",
-  "_name": "broke1",
+  "_name": "anim_broke3_1",
   "_objFlags": 0,
   "_rawFiles": null,
   "_duration": 0.42,
@@ -87,6 +87,41 @@
               "value": 0
             }
           ]
+        }
+      },
+      "piece2": {
+        "props": {
+          "position": [],
+          "rotation": [],
+          "opacity": []
+        }
+      },
+      "piece3": {
+        "props": {
+          "position": [],
+          "rotation": [],
+          "opacity": []
+        }
+      },
+      "piece4": {
+        "props": {
+          "position": [],
+          "rotation": [],
+          "opacity": []
+        }
+      },
+      "piece5": {
+        "props": {
+          "position": [],
+          "rotation": [],
+          "opacity": []
+        }
+      },
+      "piece6": {
+        "props": {
+          "position": [],
+          "rotation": [],
+          "opacity": []
         }
       }
     }
