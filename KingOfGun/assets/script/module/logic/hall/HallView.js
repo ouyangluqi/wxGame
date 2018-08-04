@@ -23,10 +23,12 @@ var HallView = cc.Class({
         this.voiceSprie = this.node.getChildByName("voiceBtn").getComponent(cc.Sprite)
 
         this.historyScoreTxt = this.node.getChildByName("scoreLabel").getComponent(cc.Label)
-        this.historyScoreTxt.string = "最高分数："+Common.getHistoryScore();
+        this.historyScoreTxt.string = "最高分数："+Common.getHistoryScore()
 
-        this.audio = this.node.getChildByName("voiceNode").getComponent(cc.AudioSource);
-        this.audio.volume = 0.1;
+        this.audio = this.node.getChildByName("voiceNode").getComponent(cc.AudioSource)
+
+        this.shareBtn = this.node.getChildByName("shareBtn").getComponent(cc.Button)
+        this.shareBtn.node.on(cc.Node.EventType.TOUCH_END, this._shareClickHandler.bind(this))
 
         this.rankView = null
     },
@@ -61,6 +63,13 @@ var HallView = cc.Class({
         cc.loader.loadRes("atlas/hall/hall", cc.SpriteAtlas, function(err, atlas) {
             self.voiceSprie.spriteFrame = atlas.getSpriteFrame(Common.canPlayAudioTag==true ? "hall_voice" : "hall_voice_stop");
         });
+    },
+
+    _shareClickHandler: function() {
+        if (CC_WECHATGAME) {
+            console.log("call share click")
+            wx.shareAppMessage()
+        }
     },
 
     _checkBgmAudio:function() {
