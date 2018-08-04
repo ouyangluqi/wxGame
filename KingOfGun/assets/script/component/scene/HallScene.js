@@ -15,8 +15,61 @@ var HallScene = cc.Class({
 
     start () {
         if (CC_WECHATGAME) {
-            
+            this._wxAuthorizeHandler()
+        } else {
+            this._startLoadResHandler()
         }
+    },
+
+    _wxAuthorizeHandler: function () {
+        var self = this
+        wx.getSetting({
+            success: function (res) {
+                var authSetting = res.authSetting
+                if (authSetting['scope.userInfo'] === true) {
+                    self._startLoadResHandler()
+                } else if (authSetting['scope.userInfo'] === false) {
+                    wx.showModal({
+                        title: '用户未授权',
+                        content: '如需正常进入游戏，请按确定并在授权管理中选中“用户信息”，然后点按确定。最后再重新进入游戏即可。',
+                        showCancel: false,
+                        success: function (res) {
+                            if (res.confirm) {
+                                wx.openSetting({
+                                    success: function (res) {
+                                        console.log('调用openSetting方法success:', res)
+                                    },
+                                    fail: function (res) {
+                                        console.log('调用openSetting方法fail:', res)
+                                    },
+                                    complete: function (res) {
+                                        console.log('调用openSetting方法complete:', res)
+                                    }
+                                });
+                            }
+                        }
+                    })
+                } else {
+                    window.wx.authorize({
+                        scope: 'scope.userInfo',
+                        success: function () {
+                            self._startLoadResHandler()
+                        },
+                        fail: function (res) {
+                            // iOS 和 Android 对于拒绝授权的回调 errMsg 没有统一，需要做一下兼容处理
+                            if (res.errMsg.indexOf('auth deny') > -1 || res.errMsg.indexOf('auth denied') > -1) {
+                                window.wx.exitMiniProgram()
+                            }
+                        },
+                        
+                    })
+                }
+            }
+        })
+        
+    },
+
+    _startLoadResHandler: function () {
         this._startLoadPrefabHandler()
         this._startLoadSpriteAtlasHandler()
     },
