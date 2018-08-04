@@ -33,6 +33,7 @@ cc.Class({
         // this.node.removeChildByTag(1000)
         this.rankingScrollView.node.active = false
         this.scrollViewContent.removeAllChildren()
+        this.sumRankView.removeAllChildren()
         this.loadingLabel.getComponent(cc.Label).string = "玩命加载中..."
         this.loadingLabel.active = true
     },
