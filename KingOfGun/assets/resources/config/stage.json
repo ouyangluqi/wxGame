@@ -1,8 +1,8 @@
 {
     "stageCount": 20,
     "itemInfo": {
-        "1": {"width":96, "lifeNum":1,"scale":0.7},
-        "2": {"width":95, "lifeNum":1,"scale":0.7},
+        "1": {"width":68, "lifeNum":1,"scale":0.7},
+        "2": {"width":68, "lifeNum":1,"scale":0.7},
         "3": {"width":104, "lifeNum":2,"scale":0.7},
         "4": {"width":71, "lifeNum":3,"scale":0.85},
         "8": {"width":198, "lifeNum":1,"scale":0.7}

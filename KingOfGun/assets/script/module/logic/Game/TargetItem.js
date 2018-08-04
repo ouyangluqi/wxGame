@@ -58,6 +58,7 @@ cc.Class({
         } else {
             this._setLifeNum(this.lifeNum);
             var eventParam = new cc.Event.EventCustom("hitTarget",true);
+            var userData = {};
             userData["lifeNum"] = this.lifeNum;
             userData["itemId"] = this.itemId;
             eventParam.setUserData(userData);
