@@ -3,7 +3,11 @@ const Log = require("Log")
 var Common = cc.Class({
 
     statics: {
+        //全局音效开关
         canPlayAudioTag : true,
+
+        //新手引导标识
+        hasShowGuideTag : false,
 
         _uploadWXData: function (keyStr, valueData) { //上报到微信服务器：历史最高分
             var kvDataList = new Array();

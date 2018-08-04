@@ -26,6 +26,7 @@ var HallView = cc.Class({
         this.historyScoreTxt.string = "最高分数："+Common.getHistoryScore()
 
         this.audio = this.node.getChildByName("voiceNode").getComponent(cc.AudioSource)
+        this.audio.volume = 0.1;
 
         this.shareBtn = this.node.getChildByName("shareBtn").getComponent(cc.Button)
         this.shareBtn.node.on(cc.Node.EventType.TOUCH_END, this._shareClickHandler.bind(this))
