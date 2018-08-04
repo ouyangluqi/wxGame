@@ -26,6 +26,7 @@ var HallView = cc.Class({
         this.historyScoreTxt.string = "最高分数："+Common.getHistoryScore();
 
         this.audio = this.node.getChildByName("voiceNode").getComponent(cc.AudioSource);
+        this.audio.volume = 0.1;
 
         this.rankView = null
     },

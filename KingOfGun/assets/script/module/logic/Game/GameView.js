@@ -45,15 +45,20 @@ var GameView = cc.Class({
             default: null,
             type: cc.Label
         },
-        stagePassTxt: {
+        stagePassNode: {
             name: "关卡动画",
             default: null,
-            type: cc.Label
+            type: cc.Node
         },
-        commobNumTxt: {
+        stagePassContainer: {
+            name: "关卡载体",
+            default: null,
+            type: cc.Node
+        },
+        commobNumNode: {
             name: "连击动画",
             default: null,
-            type: cc.Label
+            type: cc.Node
         },
         sumViewBg: {
             name: "结算界面背景",
@@ -121,7 +126,7 @@ var GameView = cc.Class({
             default:null,
             type: cc.Node
         },
-        audioSource: {
+        gunAudio: {
             type: cc.AudioSource,
             default: null
         },
@@ -129,9 +134,21 @@ var GameView = cc.Class({
             type: cc.AudioSource,
             default: null
         },
+        brokeAudio: {
+            type: cc.AudioSource,
+            default: null
+        },
         rankSprite: {
             default: null,
             type: cc.Sprite
+        },
+        guideNode: {
+            default:null,
+            type: cc.Node
+        },
+        bulletLineNode: {
+            default:null,
+            type: cc.Node
         },
 
         isBulletNoLimit : false,
@@ -141,13 +158,16 @@ var GameView = cc.Class({
         commobNum : 0,
         commobTag : 0,
         rankTex : false,
-        summingTag : false
+        summingTag : false,
+        commobNumTxt: false,
+        stagePassTxt: false,
     },
 
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
         var self = this;
+        this._getComponent();
         this._initScene();
         this._initListener();
         var windowSize=cc.view.getVisibleSize();
@@ -155,8 +175,15 @@ var GameView = cc.Class({
     },
 
     start () {
+        this.bgmAudio.volume = 0.1;
         this._checkBgmAudio();
-        this._loadStage(this.curStage);
+        if(Common.hasShowGuideTag==false) {
+            this.summingTag = true;
+            this.guideNode.active = true;
+        } else {
+            this._loadStage(this.curStage);
+        }
+        Common.hasShowGuideTag=true;
     },
 
     onDestroy () {
@@ -172,6 +199,11 @@ var GameView = cc.Class({
     // up 生命周期函数
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // down 游戏逻辑
+
+    _getComponent:function() {
+        this.commobNumTxt = this.commobNumNode.getComponent("ImageLabel");
+        this.stagePassTxt = this.stagePassNode.getComponent("ImageLabel");
+    },
 
     //初始化函数
     _initScene: function() {
@@ -225,13 +257,14 @@ var GameView = cc.Class({
             self._showGunEff();
             self._showGunAction();
             if(Common.canPlayAudioTag){
-                self.audioSource.play();
+                self.gunAudio.play();
             }
             self.commobTag += 1;
         });
 
         //注册目标被击中事件监听
         this.node.on("hitTarget",function(event){
+            self.brokeAudio.play();
             var lifeNum = event.getUserData();
 
             if (lifeNum == 0) {
@@ -268,20 +301,30 @@ var GameView = cc.Class({
         this.restartBtn.node.on('click', this._onRestartBtnClick, this);
         this.challgeBtn.node.on('click', this._onChanngleBtnClick, this);
         this.homeBtn.node.on('click', this._onHomeBtnClick, this);
+
+        //注册引导页点击事件
+        this.guideNode.on(cc.Node.EventType.TOUCH_END, this._onGuideNodeClick, this);
+    },
+
+    //点击引导页
+    _onGuideNodeClick:function() {
+        this.guideNode.active = false;
+        this._loadStage(this.curStage);
     },
 
     //显示连击数量
     _showCommobEff:function(commobNum) {
-        this.commobNumTxt.node.y = 318;
-        this.commobNumTxt.node.opacity = 0;
-        this.commobNumTxt.node.active = true;
-        var preStr = commobNum==1 ? "+" : "连击+";
-        this.commobNumTxt.string = preStr + commobNum;
+        this.commobNumNode.y = 318;
+        this.commobNumNode.opacity = 0;
+        this.commobNumNode.active = true;
+        
+        var preStr = commobNum == 1 ? "+" : "# +";
+        this.commobNumTxt.setString(preStr + commobNum);
 
         cc.spawn(cc.moveBy(0.5,0,200),cc.fadeIn(0.5));
 
         var seq = cc.sequence(cc.spawn(cc.moveBy(0.5,0,+100),cc.fadeIn(0.5)),cc.delayTime(1),cc.fadeOut(0.5));
-        this.commobNumTxt.node.runAction(seq);
+        this.commobNumNode.runAction(seq);
     },
 
     //再来一局
@@ -291,10 +334,14 @@ var GameView = cc.Class({
 
     _loadStage: function(stageNum) {
         var self = this;
+        self.summingTag = true;
         this._showStagePass(stageNum);
         setTimeout(function() {
+            self.summingTag = false;
             self._realLoadStage(stageNum);
         }.bind(self),2000);
+
+        this.bulletLineNode.active = stageNum<=2 ? true : false;
     },
 
     //加载关卡
@@ -393,6 +440,7 @@ var GameView = cc.Class({
         itemContainer = index==1 ? this.itemUpContainer : this.itemDownContainer;
         posY = index==1 ? -218 : -486;
         
+        itemContainer.removeAllChildren();
         itemContainer.parent = speed>0 ? this.leftTopNode : this.rightTopNode;
 
         itemContainer.x = 0;
@@ -452,12 +500,18 @@ var GameView = cc.Class({
     //展示过关动画
     _showStagePass: function (stageNum) {
         this._pauseView();
-        this.stagePassTxt.node.opacity = 0;
-        this.stagePassTxt.node.x = 300;
-        this.stagePassTxt.node.active = true;
-        this.stagePassTxt.string = "第 " + stageNum + " 关";
+        this.stagePassContainer.opacity = 0;
+        this.stagePassContainer.x = 300;
+        this.stagePassContainer.active = true;
+        var stageStr = stageNum+"";
+        var tranStr = stageStr;
+        if(stageStr.length>1) {
+            tranStr = stageStr.charAt(0) + " " + stageStr.charAt(1);
+        }
+        this.stagePassTxt.setString(tranStr);
+
         var seq = cc.sequence(cc.spawn(cc.moveBy(0.5, -300, 0), cc.fadeIn(0.5)),cc.delayTime(1),cc.spawn(cc.moveBy(0.5, -300, 0), cc.fadeOut(0.5)),);
-        this.stagePassTxt.node.runAction(seq);
+        this.stagePassContainer.runAction(seq);
     },
 
     //展示结算界面

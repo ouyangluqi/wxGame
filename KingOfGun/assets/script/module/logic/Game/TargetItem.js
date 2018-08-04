@@ -25,6 +25,7 @@ cc.Class({
     setItem: function (itemId) {
         this.itemId = itemId;
         this.lifeNum = Singleton.Config.stage.itemInfo[itemId].lifeNum;
+        this.node.scale = Singleton.Config.stage.itemInfo[itemId].scale;
         this._setLifeNum(this.lifeNum);
     },
 
@@ -44,6 +45,7 @@ cc.Class({
         if (this.itemId == 8) {
             var eventParam = new cc.Event.EventCustom("hitBoom",true);
             this.node.dispatchEvent(eventParam);
+            this.node.destroy();
         }
         if (this.lifeNum == 0) {
             var eventParam = new cc.Event.EventCustom("hitTarget",true);
