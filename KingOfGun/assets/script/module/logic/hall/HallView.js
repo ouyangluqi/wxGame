@@ -67,8 +67,10 @@ var HallView = cc.Class({
 
     _shareClickHandler: function() {
         if (CC_WECHATGAME) {
-            console.log("call share click")
-            wx.shareAppMessage()
+            wx.shareAppMessage({
+                title: "夏日炎炎，不如一起来爆个樽",
+                imageUrl: "https://shxingwan-down.oss-cn-shenzhen.aliyuncs.com/wechatGame/cocosGameRes/TheKingOfGun/share/miniGame_share_imge.jpg",
+            })
         }
     },
 
