@@ -17,6 +17,15 @@ var Res = cc.Class({
         PREFAB_HALL_VIEW_PATH: "prefab/home/homeView",
         PREFAB_RANK_VIEW_PATH: "prefab/home/rankView",
 
+        // effect
+        PREFAB_EFFECT_BROKE_1_0: "prefab/effect/eff_broke1_0",
+        PREFAB_EFFECT_BROKE_2_0: "prefab/effect/eff_broke2_0",
+        PREFAB_EFFECT_BROKE_3_0: "prefab/effect/eff_broke3_0",
+        PREFAB_EFFECT_BROKE_3_1: "prefab/effect/eff_broke3_1",
+        PREFAB_EFFECT_BROKE_4_0: "prefab/effect/eff_broke4_0",
+        PREFAB_EFFECT_BROKE_4_1: "prefab/effect/eff_broke4_1",
+        PREFAB_EFFECT_BROKE_4_2: "prefab/effect/eff_broke4_2",
+
         //Atals
         ATLAS_EFF_PATH: "atlas/game/effAtlas",
     }

@@ -265,7 +265,8 @@ var GameView = cc.Class({
         //注册目标被击中事件监听
         this.node.on("hitTarget",function(event){
             self.brokeAudio.play();
-            var lifeNum = event.getUserData();
+            var lifeNum = event.getUserData()["lifeNum"];
+            var itemId = event.getUserData()["itemId"];
 
             if (lifeNum == 0) {
                 var leftNum = self.bottleNumTxt.string;

@@ -49,13 +49,18 @@ cc.Class({
         }
         if (this.lifeNum == 0) {
             var eventParam = new cc.Event.EventCustom("hitTarget",true);
-            eventParam.setUserData(this.lifeNum);
+            var userData = {};
+            userData["lifeNum"] = this.lifeNum;
+            userData["itemId"] = this.itemId;
+            eventParam.setUserData(userData);
             this.node.dispatchEvent(eventParam);
             this.node.destroy();
         } else {
             this._setLifeNum(this.lifeNum);
             var eventParam = new cc.Event.EventCustom("hitTarget",true);
-            eventParam.setUserData(this.lifeNum);
+            userData["lifeNum"] = this.lifeNum;
+            userData["itemId"] = this.itemId;
+            eventParam.setUserData(userData);
             this.node.dispatchEvent(eventParam);
         }
     },

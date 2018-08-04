@@ -82,6 +82,15 @@ var HallScene = cc.Class({
         Singleton.PrefabLoader.addRes(Res.PREFAB_GAME_GUN_EFF_PATH)
         Singleton.PrefabLoader.addRes(Res.PREFAB_GAME_HIT_EFF_PATH)
         Singleton.PrefabLoader.addRes(Res.PREFAB_RANK_VIEW_PATH)
+
+        Singleton.PrefabLoader.addRes(Res.PREFAB_EFFECT_BROKE_1_0)
+        Singleton.PrefabLoader.addRes(Res.PREFAB_EFFECT_BROKE_2_0)
+        Singleton.PrefabLoader.addRes(Res.PREFAB_EFFECT_BROKE_3_0)
+        Singleton.PrefabLoader.addRes(Res.PREFAB_EFFECT_BROKE_3_1)
+        Singleton.PrefabLoader.addRes(Res.PREFAB_EFFECT_BROKE_4_0)
+        Singleton.PrefabLoader.addRes(Res.PREFAB_EFFECT_BROKE_4_1)
+        Singleton.PrefabLoader.addRes(Res.PREFAB_EFFECT_BROKE_4_2)
+
         Singleton.PrefabLoader.startLoad(false, this._completeLoadPrefabHandler.bind(this))
     },
 
