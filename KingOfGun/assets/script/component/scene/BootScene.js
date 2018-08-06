@@ -27,13 +27,13 @@ var BootScene = cc.Class({
 
     _rawAssetCompleteHandler: function (error) {
         Log.logD("_rawAssetCompleteHandler")
+        Singleton.Config.initStage(Singleton.RawAssetLoader.getRes(Res.CONFIG_STAGE_PATH))
         this._isRawAssetComplete = true
         this._checkAllComplete()
     },
 
     _animationCompleteHandler: function (dt) {
         Log.logD("_animationCompleteHandler")
-        Singleton.Config.initStage(Singleton.RawAssetLoader.getRes(Res.CONFIG_STAGE_PATH))
         this._isAnimationComplete = true
         this._checkAllComplete()
     },

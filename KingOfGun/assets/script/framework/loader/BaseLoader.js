@@ -70,7 +70,7 @@ var BaseLoader = cc.Class({
         if (res) {
             return res
         } else {
-            Log.logE("has no res in loader")
+            Log.logE("has no res in loader" + path)
             return null
         }
     }
