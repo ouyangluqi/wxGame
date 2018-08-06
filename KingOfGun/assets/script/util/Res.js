@@ -28,5 +28,6 @@ var Res = cc.Class({
 
         //Atals
         ATLAS_EFF_PATH: "atlas/game/effAtlas",
+        ATLAS_GAME_RES_PATH: "atlas/gameRes/gameRes",
     }
 })
