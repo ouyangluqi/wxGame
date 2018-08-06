@@ -563,8 +563,13 @@ var GameView = cc.Class({
 
     //点击挑战好友
     _onChanngleBtnClick: function (event) {
-
-    },
+        if (CC_WECHATGAME) {
+            wx.shareAppMessage({
+                title: "夏日炎炎，不如一起来爆个樽",
+                imageUrl: "https://shxingwan-down.oss-cn-shenzhen.aliyuncs.com/wechatGame/cocosGameRes/TheKingOfGun/share/miniGame_share_imge.jpg",
+            })
+        }
+    },  
 
     //点击返回主界面
     _onHomeBtnClick: function (event) {
