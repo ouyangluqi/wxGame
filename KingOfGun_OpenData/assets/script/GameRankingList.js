@@ -140,7 +140,6 @@ cc.Class({
                     console.log('success', userRes.data)
                     let userData = userRes.data[0]
                     let avatarUrl = userData.avatarUrl;
-                    console.log("self name : " + userName)
                     // 取出好友数据
                     wx.getFriendCloudStorage({
                         keyList: [mainMenuNum],
