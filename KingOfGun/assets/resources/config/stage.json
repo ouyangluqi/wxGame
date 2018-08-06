@@ -38,7 +38,7 @@
             "timeLimit": 0,
             "initBullet": 25,
             "lvdai": [
-                {"lvdaiId":1,"speed": 5}
+                {"lvdaiId":1,"speed": 4}
             ]
         },
         "4": {
@@ -48,9 +48,9 @@
                 {"itemName":4,"itemNum": 1}
             ],
             "timeLimit": 0,
-            "initBullet": 15,
+            "initBullet": 25,
             "lvdai": [
-                {"lvdaiId":1,"speed": 3}
+                {"lvdaiId":1,"speed": 4}
             ]
         },
         "5": {
@@ -61,9 +61,9 @@
                 {"itemName":4,"itemNum": 2}
             ],
             "timeLimit": 0,
-            "initBullet": 15,
+            "initBullet": 25,
             "lvdai": [
-                {"lvdaiId":1,"speed": 4}
+                {"lvdaiId":1,"speed": 5}
             ]
         },
         "6": {
