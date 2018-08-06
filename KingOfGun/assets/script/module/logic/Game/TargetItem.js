@@ -31,9 +31,9 @@ cc.Class({
 
     _setLifeNum: function (lifeNum) {
         var self = this;
-        cc.loader.loadRes("texture/item/item"+this.itemId+"_"+lifeNum, cc.SpriteFrame, function (err, spriteFrame) {
+        cc.loader.loadRes("atlas/gameRes/gameRes", cc.SpriteAtlas, function(err, atlas) {
             if(self.cSprite){
-                self.cSprite.spriteFrame = spriteFrame;
+                self.cSprite.spriteFrame = atlas.getSpriteFrame("item"+self.itemId+"_"+lifeNum);
                 self.boxC.size.width = self.node.width;
             }
         });

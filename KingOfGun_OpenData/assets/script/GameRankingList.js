@@ -50,6 +50,7 @@ cc.Class({
                     for(var i = 0; i < dList.length; i++) {
                         if (dList[i].key == "xw_miniGame_x1") {
                             console.log("getUserCloudStorage value: " + dList[i].value);
+                            
                             break;
                         }
                     }
