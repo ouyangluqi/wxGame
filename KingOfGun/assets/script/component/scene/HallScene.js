@@ -102,6 +102,7 @@ var HallScene = cc.Class({
 
     _startLoadSpriteAtlasHandler: function () {
         Singleton.SpriteAtlasLoader.addRes(Res.ATLAS_EFF_PATH)
+        Singleton.SpriteAtlasLoader.addRes(Res.ATLAS_GAME_RES_PATH)
         Singleton.SpriteAtlasLoader.startLoad(false, this._completeLoadSpriteAtlasHandler.bind(this))
     },
 
