@@ -139,7 +139,7 @@ cc.Class({
                     this.loadingLabel.active = false
                     console.log('success', userRes.data)
                     let userData = userRes.data[0]
-                    let userName = userData.nickName;
+                    let avatarUrl = userData.avatarUrl;
                     console.log("self name : " + userName)
                     // 取出好友数据
                     wx.getFriendCloudStorage({
@@ -168,7 +168,7 @@ cc.Class({
                                 var midPos = 0;
                                 for (var i = 0; i < dataLen; i++) {
                                     var playerInfo = data[i]
-                                    if(playerInfo.nickName == userName) {
+                                    if(playerInfo.avatarUrl == avatarUrl) {
                                         selfPos = i;
                                         break;
                                     }
