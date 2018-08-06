@@ -159,12 +159,12 @@ cc.Class({
                                 return b.KVDataList[0].value - a.KVDataList[0].value;
                             })
                             var sumData = [];
+                            var midPos = 0;
                             if(data.length<4) {
                                 sumData = data;
                             } else {
                                 var dataLen = data.length;
                                 var selfPos = 0;
-                                var midPos = 0;
                                 for (var i = 0; i < dataLen; i++) {
                                     var playerInfo = data[i]
                                     if(playerInfo.avatarUrl == avatarUrl) {
@@ -186,7 +186,7 @@ cc.Class({
                             for (let i = 0; i < sumData.length; i++) {
                                 var playerInfo = sumData[i]
                                 var item = cc.instantiate(this.prefabSumRankItem)
-                                item.getComponent('RankItem').init(i, playerInfo)
+                                item.getComponent('RankItem').init(midPos-1+i, playerInfo)
                                 this.sumRankView.addChild(item)
                                 item.width = 200
                                 item.height = 250
