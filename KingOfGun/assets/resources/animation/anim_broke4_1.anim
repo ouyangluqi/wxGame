@@ -3,67 +3,27 @@
   "_name": "anim_broke4_1",
   "_objFlags": 0,
   "_rawFiles": null,
-  "_duration": 0.42,
+  "_duration": 0.4166666666666667,
   "sample": 60,
   "speed": 1,
   "wrapMode": 1,
   "curveData": {
     "paths": {
-      "piece0": {
-        "props": {
-          "position": [
-            {
-              "frame": 0,
-              "value": [
-                0,
-                0
-              ]
-            },
-            {
-              "frame": 0.4166666666666667,
-              "value": [
-                100,
-                0
-              ]
-            }
-          ],
-          "rotation": [
-            {
-              "frame": 0,
-              "value": 0
-            },
-            {
-              "frame": 0.4166666666666667,
-              "value": 720
-            }
-          ],
-          "opacity": [
-            {
-              "frame": 0,
-              "value": 255
-            },
-            {
-              "frame": 0.4166666666666667,
-              "value": 0
-            }
-          ]
-        }
-      },
       "piece1": {
         "props": {
           "position": [
             {
               "frame": 0,
               "value": [
-                0,
-                0
+                -1,
+                -6
               ]
             },
             {
               "frame": 0.4166666666666667,
               "value": [
-                -100,
-                0
+                -106,
+                -46
               ]
             }
           ],
@@ -74,7 +34,7 @@
             },
             {
               "frame": 0.4166666666666667,
-              "value": 720
+              "value": -360
             }
           ],
           "opacity": [
@@ -91,37 +51,202 @@
       },
       "piece2": {
         "props": {
-          "position": [],
-          "rotation": [],
-          "opacity": []
+          "position": [
+            {
+              "frame": 0,
+              "value": [
+                -8,
+                30
+              ]
+            },
+            {
+              "frame": 0.4166666666666667,
+              "value": [
+                -140,
+                77
+              ]
+            }
+          ],
+          "rotation": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 0.4166666666666667,
+              "value": -800
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 0,
+              "value": 255
+            },
+            {
+              "frame": 0.4166666666666667,
+              "value": 0
+            }
+          ]
         }
       },
       "piece3": {
         "props": {
-          "position": [],
-          "rotation": [],
-          "opacity": []
+          "position": [
+            {
+              "frame": 0,
+              "value": [
+                -4,
+                48
+              ]
+            },
+            {
+              "frame": 0.4166666666666667,
+              "value": [
+                -166,
+                151
+              ]
+            }
+          ],
+          "rotation": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 0.4166666666666667,
+              "value": -700
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 0,
+              "value": 255
+            },
+            {
+              "frame": 0.4166666666666667,
+              "value": 0
+            }
+          ]
         }
       },
       "piece4": {
         "props": {
-          "position": [],
-          "rotation": [],
-          "opacity": []
+          "position": [
+            {
+              "frame": 0,
+              "value": [
+                17,
+                50
+              ]
+            },
+            {
+              "frame": 0.4166666666666667,
+              "value": [
+                249,
+                97
+              ]
+            }
+          ],
+          "rotation": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 0.4166666666666667,
+              "value": 930
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 0,
+              "value": 255
+            },
+            {
+              "frame": 0.4166666666666667,
+              "value": 0
+            }
+          ]
         }
       },
       "piece5": {
         "props": {
-          "position": [],
-          "rotation": [],
-          "opacity": []
+          "position": [
+            {
+              "frame": 0,
+              "value": [
+                22,
+                62
+              ]
+            },
+            {
+              "frame": 0.4166666666666667,
+              "value": [
+                106,
+                156
+              ]
+            }
+          ],
+          "rotation": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 0.4166666666666667,
+              "value": 1080
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 0,
+              "value": 255
+            },
+            {
+              "frame": 0.4166666666666667,
+              "value": 0
+            }
+          ]
         }
       },
       "piece6": {
         "props": {
-          "position": [],
-          "rotation": [],
-          "opacity": []
+          "position": [
+            {
+              "frame": 0,
+              "value": [
+                19,
+                11
+              ]
+            },
+            {
+              "frame": 0.4166666666666667,
+              "value": [
+                125,
+                -16
+              ]
+            }
+          ],
+          "rotation": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 0.4166666666666667,
+              "value": 720
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 0,
+              "value": 255
+            },
+            {
+              "frame": 0.4166666666666667,
+              "value": 0
+            }
+          ]
         }
       }
     }
