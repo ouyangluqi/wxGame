@@ -352,13 +352,13 @@ var GameView = cc.Class({
     _loadStage: function(stageNum) {
         var self = this;
         self.summingTag = true;
+        this.bulletLineNode.active = false;
         this._showStagePass(stageNum);
         setTimeout(function() {
             self.summingTag = false;
+            this.bulletLineNode.active = stageNum<=2 ? true : false;
             self._realLoadStage(stageNum);
         }.bind(self),2000);
-
-        this.bulletLineNode.active = stageNum<=2 ? true : false;
     },
 
     //加载关卡
