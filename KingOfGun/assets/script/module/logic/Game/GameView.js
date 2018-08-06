@@ -409,6 +409,8 @@ var GameView = cc.Class({
         var splitNum = itemList.length;
         if (curStageCfg.lvdai.length>1) {
             splitNum = Math.round(splitNum*0.7);
+        } else if (curStageCfg.lvdai[0]["lvdaiId"]==2) {
+            splitNum = 0;
         }
 
         for (let index = 0; index < itemList.length; index++) {
