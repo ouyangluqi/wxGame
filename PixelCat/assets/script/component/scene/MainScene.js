@@ -85,8 +85,6 @@ cc.Class({
 
     _startLoadPrefabHandler: function () {
         Singleton.PrefabLoader.addRes(Res.PREFAB_GAME_VIEW_PATH)
-        Singleton.PrefabLoader.addRes(Res.PREFAB_BOTTOM_STONE_PATH)
-        Singleton.PrefabLoader.addRes(Res.PREFAB_TOP_STONE_PATH)
         Singleton.PrefabLoader.startLoad(false, this._completeLoadPrefabHandler.bind(this))
     },
 
