@@ -26,12 +26,12 @@
     "orientation": "portrait"
   },
   "renderMode": "0",
-  "startScene": "",
+  "startScene": "0c2b9e5b-db6e-4f16-afde-ca58eddd92ab",
   "title": "PixelCat",
   "webOrientation": "auto",
   "wechatgame": {
     "REMOTE_SERVER_ROOT": "",
-    "appid": "wx6ac3f5090a6b99c5",
+    "appid": "wxdcc0be3c91b26f34",
     "isSubdomain": false,
     "orientation": "portrait",
     "subContext": ""
