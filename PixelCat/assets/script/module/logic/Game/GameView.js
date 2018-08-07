@@ -48,6 +48,10 @@ cc.Class({
         stoneNode2: {
             default: null,
             type: cc.Node
+        },
+        scoreTxt: {
+            default: null,
+            type: cc.Node
         }
     },
 
@@ -71,6 +75,8 @@ cc.Class({
         this.catComponent = this.catNode.getComponent("Cat");
         this.stoneNodeCom1 = this.stoneNode1.getComponent("StoneNode");
         this.stoneNodeCom2 = this.stoneNode2.getComponent("StoneNode");
+        this.scoreCom = this.scoreTxt.getComponent("ImageLabel");
+        this.scoreNum = 0;
     },
 
     _initScene:function() {
@@ -120,6 +126,8 @@ cc.Class({
         this.startBtn.runAction(act);
         setTimeout(function() {
             self.startView.active = false;
+            self.scoreCom.setString("0");
+            self.scoreTxt.active = true;
             self._onMainNodeClick();
             self.stoneNodeCom1.addStoneWithHole(Random.getRandom(5,9));
         }.bind(this),1100);
@@ -138,11 +146,21 @@ cc.Class({
         var nextNodeCom = nodeIndex==1 ? this.stoneNodeCom2 : this.stoneNodeCom1;
 
         nextNodeCom.addStoneWithHole(Random.getRandom(5,9));
+
+        this.scoreNum = this.scoreNum + 1;
+        this.scoreCom.setString(this.scoreNum+"");
+
+        var act1 = cc.scaleTo(0.1,1.2);
+        var act2 = cc.scaleTo(0.05,1);
+        var act  = cc.sequence(act1, act2);
+        this.scoreTxt.runAction(act);
     },
 
     _restart:function() {
         this.isCatDie = false;
         this.startTag = false;
+        this.scoreNum = 0;
+        this.scoreCom.setString("0");
         this.catComponent.reset();
         this.stoneNodeCom1.reset();
         this.stoneNodeCom2.reset();
