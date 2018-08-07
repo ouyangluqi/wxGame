@@ -1,12 +1,73 @@
-cc.Class({
-    extends: cc.Component,
+const BaseView = require('BaseView')
+
+var RankView = cc.Class({
+    extends: BaseView,
 
     properties: {
+        isActive: {
+            get: function() {
+                if (this.go == null) {
+                    return false
+                }
+                return this.go.active
+            },
+            set: function(value) {
+                this.go.active = value
+                if (this.go.active) {
+                    if (CC_WECHATGAME) {
+                        window.wx.postMessage({// 发消息给子域
+                            messageType: 1,
+                            mainMenuNum: "xw_miniGame_x2"
+                        });
+                        var self = this
+                        this.times = setInterval(function() {
+                            self._updateSubDomainCanvas()
+                        }.bind(self), 20)
+                    } else {
+                        cc.log("获取竖向展示排行榜数据。xw_miniGame_x2");
+                    }
+                }
+            }
+        },
+    },
+
+    _onInit: function(rootNode) {
+        this.go = rootNode
+        this.tex = new cc.Texture2D()
+        this.backBtn = this.go.getChildByName("backBtn").getComponent(cc.Button)
+        this.backBtn.node.on(cc.Node.EventType.TOUCH_END, this._backClickHandler.bind(this))
+
+        this.display = this.go.getChildByName("rankScrollViewSprite").getComponent(cc.Sprite)
+
+        if (CC_WECHATGAME) {
+            window.wx.postMessage({// 发消息给子域
+                messageType: 1,
+                mainMenuNum: "xw_miniGame_x2"
+            });
+            var self = this
+            this.times = setInterval(function() {
+                self._updateSubDomainCanvas()
+            }.bind(self), 20)
+        } else {
+            cc.log("获取竖向展示排行榜数据。xw_miniGame_x2");
+        }
     },
     
-    start () {
-
+    _backClickHandler: function() {
+        this.go.active = false
+        clearInterval(this.times)
     },
 
-    // update (dt) {},
+    _updateSubDomainCanvas: function () {
+        if (!this.tex) {
+            return
+        }
+        if (CC_WECHATGAME) {
+            var openDataContext = window.wx.getOpenDataContext()
+            var sharedCanvas = openDataContext.canvas
+            this.tex.initWithElement(sharedCanvas)
+            this.tex.handleLoadedTexture()
+            this.display.spriteFrame = new cc.SpriteFrame(this.tex)
+        }
+    },
 });
