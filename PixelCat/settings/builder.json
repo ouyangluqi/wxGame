@@ -30,11 +30,11 @@
   "title": "PixelCat",
   "webOrientation": "auto",
   "wechatgame": {
-    "REMOTE_SERVER_ROOT": "",
+    "REMOTE_SERVER_ROOT": "https://shxingwan-down.oss-cn-shenzhen.aliyuncs.com/wechatGame/cocosGameRes/PixelCat/",
     "appid": "wxdcc0be3c91b26f34",
     "isSubdomain": false,
     "orientation": "portrait",
-    "subContext": ""
+    "subContext": "PixelCat_OpenData"
   },
   "xxteaKey": "c032d277-4776-45",
   "zipCompressJs": true

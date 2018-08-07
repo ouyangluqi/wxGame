@@ -25,7 +25,7 @@
     "REMOTE_SERVER_ROOT": "",
     "orientation": "portrait"
   },
-  "renderMode": "0",
+  "renderMode": "1",
   "startScene": "6e939f84-9141-46b3-9554-305c843224e8",
   "title": "PixelCat_OpenData",
   "webOrientation": "auto",
