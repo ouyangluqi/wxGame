@@ -79,6 +79,10 @@ cc.Class({
             default: null,
             type: cc.Node
         },
+        rankViewNode: {
+            default: null,
+            type: cc.Node
+        }
     },
 
     onLoad () {
@@ -104,6 +108,7 @@ cc.Class({
         this.gameScoreCom = this.scoreTxt.getComponent("ImageLabel");
         this.curScoreCom = this.curScoreTxt.getComponent("ImageLabel");
         this.bestScoreCom = this.bestScoreTxt.getComponent("ImageLabel");
+        this.rankViewCom = this.rankViewNode.getComponent("RankView");
         this.scoreNum = 0;
     },
 
@@ -165,19 +170,19 @@ cc.Class({
     },
 
     _onRankBtnClick:function(event) {
-
+        this._showRankView();
     },
 
     _onShareBtnClick:function(event) {
-
+        this._shareToFriend();
     },
 
     _onSumShareBtnClick:function(event) {
-
+        this._shareToFriend();
     },
 
     _onSumRankBtnClick:function(event) {
-
+        this._showRankView();
     },
 
     _onSumRestartBtnClick:function(event) {
@@ -220,5 +225,20 @@ cc.Class({
         this.bestScoreCom.setString(this.scoreNum>historyScore ? this.scoreNum+"" : historyScore+"");
         
         Common.checkScoreAndSave(this.scoreNum);
+    },
+
+    _showRankView:function() {
+        this.rankViewNode.active = true;
+        this.rankViewCom.showRank();
+    },
+
+    _shareToFriend:function() {
+        if (CC_WECHATGAME) {
+            wx.shareAppMessage({
+                title: "夏日炎炎，不如一起来爆个樽",
+                imageUrl: "https://shxingwan-down.oss-cn-shenzhen.aliyuncs.com/wechatGame/cocosGameRes/TheKingOfGun/share/miniGame_share_imge.jpg",
+            })
+        }
+        cc.log("share");
     }
 });

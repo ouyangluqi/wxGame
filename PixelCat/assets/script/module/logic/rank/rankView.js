@@ -1,61 +1,24 @@
-const BaseView = require('BaseView')
-
+const ParamConst = require('ParamConst');
 var RankView = cc.Class({
-    extends: BaseView,
+    extends: cc.Component,
 
     properties: {
-        isActive: {
-            get: function() {
-                if (this.go == null) {
-                    return false
-                }
-                return this.go.active
-            },
-            set: function(value) {
-                this.go.active = value
-                if (this.go.active) {
-                    if (CC_WECHATGAME) {
-                        window.wx.postMessage({// 发消息给子域
-                            messageType: 1,
-                            mainMenuNum: "xw_miniGame_x2"
-                        });
-                        var self = this
-                        this.times = setInterval(function() {
-                            self._updateSubDomainCanvas()
-                        }.bind(self), 20)
-                    } else {
-                        cc.log("获取竖向展示排行榜数据。xw_miniGame_x2");
-                    }
-                }
-            }
-        },
     },
 
-    _onInit: function(rootNode) {
-        this.go = rootNode
+    onLoad() {
         this.tex = new cc.Texture2D()
-        this.backBtn = this.go.getChildByName("backBtn").getComponent(cc.Button)
+        this.backBtn = this.node.getChildByName("backBtn").getComponent(cc.Button)
         this.backBtn.node.on(cc.Node.EventType.TOUCH_END, this._backClickHandler.bind(this))
 
-        this.display = this.go.getChildByName("rankScrollViewSprite").getComponent(cc.Sprite)
+        this.display = this.node.getChildByName("rankScrollViewSprite").getComponent(cc.Sprite)
+    },
 
-        if (CC_WECHATGAME) {
-            window.wx.postMessage({// 发消息给子域
-                messageType: 1,
-                mainMenuNum: "xw_miniGame_x2"
-            });
-            var self = this
-            this.times = setInterval(function() {
-                self._updateSubDomainCanvas()
-            }.bind(self), 20)
-        } else {
-            cc.log("获取竖向展示排行榜数据。xw_miniGame_x2");
-        }
+    update(dt) {
+        this._updateSubDomainCanvas()
     },
     
     _backClickHandler: function() {
-        this.go.active = false
-        clearInterval(this.times)
+        this.node.active = false
     },
 
     _updateSubDomainCanvas: function () {
@@ -70,4 +33,15 @@ var RankView = cc.Class({
             this.display.spriteFrame = new cc.SpriteFrame(this.tex)
         }
     },
+
+    showRank:function() {
+        if (CC_WECHATGAME) {
+            window.wx.postMessage({// 发消息给子域
+                messageType: 1,
+                mainMenuNum: ParamConst.wxKey
+            });
+        } else {
+            cc.log("获取竖向展示排行榜数据。xw_miniGame_x2");
+        }
+    }
 });
