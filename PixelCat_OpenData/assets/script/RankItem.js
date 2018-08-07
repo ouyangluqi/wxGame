@@ -2,7 +2,7 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        bgSprite: cc.Node,
+        bgSprite: cc.Sprite,
         rankLabel: cc.Label,
         avatarImgSprite: cc.Sprite,
         nickLabel: cc.Label,
@@ -15,6 +15,21 @@ cc.Class({
         let avatarUrl = data.avatarUrl
         let nick = data.nickname
         let grade = data.KVDataList.length != 0 ? data.KVDataList[0].value : 0
+
+        var self = this
+        if ((rank + 1) % 2 == 0 ) {
+            cc.loader.loadRes("atlas/rank", cc.SpriteAtlas, function(err, spriteAtlas) {
+                if (self.bgSprite) {
+                    self.bgSprite.spriteFrame = spriteAtlas.getSpriteFrame("rank_02")
+                }
+            })
+        } else {
+            cc.loader.loadRes("atlas/rank", cc.SpriteAtlas, function(err, spriteAtlas) {
+                if (self.bgSprite) {
+                    self.bgSprite.spriteFrame = spriteAtlas.getSpriteFrame("rank_01")
+                }
+            })
+        }
 
         this.rankLabel.string = (rank + 1).toString()
         this.createImage(avatarUrl)
