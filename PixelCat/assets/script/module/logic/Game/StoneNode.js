@@ -27,6 +27,7 @@ cc.Class({
     },
 
     onLoad () {
+        this.cfg = Singleton.Config.stage;
         this.hasSendMsg = false;
     },
 
@@ -39,8 +40,8 @@ cc.Class({
         if(!this.canMoveTag) {
             return;
         }
-        this.node.x -= 5;
-        if(this.node.x<-600 && !this.hasSendMsg){
+        this.node.x -= this.cfg.containerSpeed.value;
+        if(this.node.x<(-1*this.cfg.stonePadSize.value) && !this.hasSendMsg){
             var eventParam = new cc.Event.EventCustom("stoneOut",true);
             var eventData = {};
             eventData["nodeIndex"] = this.nodeIndex;
@@ -50,14 +51,14 @@ cc.Class({
 
             this.hasSendMsg = true;
         }
-        if(this.node.x<-950){
+        if(this.node.x<-810){
             this.reset();
         }
     },
 
     addStoneWithHole:function(holeNum) {
         var stoneNum = 24 - holeNum;
-        var topStoneNum = Random.getRandom(1,stoneNum-1);
+        var topStoneNum = Random.getRandom(this.cfg.stoneMinHeight.value,stoneNum-1);
         var bommtonStoneNum = stoneNum - topStoneNum;
 
         this.topStoneCom.setHeight(topStoneNum,-1);
@@ -73,6 +74,11 @@ cc.Class({
     reset:function() {
         this.canMoveTag = false;
         this.hasSendMsg = false;
-        this.node.x = 200;
+        this.node.x = 57;
+    },
+
+    restartSet:function() {
+        this.reset();
+        this.node.x = this.cfg.stoneStartPosX.value;
     }
 });

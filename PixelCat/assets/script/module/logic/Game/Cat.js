@@ -1,3 +1,5 @@
+const Singleton = require('Singleton')
+
 cc.Class({
     extends: cc.Component,
 
@@ -6,7 +8,8 @@ cc.Class({
     },
 
     onLoad () {
-        this.gv = 0.5;
+        this.cfg = Singleton.Config.stage;
+        this.gv = this.cfg.catGravity.value;
         this.dt = 0;
         cc.director.getCollisionManager().enabled = true;
         this.catDie = false;

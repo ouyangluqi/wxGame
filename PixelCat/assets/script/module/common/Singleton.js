@@ -3,7 +3,6 @@ const RawAssetLoader = require('RawAssetLoader')
 const PrefabLoader = require('PrefabLoader')
 const SpriteAtlasLoader = require('SpriteAtlasLoader')
 const Config = require('Config')
-const Random = require('Random')
 const PrefabPool = require('PrefabPool');
 
 var Singleton = cc.Class({

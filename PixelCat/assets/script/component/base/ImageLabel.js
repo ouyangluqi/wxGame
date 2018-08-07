@@ -22,7 +22,6 @@ cc.Class({
                 this.tranStr += "<img src='"+this.framePreStr+charStr+"'/>";
             }
         }
-        cc.log("this.tranStr  " + this.tranStr)
         if(this.richText){
             this.richText.string = this.tranStr;
         }

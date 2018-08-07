@@ -1,6 +1,7 @@
 const BaseView = require('BaseView')
 const Random = require('Random')
 const Common = require('Common')
+const Singleton = require('Singleton')
 
 cc.Class({
     extends: BaseView,
@@ -86,7 +87,7 @@ cc.Class({
     },
 
     onLoad () {
-        this.isCatDie = false;
+
     },
 
     start () {
@@ -101,7 +102,6 @@ cc.Class({
 
     ///////////////////////////////////////////////////////////
     _initThings:function() {
-        this.startTag = false;
         this.catComponent = this.catNode.getComponent("Cat");
         this.stoneNodeCom1 = this.stoneNode1.getComponent("StoneNode");
         this.stoneNodeCom2 = this.stoneNode2.getComponent("StoneNode");
@@ -109,7 +109,13 @@ cc.Class({
         this.curScoreCom = this.curScoreTxt.getComponent("ImageLabel");
         this.bestScoreCom = this.bestScoreTxt.getComponent("ImageLabel");
         this.rankViewCom = this.rankViewNode.getComponent("RankView");
+
+        this.cfg = Singleton.Config.stage;
+
+        this.isCatDie = false;
+        this.startTag = false;
         this.scoreNum = 0;
+        this.stoneNode1.x = this.cfg.stoneStartPosX.value;
     },
 
     _initScene:function() {
@@ -150,7 +156,7 @@ cc.Class({
             this.tapAudio.play();
         }
         this.catComponent.dt = 0;
-        var act1 = cc.moveBy(0.1,0,100);
+        var act1 = cc.moveBy(Number(this.cfg.catjumpTime.value),0,Number(this.cfg.catjumpPix.value));
         this.catNode.runAction(act1);
     },
 
@@ -165,7 +171,8 @@ cc.Class({
             self.gameScoreCom.setString("0");
             self.scoreTxt.active = true;
             self._onMainNodeClick();
-            self.stoneNodeCom1.addStoneWithHole(Random.getRandom(5,9));
+            self.stoneNodeCom1.restartSet();
+            self.stoneNodeCom1.addStoneWithHole(Random.getRandom(self.cfg.holeMinSize.value,self.cfg.holeMaxSize.value));
         }.bind(this),1100);
     },
 
@@ -194,7 +201,7 @@ cc.Class({
         var nodeIndex = event.getUserData()["nodeIndex"];
         var nextNodeCom = nodeIndex==1 ? this.stoneNodeCom2 : this.stoneNodeCom1;
 
-        nextNodeCom.addStoneWithHole(Random.getRandom(5,9));
+        nextNodeCom.addStoneWithHole(Random.getRandom(this.cfg.holeMinSize.value,this.cfg.holeMaxSize.value));
 
         this.scoreNum = this.scoreNum + 1;
         this.gameScoreCom.setString(this.scoreNum+"");
@@ -211,10 +218,10 @@ cc.Class({
         this.scoreNum = 0;
         this.gameScoreCom.setString("0");
         this.catComponent.reset();
-        this.stoneNodeCom1.reset();
+        this.stoneNodeCom1.restartSet();
         this.stoneNodeCom2.reset();
         this._onMainNodeClick();
-        this.stoneNodeCom1.addStoneWithHole(Random.getRandom(5,9));
+        this.stoneNodeCom1.addStoneWithHole(Random.getRandom(this.cfg.holeMinSize.value,this.cfg.holeMaxSize.value));
     },
 
     _showSumView:function() {
