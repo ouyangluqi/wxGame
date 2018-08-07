@@ -25,6 +25,10 @@ cc.Class({
             default: null,
             type: cc.AudioSource
         },
+        lostAudio: {
+            default: null,
+            type: cc.AudioSource
+        },
         startBtn: {
             default: null,
             type: cc.Node
@@ -37,17 +41,22 @@ cc.Class({
             default: null,
             type: cc.Node
         },
-        stoneNode: {
+        stoneNode1: {
+            default: null,
+            type: cc.Node
+        },
+        stoneNode2: {
             default: null,
             type: cc.Node
         }
     },
 
     onLoad () {
-        this._initThings();
+        this.isCatDie = false;
     },
 
     start () {
+        this._initThings();
         this._initScene();
         this._initListener();  
     },
@@ -60,7 +69,8 @@ cc.Class({
     _initThings:function() {
         this.startTag = false;
         this.catComponent = this.catNode.getComponent("Cat");
-        this.stoneComponent = this.stoneNode.getComponent("StoneNode");
+        this.stoneNodeCom1 = this.stoneNode1.getComponent("StoneNode");
+        this.stoneNodeCom2 = this.stoneNode2.getComponent("StoneNode");
     },
 
     _initScene:function() {
@@ -73,10 +83,22 @@ cc.Class({
         this.rankBtn.on('click', this._onRankBtnClick, this);
         this.shareBtn.on('click', this._onShareBtnClick, this);
         this.node.on("stoneOut",this._onStoneOut, this);
+        this.node.on("catDie",this._onCatDie, this);
+    },
+
+    _onCatDie:function(event) {
+        this.isCatDie = true;
+        this.lostAudio.play();
+        this.stoneNodeCom1.stopMove();
+        this.stoneNodeCom2.stopMove();
+        var self = this;
+        setTimeout(function() {
+            self._showSumView();
+        }.bind(this),1000);
     },
 
     _onMainNodeClick:function(event) {
-        if(this.startView.active==true) {
+        if(this.startView.active==true || this.isCatDie==true) {
             return;
         }
         if(this.startTag==false) {
@@ -86,10 +108,8 @@ cc.Class({
             this.tapAudio.play();
         }
         this.catComponent.dt = 0;
-        var act1 = cc.moveBy(0.1,0,150);
-        var act2 = cc.rotateTo(0.1,-20);
-        var act = cc.spawn(act1,act2,act2,act2);
-        this.catNode.runAction(act);
+        var act1 = cc.moveBy(0.1,0,100);
+        this.catNode.runAction(act1);
     },
 
     _onStartBtnClick:function(event) {
@@ -101,6 +121,7 @@ cc.Class({
         setTimeout(function() {
             self.startView.active = false;
             self._onMainNodeClick();
+            self.stoneNodeCom1.addStoneWithHole(Random.getRandom(5,9));
         }.bind(this),1100);
     },
 
@@ -113,6 +134,23 @@ cc.Class({
     },
 
     _onStoneOut:function(event) {
-        this.stoneComponent.addStoneWithHole(Random.getRandom(4,8));
+        var nodeIndex = event.getUserData()["nodeIndex"];
+        var nextNodeCom = nodeIndex==1 ? this.stoneNodeCom2 : this.stoneNodeCom1;
+
+        nextNodeCom.addStoneWithHole(Random.getRandom(5,9));
     },
+
+    _restart:function() {
+        this.isCatDie = false;
+        this.startTag = false;
+        this.catComponent.reset();
+        this.stoneNodeCom1.reset();
+        this.stoneNodeCom2.reset();
+        this._onMainNodeClick();
+        this.stoneNodeCom1.addStoneWithHole(Random.getRandom(5,9));
+    },
+
+    _showSumView:function() {
+        this._restart();
+    }
 });
