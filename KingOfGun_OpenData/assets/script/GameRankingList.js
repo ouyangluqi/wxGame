@@ -17,10 +17,8 @@ cc.Class({
                 if (data.messageType == 0) {
                     this._removeChild()
                 } else if(data.messageType == 1) {
-                    this._removeChild()
                     this._fetchFriendData(data.mainMenuNum)
                 } else if(data.messageType == 2) {
-                    this._removeChild()
                     this._fetchSummaryData(data.mainMenuNum)
                 }
             })

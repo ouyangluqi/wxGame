@@ -9,8 +9,7 @@ cc.Class({
         topScoreLabel: cc.Label
     },
 
-    start: function () {
-    },
+    start () {},
 
     init: function (rank, data) {
         let avatarUrl = data.avatarUrl
