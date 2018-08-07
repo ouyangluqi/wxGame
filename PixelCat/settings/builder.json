@@ -30,7 +30,7 @@
   "title": "PixelCat",
   "webOrientation": "auto",
   "wechatgame": {
-    "REMOTE_SERVER_ROOT": "https://shxingwan-down.oss-cn-shenzhen.aliyuncs.com/wechatGame/cocosGameRes/PixelCat/",
+    "REMOTE_SERVER_ROOT": "https://shxingwan-down.oss-cn-shenzhen.aliyuncs.com/wechatGame/cocosGameRes/PixelCat",
     "appid": "wxdcc0be3c91b26f34",
     "isSubdomain": false,
     "orientation": "portrait",
