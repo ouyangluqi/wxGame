@@ -2,6 +2,7 @@ const Singleton = require('Singleton')
 const Log = require('Log')
 const Res = require('Res')
 const GameView = require('GameView')
+const Common = require('Common')
 
 cc.Class({
     extends: cc.Component,
@@ -120,6 +121,7 @@ cc.Class({
     },
 
     _checkAllLoadComplete:function () {
+        Common.getHistoryScore();
         if (this._isPrefabComplete && this._isSpriteAtlasComplete && this._isRawAssetComplete) {
             if (this._gameView == null) {
                 this._gameView = new GameView()

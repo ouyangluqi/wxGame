@@ -1,5 +1,7 @@
 const BaseView = require('BaseView')
 const Random = require('Random')
+const Common = require('Common')
+
 cc.Class({
     extends: BaseView,
 
@@ -52,7 +54,31 @@ cc.Class({
         scoreTxt: {
             default: null,
             type: cc.Node
-        }
+        },
+        sumView: {
+            default: null,
+            type: cc.Node
+        },
+        curScoreTxt: {
+            default: null,
+            type: cc.Node
+        },
+        bestScoreTxt: {
+            default: null,
+            type: cc.Node
+        },
+        sumRankBtn: {
+            default: null,
+            type: cc.Node
+        },
+        sumRestartBtn: {
+            default: null,
+            type: cc.Node
+        },
+        sumShareBtn: {
+            default: null,
+            type: cc.Node
+        },
     },
 
     onLoad () {
@@ -75,7 +101,9 @@ cc.Class({
         this.catComponent = this.catNode.getComponent("Cat");
         this.stoneNodeCom1 = this.stoneNode1.getComponent("StoneNode");
         this.stoneNodeCom2 = this.stoneNode2.getComponent("StoneNode");
-        this.scoreCom = this.scoreTxt.getComponent("ImageLabel");
+        this.gameScoreCom = this.scoreTxt.getComponent("ImageLabel");
+        this.curScoreCom = this.curScoreTxt.getComponent("ImageLabel");
+        this.bestScoreCom = this.bestScoreTxt.getComponent("ImageLabel");
         this.scoreNum = 0;
     },
 
@@ -88,6 +116,9 @@ cc.Class({
         this.startBtn.on('click', this._onStartBtnClick, this);
         this.rankBtn.on('click', this._onRankBtnClick, this);
         this.shareBtn.on('click', this._onShareBtnClick, this);
+        this.sumRankBtn.on('click', this._onSumRankBtnClick, this);
+        this.sumRestartBtn.on('click', this._onSumRestartBtnClick, this);
+        this.sumShareBtn.on('click', this._onSumShareBtnClick, this);
         this.node.on("stoneOut",this._onStoneOut, this);
         this.node.on("catDie",this._onCatDie, this);
     },
@@ -126,7 +157,7 @@ cc.Class({
         this.startBtn.runAction(act);
         setTimeout(function() {
             self.startView.active = false;
-            self.scoreCom.setString("0");
+            self.gameScoreCom.setString("0");
             self.scoreTxt.active = true;
             self._onMainNodeClick();
             self.stoneNodeCom1.addStoneWithHole(Random.getRandom(5,9));
@@ -141,6 +172,19 @@ cc.Class({
 
     },
 
+    _onSumShareBtnClick:function(event) {
+
+    },
+
+    _onSumRankBtnClick:function(event) {
+
+    },
+
+    _onSumRestartBtnClick:function(event) {
+        this.sumView.active = false;
+        this._restart();
+    },
+
     _onStoneOut:function(event) {
         var nodeIndex = event.getUserData()["nodeIndex"];
         var nextNodeCom = nodeIndex==1 ? this.stoneNodeCom2 : this.stoneNodeCom1;
@@ -148,7 +192,7 @@ cc.Class({
         nextNodeCom.addStoneWithHole(Random.getRandom(5,9));
 
         this.scoreNum = this.scoreNum + 1;
-        this.scoreCom.setString(this.scoreNum+"");
+        this.gameScoreCom.setString(this.scoreNum+"");
 
         var act1 = cc.scaleTo(0.1,1.2);
         var act2 = cc.scaleTo(0.05,1);
@@ -160,7 +204,7 @@ cc.Class({
         this.isCatDie = false;
         this.startTag = false;
         this.scoreNum = 0;
-        this.scoreCom.setString("0");
+        this.gameScoreCom.setString("0");
         this.catComponent.reset();
         this.stoneNodeCom1.reset();
         this.stoneNodeCom2.reset();
@@ -169,6 +213,12 @@ cc.Class({
     },
 
     _showSumView:function() {
-        this._restart();
+        this.sumView.active = true;
+        this.curScoreCom.setString(this.scoreNum + "");
+
+        var historyScore = Number(Common.getHistoryScore());
+        this.bestScoreCom.setString(this.scoreNum>historyScore ? this.scoreNum+"" : historyScore+"");
+        
+        Common.checkScoreAndSave(this.scoreNum);
     }
 });

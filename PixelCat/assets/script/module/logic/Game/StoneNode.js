@@ -73,6 +73,6 @@ cc.Class({
     reset:function() {
         this.canMoveTag = false;
         this.hasSendMsg = false;
-        this.node.x = 50;
+        this.node.x = 200;
     }
 });
