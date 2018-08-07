@@ -58,7 +58,7 @@ cc.Class({
 
     addStoneWithHole:function(holeNum) {
         var stoneNum = 24 - holeNum;
-        var topStoneNum = Random.getRandom(this.cfg.stoneMinHeight.value,stoneNum-1);
+        var topStoneNum = Random.getRandom(this.cfg.stoneMinHeight.value,stoneNum-this.cfg.stoneMinHeight.value);
         var bommtonStoneNum = stoneNum - topStoneNum;
 
         this.topStoneCom.setHeight(topStoneNum,-1);
