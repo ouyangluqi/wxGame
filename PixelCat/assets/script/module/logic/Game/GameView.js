@@ -32,6 +32,10 @@ cc.Class({
             default: null,
             type: cc.AudioSource
         },
+        coinAudio: {
+            default: null,
+            type: cc.AudioSource
+        },
         startBtn: {
             default: null,
             type: cc.Node
@@ -83,6 +87,26 @@ cc.Class({
         rankViewNode: {
             default: null,
             type: cc.Node
+        },
+        commboTxtNode: {
+            default: null,
+            type: cc.Node
+        },
+        newRecordSp: {
+            default: null,
+            type: cc.Node
+        },
+        guideView: {
+            default: null,
+            type: cc.Node
+        },
+        guideBtn: {
+            default: null,
+            type: cc.Node
+        },
+        guideBlinNode: {
+            default: null,
+            type: cc.Node
         }
     },
 
@@ -109,12 +133,16 @@ cc.Class({
         this.curScoreCom = this.curScoreTxt.getComponent("ImageLabel");
         this.bestScoreCom = this.bestScoreTxt.getComponent("ImageLabel");
         this.rankViewCom = this.rankViewNode.getComponent("RankView");
+        this.commboTxt = this.commboTxtNode.getComponent("ImageLabel");
 
         this.cfg = Singleton.Config.stage;
 
         this.isCatDie = false;
         this.startTag = false;
         this.scoreNum = 0;
+        this.commboNum = 0;
+        this.commboTag = 0;
+        this.commboTxtNode.opacity = 0;
         this.stoneNode1.x = this.cfg.stoneStartPosX.value;
     },
 
@@ -130,8 +158,62 @@ cc.Class({
         this.sumRankBtn.on('click', this._onSumRankBtnClick, this);
         this.sumRestartBtn.on('click', this._onSumRestartBtnClick, this);
         this.sumShareBtn.on('click', this._onSumShareBtnClick, this);
+        this.guideBtn.on('click',this._onGuideBtnClick, this);
         this.node.on("stoneOut",this._onStoneOut, this);
         this.node.on("catDie",this._onCatDie, this);
+        this.node.on("eatGold",this._eatGold, this);
+        this.node.on("buileGold",this._buildGold, this);
+    },
+
+    _buildGold:function(event) {
+        this.commboTag = this.commboTag + 1;
+    },
+
+    _eatGold:function(event) {
+        this.commboTag = this.commboTag - 1;
+        if(this.commboTag==0) {
+            this.commboNum = this.commboNum + 1;
+        } else {
+            this.commboTag = 0;
+            this.commboNum = 1;
+        }
+        var getScore = this.commboNum * 2;
+        this.scoreNum = this.scoreNum + getScore;
+        this.gameScoreCom.setString(this.scoreNum+"");
+        this.coinAudio.play();
+        this._showGetScoreEff(getScore);
+    },
+
+    _showGetScoreEff:function(score) {
+        var extraStr = "";
+        if(score==2) {
+            extraStr = "a";
+        }
+        if(score==4) {
+            extraStr = "b";
+        }
+        if(score==6) {
+            extraStr = "c";
+        }
+        if(score==8) {
+            extraStr = "d";
+        }
+        if(score==10) {
+            extraStr = "e";
+        }
+        if(score>=12) {
+            extraStr = "f";
+        }
+        this.commboTxtNode.stopAllActions();
+        this.commboTxtNode.opacity = 255;
+        this.commboTxtNode.y = this.catNode.y + 87;
+        this.commboTxt.setString("+"+score+(extraStr!="" ? " " + extraStr : ""));
+
+        var act1 = cc.moveBy(0.2,0,70);
+        var act2 = cc.delayTime(0.5);
+        var act3 = cc.spawn(cc.moveBy(0.2,0,30),cc.fadeOut(0.2));
+        var act = cc.sequence(act1,act2,act3);
+        this.commboTxtNode.runAction(act);
     },
 
     _onCatDie:function(event) {
@@ -168,12 +250,27 @@ cc.Class({
         this.startBtn.runAction(act);
         setTimeout(function() {
             self.startView.active = false;
-            self.gameScoreCom.setString("0");
-            self.scoreTxt.active = true;
-            self._onMainNodeClick();
-            self.stoneNodeCom1.restartSet();
-            self.stoneNodeCom1.addStoneWithHole(Random.getRandom(self.cfg.holeMinSize.value,self.cfg.holeMaxSize.value));
+            self._showGuideView();
         }.bind(this),1100);
+    },
+
+    _onGuideBtnClick:function(event) {
+        this.guideView.active = false;
+        this._startGame();
+    },
+
+    _showGuideView:function() {
+        this.guideView.active = true;
+        var act = cc.repeatForever(cc.blink(1,2));
+        this.guideBlinNode.runAction(act);
+    },
+
+    _startGame:function() {
+        this.gameScoreCom.setString("0");
+        this.scoreTxt.active = true;
+        this._onMainNodeClick();
+        this.stoneNodeCom1.restartSet();
+        this.stoneNodeCom1.addStoneWithHole(Random.getRandom(this.cfg.holeMinSize.value,this.cfg.holeMaxSize.value));
     },
 
     _onRankBtnClick:function(event) {
@@ -216,6 +313,9 @@ cc.Class({
         this.isCatDie = false;
         this.startTag = false;
         this.scoreNum = 0;
+        this.commboNum = 0;
+        this.commboTag = 0;
+        this.commboTxtNode.opacity = 0;
         this.gameScoreCom.setString("0");
         this.catComponent.reset();
         this.stoneNodeCom1.restartSet();
@@ -225,6 +325,8 @@ cc.Class({
     },
 
     _showSumView:function() {
+       this.newRecordSp.stopAllActions();
+        this.newRecordSp.active = false;
         this.sumView.active = true;
         this.curScoreCom.setString(this.scoreNum + "");
 
@@ -232,6 +334,13 @@ cc.Class({
         this.bestScoreCom.setString(this.scoreNum>historyScore ? this.scoreNum+"" : historyScore+"");
         
         Common.checkScoreAndSave(this.scoreNum);
+
+        if(this.scoreNum>historyScore) {
+            this.newRecordSp.active = true;
+             var act1 = cc.blink(1,3);
+             var act = cc.repeatForever(act1);
+             this.newRecordSp.runAction(act);
+        }
     },
 
     _showRankView:function() {
@@ -242,10 +351,14 @@ cc.Class({
     _shareToFriend:function() {
         if (CC_WECHATGAME) {
             wx.shareAppMessage({
-                title: "夏日炎炎，不如一起来爆个樽",
-                imageUrl: "https://shxingwan-down.oss-cn-shenzhen.aliyuncs.com/wechatGame/cocosGameRes/TheKingOfGun/share/miniGame_share_imge.jpg",
+                title: "上上下下左右左右BABA！你还记得这串代码么？",
+                imageUrl: "https://shxingwan-down.oss-cn-shenzhen.aliyuncs.com/wechatGame/cocosGameRes/PixelCat/share/miniGame_share_imge.jpg",
             })
         }
         cc.log("share");
+    },
+
+    _showCommboEff:function() {
+
     }
 });

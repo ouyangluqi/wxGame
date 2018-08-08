@@ -17,8 +17,8 @@ cc.Class({
 
     reset:function() {
         this.node.opacity = 255;
-        this.node.scaleX = 1;
-        this.anim.play();
+      //  this.node.scaleX = 1;
+      //  this.anim.play();
         this.boxC.enabled = true;
     },
 
@@ -26,13 +26,16 @@ cc.Class({
     onCollisionEnter: function (other) {
         if(other.name.indexOf("cat")!=-1) {
             this.boxC.enabled = false;
-            this.anim.stop();
-            this.node.scaleX = 1;
+            //this.anim.stop();
+            //this.node.scaleX = 1;
 
             var act1 = cc.fadeOut(0.3);
             var act2 = cc.moveBy(0.3, 0,50);
             var act = cc.spawn(act1, act2);
             this.node.runAction(act);
+
+            var eventParam = new cc.Event.EventCustom("eatGold",true);
+            this.node.dispatchEvent(eventParam);
         }
     },
 

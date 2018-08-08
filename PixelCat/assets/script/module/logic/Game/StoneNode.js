@@ -72,7 +72,9 @@ cc.Class({
         this.canMoveTag = true;
 
         this.goldCom.reset();
-        this.goldNode.y = -667 + (bommtonStoneNum+holeNum/2)*57;
+        this.goldNode.y = Random.getRandom(-612,612);
+        var eventParam = new cc.Event.EventCustom("buileGold",true);
+        this.node.dispatchEvent(eventParam);
     },
 
     stopMove:function() {
