@@ -3,6 +3,7 @@ const Log = require('Log')
 const Res = require('Res')
 const GameView = require('GameView')
 const Common = require('Common')
+const ParamConst = require('ParamConst')
 
 cc.Class({
     extends: cc.Component,
@@ -19,6 +20,10 @@ cc.Class({
         this._isSpriteAtlasComplete = false
         this._isRawAssetsComplete = true
         this._gameView = null
+        window.Global = {
+            historyScore: 0,
+        };
+        
     },
 
     start () {
@@ -26,7 +31,7 @@ cc.Class({
         if (CC_WECHATGAME) {
             this._wxAuthorizeHandler()
         } else {
-            this._startLoadResHandler()
+            this._initGame()
         }
     },
 
@@ -36,7 +41,7 @@ cc.Class({
             success: function (res) {
                 var authSetting = res.authSetting
                 if (authSetting['scope.userInfo'] === true) {
-                    self._startLoadResHandler()
+                    self._initGame()
                 } else if (authSetting['scope.userInfo'] === false) {
                     wx.showModal({
                         title: '用户未授权',
@@ -62,7 +67,7 @@ cc.Class({
                     window.wx.authorize({
                         scope: 'scope.userInfo',
                         success: function () {
-                            self._startLoadResHandler()
+                            self._initGame()
                         },
                         fail: function (res) {
                             // iOS 和 Android 对于拒绝授权的回调 errMsg 没有统一，需要做一下兼容处理
@@ -76,6 +81,11 @@ cc.Class({
             }
         })
         
+    },
+
+    _initGame:function() {
+        Common.initHistoryScore();
+        this._startLoadResHandler();
     },
 
     _startLoadResHandler: function () {
