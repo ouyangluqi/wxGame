@@ -111,7 +111,7 @@ cc.Class({
     },
 
     onLoad () {
-        
+
     },
 
     start () {

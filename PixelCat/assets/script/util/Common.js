@@ -22,13 +22,36 @@ var Common = cc.Class({
         },
 
         getHistoryScore:function () {
-            return Global.historyScore;
+            Log.logD("getHistroyScore")
+            var result = cc.sys.localStorage.getItem(ParamConst.wxKey);
+            if(result == null) {
+                Log.logD("The result is null")
+                cc.sys.localStorage.setItem(ParamConst.wxKey, 0);
+                if(CC_WECHATGAME) {
+                    var kvDataList = new Array();
+                    kvDataList.push({
+                        key: ParamConst.wxKey,
+                        value: "0"
+                    });
+                    wx.setUserCloudStorage({
+                        KVDataList: kvDataList,
+                        success: function() {
+                            Log.logD("reset score success")
+                        },
+                        fail: function() {
+                            Log.logD("reset score fail")
+                        }
+                    })
+                }
+                return 0;
+            } 
+            return result;
         },
 
         checkScoreAndSave:function (scoreNum) {
-            var result = Global.historyScore;
+            var result = cc.sys.localStorage.getItem(ParamConst.wxKey);
             if(scoreNum > result) {
-                Global.historyScore = scoreNum;
+                cc.sys.localStorage.setItem(ParamConst.wxKey, scoreNum);
                 if(CC_WECHATGAME) {
                     var kvDataList = new Array();
                     kvDataList.push({
@@ -44,39 +67,8 @@ var Common = cc.Class({
                             Log.logD("reset score fail")
                         }
                     })
-                } else {
-                    cc.sys.localStorage.setItem(ParamConst.wxKey, scoreNum);
                 }
             }
-        },
-
-        initHistoryScore:function() {
-            if(CC_WECHATGAME) {
-                wx.getUserCloudStorage({
-                    keyList: [ParamConst.wxKey],
-                    success: res => {
-                        var dList = res.KVDataList
-                        console.log("getUserCloudStorage success");
-                        for(var i = 0; i < dList.length; i++) {
-                            if (dList[i].key == ParamConst.wxKey) {
-                                console.log("getUserCloudStorage value: " + dList[i].value);
-                                if(dList[i].value!=null) {
-                                    Global.historyScore = dList[i].value;
-                                }
-                                return;
-                            }
-                        }
-                    },
-                    fail: res => {
-                        console.log("getUserCloudStorage fail");
-                    }
-                })
-            } else {
-                var result = cc.sys.localStorage.getItem(ParamConst.wxKey);
-                if(result!=null) {
-                    Global.historyScore = result;
-                }
-            }
-        },
+        }
     }
 })
