@@ -30,12 +30,16 @@ cc.Class({
     },
 
     onCollisionEnter: function (other) {
-        if(!this.catDie) {
-            var eventParam = new cc.Event.EventCustom("catDie",true);
-            this.node.dispatchEvent(eventParam);
-            this.showDieAnimation();
+        if(other.name.indexOf("gold")!=-1) {
+            cc.log("eat gold")
+        } else {
+            if(!this.catDie) {
+                var eventParam = new cc.Event.EventCustom("catDie",true);
+                this.node.dispatchEvent(eventParam);
+                this.showDieAnimation();
+            }
+            this.catDie = true;
         }
-        this.catDie = true;
     },
 
     onCollisionStay: function (other) {

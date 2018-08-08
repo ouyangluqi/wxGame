@@ -22,6 +22,10 @@ cc.Class({
             default: null,
             type: cc.Node
         },
+        goldNode: {
+            default: null,
+            type: cc.Node
+        },
         nodeIndex: 1,
         canMoveTag: false
     },
@@ -34,6 +38,7 @@ cc.Class({
     start () {
         this.topStoneCom = this.topStone.getComponent("Stone");
         this.bottomStoneCom = this.bottomStone.getComponent("Stone");
+        this.goldCom = this.goldNode.getComponent("Gold");
     },
 
     update (dt) {
@@ -65,6 +70,9 @@ cc.Class({
         this.bottomStoneCom.setHeight(bommtonStoneNum,1);
 
         this.canMoveTag = true;
+
+        this.goldCom.reset();
+        this.goldNode.y = -667 + (bommtonStoneNum+holeNum/2)*57;
     },
 
     stopMove:function() {
