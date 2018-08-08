@@ -1,7 +1,7 @@
 {
     "containerSpeed": {
         "note":"石头墙横向移动的速度，单位为 像素/每帧，需考虑单位时间内猫可以从最上掉到最下及最下移动到最上",
-        "value": 5
+        "value": 4
     },
 
     "catGravity": {
@@ -11,17 +11,17 @@
 
     "stoneStartPosX": {
         "note":"第一堵墙离屏幕右边的像素值，值越大第一堵墙出现的越晚",
-        "value":100
+        "value":400
     },
 
     "holeMinSize": {
         "note":"洞的最小值，值为石头个数，单个石头高57像素，猫高109像素，此值需要考虑猫的跳跃高度",
-        "value":5
+        "value":6
     },
 
     "holeMaxSize": {
         "note":"洞的最大值，石墙24行满屏",
-        "value":9
+        "value":10
     },
 
     "catjumpTime": {
@@ -36,7 +36,7 @@
 
     "stoneMinHeight": {
         "note":"墙的最小行数，最小行数越大，随机出来的洞越居中，不能超过 24-holeMaxSize",
-        "value":1
+        "value":4
     },
 
     "stonePadSize": {
