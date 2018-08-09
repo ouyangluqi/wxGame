@@ -1,14 +1,14 @@
 {
   "ver": "1.0.0",
-  "uuid": "2bcbb859-d89e-4dcc-b147-f78585232cfa",
+  "uuid": "a6c1425c-5b2a-4ead-826f-458f5fe8e5a3",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
   "subMetas": {
-    "rank": {
+    "achievement_PB": {
       "ver": "1.0.3",
-      "uuid": "10632579-385c-4453-997c-97399a221904",
-      "rawTextureUuid": "2bcbb859-d89e-4dcc-b147-f78585232cfa",
+      "uuid": "7977c30d-43fa-45c7-ae8e-9e86e3fc424f",
+      "rawTextureUuid": "a6c1425c-5b2a-4ead-826f-458f5fe8e5a3",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,
@@ -16,10 +16,10 @@
       "offsetY": 0,
       "trimX": 0,
       "trimY": 0,
-      "width": 145,
-      "height": 49,
-      "rawWidth": 145,
-      "rawHeight": 49,
+      "width": 42,
+      "height": 41,
+      "rawWidth": 42,
+      "rawHeight": 41,
       "borderTop": 0,
       "borderBottom": 0,
       "borderLeft": 0,

@@ -7,7 +7,7 @@
   "subMetas": {
     "score_share": {
       "ver": "1.0.3",
-      "uuid": "2e533213-e4b3-4acc-a5fc-f099af79e7c2",
+      "uuid": "313ebeb2-e796-4042-bbd8-068c2c50b0f6",
       "rawTextureUuid": "88d58c9b-cf34-429e-9a25-5f5a405079a0",
       "trimType": "auto",
       "trimThreshold": 1,
@@ -16,9 +16,9 @@
       "offsetY": 0,
       "trimX": 0,
       "trimY": 0,
-      "width": 180,
+      "width": 179,
       "height": 100,
-      "rawWidth": 180,
+      "rawWidth": 179,
       "rawHeight": 100,
       "borderTop": 0,
       "borderBottom": 0,

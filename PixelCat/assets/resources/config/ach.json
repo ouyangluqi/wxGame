@@ -1,0 +1,108 @@
+{
+    "login": {
+        "note": "登录",
+        "detail": [
+            {"note":"首次进入游戏", "value":1, "reward":1},
+            {"note":"第二日进入游戏", "value":2, "reward":2},
+            {"note":"第三日进入游戏", "value":3, "reward":3},
+            {"note":"第四日进入游戏", "value":4, "reward":4},
+            {"note":"第五日进入游戏", "value":5, "reward":5},
+            {"note":"第六日进入游戏", "value":6, "reward":6},
+            {"note":"第七日进入游戏", "value":7, "reward":10}
+        ]
+    },
+    "maxScore": {
+        "note": "分数突破",
+        "detail": [
+            {"note":"首次单局突破50分", "value":50, "reward":1},
+            {"note":"首次单局突破100分", "value":100, "reward":2},
+            {"note":"首次单局突破200分", "value":200, "reward":5},
+            {"note":"首次单局突破500分", "value":500, "reward":10},
+            {"note":"首次单局突破1000分", "value":1000, "reward":20},
+            {"note":"首次单局突破2000分", "value":2000, "reward":30},
+            {"note":"首次单局突破3000分", "value":3000, "reward":50},
+            {"note":"首次单局突破5000分", "value":5000, "reward":100},
+            {"note":"首次单局突破10000分", "value":10000, "reward":200}
+        ]
+    },
+    "commboNum": {
+        "note": "连续吃币",
+        "detail": [
+            {"note":"首次连续吃到5个金币", "value":5, "reward":1},
+            {"note":"首次连续吃到10个金币", "value":10, "reward":5},
+            {"note":"首次连续吃到20个金币", "value":20, "reward":10},
+            {"note":"首次连续吃到30个金币", "value":30, "reward":15},
+            {"note":"首次连续吃到50个金币", "value":50, "reward":20},
+            {"note":"首次连续吃到100个金币", "value":100, "reward":30},
+            {"note":"首次连续吃到150个金币", "value":150, "reward":50},
+            {"note":"首次连续吃到200个金币", "value":200, "reward":100}
+        ]
+    },
+    "totalScore": {
+        "note": "累计分数",
+        "detail": [
+            {"note":"累计获得500分", "value":500, "reward":1},
+            {"note":"累计获得1000分", "value":1000, "reward":5},
+            {"note":"累计获得2000分", "value":2000, "reward":5},
+            {"note":"累计获得3000分", "value":3000, "reward":10},
+            {"note":"累计获得4000分", "value":4000, "reward":10},
+            {"note":"累计获得5000分", "value":5000, "reward":10},
+            {"note":"累计获得6000分", "value":6000, "reward":10},
+            {"note":"累计获得7000分", "value":7000, "reward":10},
+            {"note":"累计获得8000分", "value":8000, "reward":10},
+            {"note":"累计获得9000分", "value":9000, "reward":10},
+            {"note":"累计获得10000分", "value":10000, "reward":20},
+            {"note":"累计获得15000分", "value":15000, "reward":20},
+            {"note":"累计获得20000分", "value":20000, "reward":20},
+            {"note":"累计获得25000分", "value":25000, "reward":20},
+            {"note":"累计获得30000分", "value":30000, "reward":20},
+            {"note":"累计获得35000分", "value":35000, "reward":20},
+            {"note":"累计获得40000分", "value":40000, "reward":20},
+            {"note":"累计获得45000分", "value":45000, "reward":20},
+            {"note":"累计获得50000分", "value":50000, "reward":20},
+            {"note":"累计获得55000分", "value":55000, "reward":20},
+            {"note":"累计获得60000分", "value":60000, "reward":20},
+            {"note":"累计获得65000分", "value":65000, "reward":20},
+            {"note":"累计获得70000分", "value":70000, "reward":20},
+            {"note":"累计获得75000分", "value":75000, "reward":20},
+            {"note":"累计获得80000分", "value":80000, "reward":20},
+            {"note":"累计获得85000分", "value":85000, "reward":20},
+            {"note":"累计获得90000分", "value":90000, "reward":20},
+            {"note":"累计获得95000分", "value":95000, "reward":20},
+            {"note":"累计获得100000分", "value":100000, "reward":20},
+            {"note":"累计获得999999分", "value":999999, "reward":500}
+        ]
+    },
+    "totalCoin": {
+        "note": "累计金币",
+        "detail": [
+            {"note":"累计吃了10个金币", "value":10, "reward":1},
+            {"note":"累计吃了100个金币", "value":100, "reward":10},
+            {"note":"累计吃了200个金币", "value":200, "reward":10},
+            {"note":"累计吃了300个金币", "value":300, "reward":10},
+            {"note":"累计吃了400个金币", "value":400, "reward":10},
+            {"note":"累计吃了500个金币", "value":500, "reward":10},
+            {"note":"累计吃了600个金币", "value":600, "reward":10},
+            {"note":"累计吃了700个金币", "value":700, "reward":10},
+            {"note":"累计吃了800个金币", "value":800, "reward":10},
+            {"note":"累计吃了900个金币", "value":900, "reward":10},
+            {"note":"累计吃了1000个金币", "value":1000, "reward":10},
+            {"note":"累计吃了1100个金币", "value":1100, "reward":10},
+            {"note":"累计吃了1200个金币", "value":1200, "reward":10},
+            {"note":"累计吃了1300个金币", "value":1300, "reward":10},
+            {"note":"累计吃了1400个金币", "value":1400, "reward":10},
+            {"note":"累计吃了1500个金币", "value":1500, "reward":10},
+            {"note":"累计吃了9999个金币", "value":9999, "reward":500}
+        ]
+    },
+    "share": {
+        "note": "分享",
+        "detail": [
+            {"note":"首次分享给好友", "value":1, "reward":10},
+            {"note":"累计分享5次", "value":5, "reward":10},
+            {"note":"累计分享10次", "value":10, "reward":10},
+            {"note":"累计分享50次", "value":50, "reward":30},
+            {"note":"累计分享100次", "value":100, "reward":50}
+        ]
+    }
+}

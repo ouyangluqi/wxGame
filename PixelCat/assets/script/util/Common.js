@@ -69,6 +69,72 @@ var Common = cc.Class({
                     })
                 }
             }
+        },
+
+        /*
+        countKeyLogin: "login",
+        countKeyMaxScore: "maxScore",
+        countKeyCommboNum: "commboNum",
+        countKeyTotalScore: "totalScore",
+        countKeyTotalCoin: "totalCoin",
+        countKeyShare: "share",
+        */
+        initDataCount:function() {
+            Common._initItem(ParamConst.countKeyLogin,0);
+            Common._initItem(ParamConst.countKeyMaxScore,0);
+            Common._initItem(ParamConst.countKeyCommboNum,0);
+            Common._initItem(ParamConst.countKeyTotalScore,0);
+            Common._initItem(ParamConst.countKeyTotalCoin,0);
+            Common._initItem(ParamConst.countKeyShare,0);
+
+            Common._initItem(ParamConst.countKeyLoginDate,0);
+        },
+
+        _initItem:function(key,defaultValue) {
+            var value = cc.sys.localStorage.getItem(key);
+            if(value == null) cc.sys.localStorage.setItem(key, defaultValue);
+            else cc.log("==store=="+key+" " + value);
+        },
+
+        /*
+        achIndexLogin: "login",
+        achIndexMaxScore: "maxScore",
+        achIndexCommboNum: "commboNum",
+        achIndexTotalScore: "totalScore",
+        achIndexTotalCoin: "totalCoin",
+        achIndexShare: "share",
+        */
+        initAchIndex:function() {
+            Common._initItem(ParamConst.achIndexLogin,-1);
+            Common._initItem(ParamConst.achIndexMaxScore,-1);
+            Common._initItem(ParamConst.achIndexCommboNum,-1);
+            Common._initItem(ParamConst.achIndexTotalScore,-1);
+            Common._initItem(ParamConst.achIndexTotalCoin,-1);
+            Common._initItem(ParamConst.achIndexShare,-1);
+        },
+
+        setDataCount:function(countKey, countValue) {
+            cc.sys.localStorage.setItem(countKey, countValue);
+        },
+
+        getDataCount:function(countKey) {
+            return Number(cc.sys.localStorage.getItem(countKey));
+        },
+
+        getAchIndex:function(achKey) {
+            return Number(cc.sys.localStorage.getItem(achKey+"Index"));
+        },
+
+        setAchIndex:function(achKey,index) {
+            cc.sys.localStorage.setItem(achKey+"Index", index);
+        },
+
+        //只有开发的时候可以使用
+        clearAllData:function() {
+            if(CC_DEV) {
+                cc.log("**************** clear all data ******************");
+                cc.sys.localStorage.clear();
+            }
         }
     }
 })

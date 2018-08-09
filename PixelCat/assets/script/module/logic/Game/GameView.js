@@ -2,6 +2,8 @@ const BaseView = require('BaseView')
 const Random = require('Random')
 const Common = require('Common')
 const Singleton = require('Singleton')
+const ParamConst = require('ParamConst')
+const Res = require('Res');
 
 cc.Class({
     extends: BaseView,
@@ -88,6 +90,14 @@ cc.Class({
             default: null,
             type: cc.Node
         },
+        shopBtn: {
+            default: null,
+            type: cc.Node
+        },
+        achBtn: {
+            default: null,
+            type: cc.Node
+        },
         commboTxtNode: {
             default: null,
             type: cc.Node
@@ -105,6 +115,42 @@ cc.Class({
             type: cc.Node
         },
         guideBlinNode: {
+            default: null,
+            type: cc.Node
+        },
+        achNode: {
+            default: null,
+            type: cc.Node
+        },
+        achNoteTxt: {
+            default: null,
+            type: cc.Label
+        },
+        achRewardTxt: {
+            default: null,
+            type: cc.Label
+        },
+        shopView: {
+            default: null,
+            type: cc.Node
+        },
+        coinNumTxt: {
+            default: null,
+            type: cc.Label
+        },
+        shopBackBtn: {
+            default: null,
+            type: cc.Node
+        },
+        achView: {
+            default: null,
+            type: cc.Node
+        },
+        achBackBtn: {
+            default: null,
+            type: cc.Node
+        },
+        achList: {
             default: null,
             type: cc.Node
         }
@@ -136,6 +182,7 @@ cc.Class({
         this.commboTxt = this.commboTxtNode.getComponent("ImageLabel");
 
         this.cfg = Singleton.Config.stage;
+        this.ach = Singleton.Config.ach;
 
         this.isCatDie = false;
         this.startTag = false;
@@ -147,7 +194,13 @@ cc.Class({
     },
 
     _initScene:function() {
-
+        var date = new Date();
+        var curDate = date.getDate();
+        var lastLoginDate = Common.getDataCount(ParamConst.countKeyLoginDate);
+        if(curDate!=lastLoginDate) {
+            this._countDataAndCheckAch(ParamConst.countKeyLogin, 1);
+            Common.setDataCount(ParamConst.countKeyLoginDate,curDate);
+        }
     },
 
     _initListener:function() {
@@ -159,10 +212,33 @@ cc.Class({
         this.sumRestartBtn.on('click', this._onSumRestartBtnClick, this);
         this.sumShareBtn.on('click', this._onSumShareBtnClick, this);
         this.guideBtn.on('click',this._onGuideBtnClick, this);
+        this.achBtn.on('click',this._onAchBtnClick, this);
+        this.shopBackBtn.on('click',this._onShopBackBtnClick, this);
+        this.shopBtn.on('click',this._onShopBtnClick, this);
+        this.achBackBtn.on('click',this._onAchBackBtnClick, this);
+
+
         this.node.on("stoneOut",this._onStoneOut, this);
         this.node.on("catDie",this._onCatDie, this);
         this.node.on("eatGold",this._eatGold, this);
         this.node.on("buileGold",this._buildGold, this);
+    },
+
+    _onAchBtnClick:function(event) {
+        this.achView.active = true;
+        this._drawAchView();
+    },
+
+    _onAchBackBtnClick:function(event) {
+        this.achView.active = false;
+    },
+
+    _onShopBtnClick:function(event) {
+        this.shopView.active = true;
+    },
+
+    _onShopBackBtnClick:function(event) {
+        this.shopView.active = false;
     },
 
     _buildGold:function(event) {
@@ -180,8 +256,12 @@ cc.Class({
         var getScore = this.commboNum * 2;
         this.scoreNum = this.scoreNum + getScore;
         this.gameScoreCom.setString(this.scoreNum+"");
+        this._countDataAndCheckAch(ParamConst.countKeyTotalScore, getScore);
+        this._countDataAndCheckAch(ParamConst.countKeyMaxScore, this.scoreNum);
         this.coinAudio.play();
         this._showGetScoreEff(getScore);
+        this._countDataAndCheckAch(ParamConst.countKeyTotalCoin, 1);
+        this._countDataAndCheckAch(ParamConst.countKeyCommboNum, this.commboNum);
     },
 
     _showGetScoreEff:function(score) {
@@ -302,6 +382,8 @@ cc.Class({
 
         this.scoreNum = this.scoreNum + 1;
         this.gameScoreCom.setString(this.scoreNum+"");
+        this._countDataAndCheckAch(ParamConst.countKeyTotalScore, 1);
+        this._countDataAndCheckAch(ParamConst.countKeyMaxScore, this.scoreNum);
 
         var act1 = cc.scaleTo(0.1,1.2);
         var act2 = cc.scaleTo(0.05,1);
@@ -355,10 +437,205 @@ cc.Class({
                 imageUrl: "https://shxingwan-down.oss-cn-shenzhen.aliyuncs.com/wechatGame/cocosGameRes/PixelCat/share/miniGame_share_imge.jpg",
             })
         }
-        cc.log("share");
+        this._countDataAndCheckAch(ParamConst.countKeyShare, 1);
     },
 
-    _showCommboEff:function() {
+    /*
+    countKeyLogin: "login",
+    countKeyMaxScore: "maxScore",  value
+    countKeyCommboNum: "commboNum", value
+    countKeyTotalScore: "totalScore", 1
+    countKeyTotalCoin: "totalCoin", 1
+    countKeyShare: "share",*/
+    _countDataAndCheckAch:function(countKey,countValue) {
+        switch (countKey) {
+            //登录
+            case ParamConst.countKeyLogin:
+                this._doCheckLogicAddCompare(countKey,countValue);
+            break;
 
+            //最高分数
+            case ParamConst.countKeyMaxScore:
+                this._doCheckLogicCompare(countKey,countValue);
+            break;
+
+            //连击总数
+            case ParamConst.countKeyCommboNum:
+                this._doCheckLogicCompare(countKey,countValue);
+            break;
+
+            //总分数
+            case ParamConst.countKeyTotalScore:
+                this._doCheckLogicAddCompare(countKey,countValue);
+            break;
+
+            //总金币数
+            case ParamConst.countKeyTotalCoin:
+                this._doCheckLogicAddCompare(countKey,countValue);
+            break;
+
+            //分享次数
+            case ParamConst.countKeyShare:
+                this._doCheckLogicAddCompare(countKey,countValue);
+            break;
+
+            default:
+                break;
+        }
+    },
+
+    _doCheckLogicCompare:function(countKey,countValue) {
+        var nextAchData = this.getNextAchData(countKey);
+        if(nextAchData==null) {
+            return;   
+        }
+
+        if(countValue>nextAchData.value) {
+            this._reachNewAch(countKey, nextAchData.index);
+        }
+    },
+
+    _doCheckLogicAddCompare:function(countKey,countValue) {
+        var nextAchData = this.getNextAchData(countKey);
+        if(nextAchData==null) {
+            return;   
+        }
+
+        var storeValue = Common.getDataCount(countKey);
+        var newValue = storeValue+Number(countValue);
+        Common.setDataCount(countKey, newValue);
+        if(newValue>=nextAchData.value) {
+            this._reachNewAch(countKey, nextAchData.index)
+        }
+    },
+
+    getNextAchData:function(achKey) {
+        var achData = {
+            "index":0,
+            "value":0
+        };
+        var curAchIndex = Common.getAchIndex(achKey);
+        var nextAchIndex = 0;
+        
+        if(curAchIndex==-1) {
+            nextAchIndex = 0;
+        } else {
+            var achLen = this.ach[achKey].detail.length;
+            if(curAchIndex<achLen-1) {
+                nextAchIndex = curAchIndex+1;
+            } else {
+                nextAchIndex = -1;
+            }
+        }
+
+        if(nextAchIndex==-1) {
+            achData = null;
+        } else {
+            achData.index = nextAchIndex;
+            achData.value = this.ach[achKey].detail[nextAchIndex].value;
+        }
+
+        return achData;
+    },
+
+    //达成新成就
+    _reachNewAch:function(achKey,achIndex) {
+        Common.setAchIndex(achKey,achIndex);
+
+        var achData = this.ach[achKey].detail[achIndex];
+        this.achNoteTxt.string = achData.note;
+        this.achRewardTxt.string = "+"+achData.reward;
+
+        this.achNode.stopAllActions();
+        this.achNode.opacity = 255;
+        this.achNode.x = -400;
+
+        var act1 = cc.moveBy(0.5,400,0);
+        var act2 = cc.delayTime(2);
+        var act3 = cc.moveBy(0.5,-400,0);
+        var act = cc.sequence(act1,act2,act3);
+        this.achNode.runAction(act);
+    },
+
+    _drawAchView:function() {
+        this.achList.removeAllChildren();
+
+        var achIndexLogin = Common.getAchIndex(ParamConst.countKeyLogin);
+        var achIndexMaxScore = Common.getAchIndex(ParamConst.countKeyMaxScore);
+        var achIndexCommboNum = Common.getAchIndex(ParamConst.countKeyCommboNum);
+        var achIndexTotalScore = Common.getAchIndex(ParamConst.countKeyTotalScore);
+        var achIndexTotalCoin = Common.getAchIndex(ParamConst.countKeyTotalCoin);
+        var achIndexShare = Common.getAchIndex(ParamConst.countKeyShare);
+
+        var countKeyLogin = Common.getDataCount(ParamConst.countKeyLogin);
+        var countKeyMaxScore = Common.getDataCount(ParamConst.countKeyMaxScore);
+        var countKeyCommboNum = Common.getDataCount(ParamConst.countKeyCommboNum);
+        var countKeyTotalScore = Common.getDataCount(ParamConst.countKeyTotalScore);
+        var countKeyTotalCoin = Common.getDataCount(ParamConst.countKeyTotalCoin);
+        var countKeyShare = Common.getDataCount(ParamConst.countKeyShare);
+
+        var loginCfg = this.ach.login.detail;
+        var maxScoreCfg = this.ach.maxScore.detail;
+        var commboNumCfg = this.ach.commboNum.detail;
+        var totalScoreCfg = this.ach.totalScore.detail;
+        var totalCoinCfg = this.ach.totalCoin.detail;
+        var shareCfg = this.ach.share.detail;
+
+        var dataArr = [];
+        var curArr = [];
+        var doneArr = [];
+        //创建未完成标题
+        var curTitleData = {};
+        curTitleData.type = 1;
+        curTitleData.cfg = "未完成";
+        dataArr[0] = curTitleData;
+
+        //创建成就数据
+        this._getAchData(curArr,doneArr,loginCfg,achIndexLogin,countKeyLogin);
+        this._getAchData(curArr,doneArr,maxScoreCfg,achIndexMaxScore,countKeyMaxScore);
+        this._getAchData(curArr,doneArr,commboNumCfg,achIndexCommboNum,countKeyCommboNum);
+        this._getAchData(curArr,doneArr,totalScoreCfg,achIndexTotalScore,countKeyTotalScore);
+        this._getAchData(curArr,doneArr,totalCoinCfg,achIndexTotalCoin,countKeyTotalCoin);
+        this._getAchData(curArr,doneArr,shareCfg,achIndexShare,countKeyShare);
+
+        //添加未完成成就
+        dataArr = dataArr.concat(curArr);
+
+        //创建已完成标题
+        var doneTitleData = {};
+        doneTitleData.type = 1;
+        doneTitleData.cfg = "已完成";
+        dataArr[dataArr.length] = doneTitleData;
+
+        //添加已完成成就
+        dataArr = dataArr.concat(doneArr);
+
+        var dataArrLen = dataArr.length;
+        var achItemPrefab = Singleton.PrefabLoader.getRes(Res.PREFAB_ACH_ITEM_PATH);
+        for (let index = 0; index < dataArrLen; index++) {
+            var prefabNode = cc.instantiate(achItemPrefab);
+            var prefabCom = prefabNode.getComponent("AchItem");
+            this.achList.addChild(prefabNode);
+            prefabCom.setData(dataArr[index]);
+        }
+    },
+
+    _getAchData:function(outCurArr, outDoneArr, cfgData, curIndex, curCount) {
+        var cfgLen = cfgData.length;
+        for (let index = 0; index < cfgLen; index++) {
+            if(index==curIndex+1) {
+                var curData = {};
+                curData.type = 2;
+                curData.cfg = cfgData[index];
+                curData.process = curCount;
+                outCurArr[outCurArr.length] = curData;
+            }
+            if(index<=curIndex) {
+                var doneData = {};
+                doneData.type = 3;
+                doneData.cfg = cfgData[index];
+                outDoneArr[outDoneArr.length] = doneData;
+            }
+        }
     }
 });
