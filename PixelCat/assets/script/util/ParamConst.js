@@ -11,6 +11,14 @@ var ParamConst = cc.Class({
 
         countKeyLoginDate: "loginDate",
 
+        countKeyRolePix:"cat_pix",
+        countKeyRoleWhite:"cat_white",
+        countKeyRoleFish:"cat_fish",
+
+        countKeyRoleSkin:"cat",
+
+        countKeyXGold:"xGold",
+
         achIndexLogin: "loginIndex",
         achIndexMaxScore: "maxScoreIndex",
         achIndexCommboNum: "commboNumIndex",

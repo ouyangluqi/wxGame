@@ -87,6 +87,7 @@ cc.Class({
     _startLoadPrefabHandler: function () {
         Singleton.PrefabLoader.addRes(Res.PREFAB_GAME_VIEW_PATH)
         Singleton.PrefabLoader.addRes(Res.PREFAB_ACH_ITEM_PATH);
+        Singleton.PrefabLoader.addRes(Res.PREFAB_SHOP_ITEM_PATH);
         Singleton.PrefabLoader.startLoad(false, this._completeLoadPrefabHandler.bind(this))
     },
 
@@ -98,6 +99,7 @@ cc.Class({
     _startLoadRawAssetHandler: function () {
         Singleton.RawAssetLoader.addRes(Res.CONFIG_STAGE_PATH)
         Singleton.RawAssetLoader.addRes(Res.COFING_ACH_PATH)
+        Singleton.RawAssetLoader.addRes(Res.COFING_SHOP_PATH)
         Singleton.RawAssetLoader.startLoad(false, this._completeLoadRawAssetHandler.bind(this))
     },
 
@@ -119,11 +121,13 @@ cc.Class({
 
         Singleton.Config.initStage(Singleton.RawAssetLoader.getRes(Res.CONFIG_STAGE_PATH))
         Singleton.Config.initAch(Singleton.RawAssetLoader.getRes(Res.COFING_ACH_PATH))
+        Singleton.Config.initShop(Singleton.RawAssetLoader.getRes(Res.COFING_SHOP_PATH))
 
         this._checkAllLoadComplete()
     },
 
     _checkAllLoadComplete:function () {
+        Common.clearAllData();
         Common.getHistoryScore();
         Common.initDataCount();
         Common.initAchIndex();

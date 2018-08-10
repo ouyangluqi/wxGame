@@ -1,0 +1,31 @@
+{
+    "role": [
+        {
+            "key":"cat_pix",
+            "name":"像素猫",
+            "framePre":"cat",
+            "desc":"一看就是标准主角样子",
+            "effect":"特殊效果：无",
+            "price":0
+        },
+        {
+            "key":"cat_white",
+            "name":"小白",
+            "framePre":"cat_white",
+            "desc":"或者称呼为大白更合适",
+            "effect":"特殊效果：无",
+            "price":1000
+        },
+        {
+            "key":"cat_fish",
+            "name":"美人猫",
+            "framePre":"cat_fish",
+            "desc":"看着就很吸引人...吗",
+            "effect":"特殊效果：无",
+            "price":1000
+        }
+    ],
+    "item": [
+
+    ]
+}

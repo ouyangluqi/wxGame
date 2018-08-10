@@ -86,6 +86,10 @@ cc.Class({
             default: null,
             type: cc.Node
         },
+        sumHomeBtn: {
+            default: null,
+            type: cc.Node
+        },
         rankViewNode: {
             default: null,
             type: cc.Node
@@ -153,6 +157,10 @@ cc.Class({
         achList: {
             default: null,
             type: cc.Node
+        },
+        shopList: {
+            default: null,
+            type: cc.Node
         }
     },
 
@@ -180,9 +188,11 @@ cc.Class({
         this.bestScoreCom = this.bestScoreTxt.getComponent("ImageLabel");
         this.rankViewCom = this.rankViewNode.getComponent("RankView");
         this.commboTxt = this.commboTxtNode.getComponent("ImageLabel");
+        this.catCom = this.catNode.getComponent("FrameAnimation");
 
         this.cfg = Singleton.Config.stage;
         this.ach = Singleton.Config.ach;
+        this.shop = Singleton.Config.shop;
 
         this.isCatDie = false;
         this.startTag = false;
@@ -191,6 +201,8 @@ cc.Class({
         this.commboTag = 0;
         this.commboTxtNode.opacity = 0;
         this.stoneNode1.x = this.cfg.stoneStartPosX.value;
+        var catSkin = Common.getDataCountStr(ParamConst.countKeyRoleSkin);
+        this.catCom.framePre = catSkin;
     },
 
     _initScene:function() {
@@ -200,6 +212,10 @@ cc.Class({
         if(curDate!=lastLoginDate) {
             this._countDataAndCheckAch(ParamConst.countKeyLogin, 1);
             Common.setDataCount(ParamConst.countKeyLoginDate,curDate);
+            //登录第二天送白猫
+            if(Common.getDataCount(ParamConst.countKeyLogin)==2) {
+                Common.setDataCount(ParamConst.countKeyRoleWhite,1);
+            }
         }
     },
 
@@ -216,13 +232,38 @@ cc.Class({
         this.shopBackBtn.on('click',this._onShopBackBtnClick, this);
         this.shopBtn.on('click',this._onShopBtnClick, this);
         this.achBackBtn.on('click',this._onAchBackBtnClick, this);
+        this.sumHomeBtn.on('click',this._onSumHomeBtnClick, this);
 
 
         this.node.on("stoneOut",this._onStoneOut, this);
         this.node.on("catDie",this._onCatDie, this);
         this.node.on("eatGold",this._eatGold, this);
         this.node.on("buileGold",this._buildGold, this);
+        this.node.on("changeSkin",this._changeSkin, this);
     },
+
+    _onSumHomeBtnClick:function(event) {
+        this.sumView.active = false;
+        this.isCatDie = false;
+        this.startTag = false;
+        this.catComponent.startTag = false;
+        this.scoreNum = 0;
+        this.commboNum = 0;
+        this.commboTag = 0;
+        this.commboTxtNode.opacity = 0;
+        this.gameScoreCom.setString("");
+        this.catComponent.reset();
+        this.stoneNodeCom1.restartSet();
+        this.stoneNodeCom2.reset();
+        this.startView.active = true;
+    },
+
+    _changeSkin:function(event) {
+        var skin = event.getUserData()["skin"];
+        this.catCom.framePre = skin;
+        Common.setDataCount(ParamConst.countKeyRoleSkin, skin);
+        this._showRoleShop();
+    },  
 
     _onAchBtnClick:function(event) {
         this.achView.active = true;
@@ -235,6 +276,7 @@ cc.Class({
 
     _onShopBtnClick:function(event) {
         this.shopView.active = true;
+        this._showRoleShop();
     },
 
     _onShopBackBtnClick:function(event) {
@@ -407,7 +449,7 @@ cc.Class({
     },
 
     _showSumView:function() {
-       this.newRecordSp.stopAllActions();
+        this.newRecordSp.stopAllActions();
         this.newRecordSp.active = false;
         this.sumView.active = true;
         this.curScoreCom.setString(this.scoreNum + "");
@@ -422,6 +464,15 @@ cc.Class({
              var act1 = cc.blink(1,3);
              var act = cc.repeatForever(act1);
              this.newRecordSp.runAction(act);
+        }
+
+        if(this.scoreNum>=50) {
+            var getGold = 1;
+            var storeGold = Common.getDataCount(ParamConst.countKeyXGold);
+            getGold = getGold + Math.round(this.scoreNum/100);
+            getGold = getGold + storeGold;
+
+            Common.setDataCount(ParamConst.countKeyXGold, getGold);
         }
     },
 
@@ -546,6 +597,10 @@ cc.Class({
         this.achNoteTxt.string = achData.note;
         this.achRewardTxt.string = "+"+achData.reward;
 
+        var gold = Common.getDataCount(ParamConst.countKeyXGold);
+        gold = gold + Number(achData.reward);
+        Common.setDataCount(ParamConst.countKeyXGold, gold);
+
         this.achNode.stopAllActions();
         this.achNode.opacity = 255;
         this.achNode.x = -400;
@@ -637,5 +692,30 @@ cc.Class({
                 outDoneArr[outDoneArr.length] = doneData;
             }
         }
+    },
+
+    _showRoleShop:function() {
+        this.shopList.removeAllChildren();
+
+        var dataArr = [];
+        this.shop.role.forEach(element => {
+            var data = {};
+            data.type = "role",
+            data.cfg = element;
+            dataArr[dataArr.length] = data;
+        });
+
+        var dataArrLen = dataArr.length;
+
+        var shopItemPrefab = Singleton.PrefabLoader.getRes(Res.PREFAB_SHOP_ITEM_PATH);
+        for (let index = 0; index < dataArrLen; index++) {
+            var prefabNode = cc.instantiate(shopItemPrefab);
+            var prefabCom = prefabNode.getComponent("ShopItem");
+            this.shopList.addChild(prefabNode);
+            prefabCom.setData(dataArr[index]);
+        }
+
+        var curGold = Common.getDataCount(ParamConst.countKeyXGold);
+        this.coinNumTxt.string = curGold;
     }
 });

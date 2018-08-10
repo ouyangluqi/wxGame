@@ -88,6 +88,14 @@ var Common = cc.Class({
             Common._initItem(ParamConst.countKeyShare,0);
 
             Common._initItem(ParamConst.countKeyLoginDate,0);
+
+            Common._initItem(ParamConst.countKeyRolePix,1);
+            Common._initItem(ParamConst.countKeyRoleWhite,0);
+            Common._initItem(ParamConst.countKeyRoleFish,0);
+
+            Common._initItem(ParamConst.countKeyRoleSkin,"cat");
+
+            Common._initItem(ParamConst.countKeyXGold,0);
         },
 
         _initItem:function(key,defaultValue) {
@@ -119,6 +127,10 @@ var Common = cc.Class({
 
         getDataCount:function(countKey) {
             return Number(cc.sys.localStorage.getItem(countKey));
+        },
+
+        getDataCountStr:function(countKey) {
+            return cc.sys.localStorage.getItem(countKey);
         },
 
         getAchIndex:function(achKey) {
