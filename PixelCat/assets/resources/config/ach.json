@@ -3,12 +3,12 @@
         "note": "登录",
         "detail": [
             {"note":"首次进入游戏", "value":1, "reward":1},
-            {"note":"第二日进入游戏", "value":2, "reward":2},
-            {"note":"第三日进入游戏", "value":3, "reward":3},
-            {"note":"第四日进入游戏", "value":4, "reward":4},
-            {"note":"第五日进入游戏", "value":5, "reward":5},
-            {"note":"第六日进入游戏", "value":6, "reward":6},
-            {"note":"第七日进入游戏", "value":7, "reward":10}
+            {"note":"第二天进入游戏", "value":2, "reward":2},
+            {"note":"第三天进入游戏", "value":3, "reward":3},
+            {"note":"第四天进入游戏", "value":4, "reward":4},
+            {"note":"第五天进入游戏", "value":5, "reward":5},
+            {"note":"第六天进入游戏", "value":6, "reward":6},
+            {"note":"第七天进入游戏", "value":7, "reward":10}
         ]
     },
     "maxScore": {
