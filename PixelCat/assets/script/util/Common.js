@@ -101,7 +101,7 @@ var Common = cc.Class({
         _initItem:function(key,defaultValue) {
             var value = cc.sys.localStorage.getItem(key);
             if(value == null) cc.sys.localStorage.setItem(key, defaultValue);
-            else cc.log("==store=="+key+" " + value);
+            else Log.logD("==store=="+key+" " + value);
         },
 
         /*
