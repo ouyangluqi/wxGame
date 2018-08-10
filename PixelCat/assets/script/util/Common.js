@@ -95,13 +95,18 @@ var Common = cc.Class({
 
             Common._initItem(ParamConst.countKeyRoleSkin,"cat");
 
-            Common._initItem(ParamConst.countKeyXGold,0);
+            Common._initItem(ParamConst.countKeyXGold, 0);
         },
 
         _initItem:function(key,defaultValue) {
             var value = cc.sys.localStorage.getItem(key);
-            if(value == null) cc.sys.localStorage.setItem(key, defaultValue);
-            else Log.logD("==store=="+key+" " + value);
+            if(value == null || value == "" || isNaN(value)) {
+                Log.logD("==store== value is null" + key + "==" + value)
+                cc.sys.localStorage.setItem(key, defaultValue);
+            }
+            else {
+                Log.logD("==store== value is not null" + key + " " + value);
+            }
         },
 
         /*
@@ -143,10 +148,10 @@ var Common = cc.Class({
 
         //只有开发的时候可以使用
         clearAllData:function() {
-            if(CC_DEV) {
-                cc.log("**************** clear all data ******************");
+            // if(CC_DEV) {
+                Log.logD("**************** clear all data ******************");
                 cc.sys.localStorage.clear();
-            }
+            // }
         }
     }
 })
