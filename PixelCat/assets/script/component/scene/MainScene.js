@@ -127,7 +127,7 @@ cc.Class({
     },
 
     _checkAllLoadComplete:function () {
-        Common.clearAllData();
+        //Common.clearAllData();
         Common.getHistoryScore();
         Common.initDataCount();
         Common.initAchIndex();

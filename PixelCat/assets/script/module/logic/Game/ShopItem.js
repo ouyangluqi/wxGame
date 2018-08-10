@@ -66,6 +66,13 @@ cc.Class({
                 eventParam.setUserData(eventData);
                 this.node.dispatchEvent(eventParam);
                 break;
+            case 2:
+                var eventParam = new cc.Event.EventCustom("buyItem",true);
+                var eventData = {};
+                eventData["cfg"] = this.data.cfg;
+                eventParam.setUserData(eventData);
+
+                this.node.dispatchEvent(eventParam);
             default:
                 break;
         }

@@ -161,6 +161,22 @@ cc.Class({
         shopList: {
             default: null,
             type: cc.Node
+        },
+        alertView: {
+            default: null,
+            type: cc.Node
+        },
+        alertConfirmBtn: {
+            default: null,
+            type: cc.Node
+        },
+        alertCancelBtn: {
+            default: null,
+            type: cc.Node
+        },
+        alertTxt: {
+            default: null,
+            type: cc.Label
         }
     },
 
@@ -233,6 +249,8 @@ cc.Class({
         this.shopBtn.on('click',this._onShopBtnClick, this);
         this.achBackBtn.on('click',this._onAchBackBtnClick, this);
         this.sumHomeBtn.on('click',this._onSumHomeBtnClick, this);
+        this.alertConfirmBtn.on('click',this._onAlertComfirmBtnClick, this);
+        this.alertCancelBtn.on('click',this._onAlertCancelBtnClick, this);
 
 
         this.node.on("stoneOut",this._onStoneOut, this);
@@ -240,6 +258,32 @@ cc.Class({
         this.node.on("eatGold",this._eatGold, this);
         this.node.on("buileGold",this._buildGold, this);
         this.node.on("changeSkin",this._changeSkin, this);
+        this.node.on("buyItem",this._buyItem, this);
+    },
+
+    _buyItem:function(event) {
+        var cfg = event.getUserData()["cfg"];
+        this.buyCfg = cfg;
+        this.alertView.active = true;
+        this.alertTxt.string = "确认花费"+cfg.price+"星币购买"+cfg.name+"吗?";
+    },
+
+    _onAlertComfirmBtnClick:function(event) {
+        this.alertView.active = false;
+        var coinNum = Common.getDataCount(ParamConst.countKeyXGold);
+        var price = this.buyCfg.price;
+        if(coinNum>=price) {
+            var storeNum = Common.getDataCount(this.buyCfg.key);
+            storeNum = storeNum + 1;
+            Common.setDataCount(this.buyCfg.key,storeNum);
+            Common.setDataCount(ParamConst.countKeyXGold, (coinNum-price));
+        }
+        this._showRoleShop();
+    },  
+
+    _onAlertCancelBtnClick:function(event) {
+        this.alertView.active = false;
+        this.buyCfg = null;
     },
 
     _onSumHomeBtnClick:function(event) {
