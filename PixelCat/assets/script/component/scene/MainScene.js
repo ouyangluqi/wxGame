@@ -127,12 +127,16 @@ cc.Class({
     },
 
     _checkAllLoadComplete:function () {
-        //Common.clearAllData();
-        Common.getHistoryScore();
-        Common.initDataCount();
-        Common.initAchIndex();
+        // Common.clearAllData();
+        // Common.getHistoryScore();
+        // Common.initDataCount();
+        // Common.initAchIndex();
         if (this._isPrefabComplete && this._isSpriteAtlasComplete && this._isRawAssetComplete) {
             if (this._gameView == null) {
+                // Common.clearAllData();
+                Common.getHistoryScore();
+                Common.initDataCount();
+                Common.initAchIndex();
                 this._gameView = new GameView()
                 this._gameView.init(Res.PREFAB_GAME_VIEW_PATH, this.node)
             }
