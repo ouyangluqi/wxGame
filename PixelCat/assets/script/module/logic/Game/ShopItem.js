@@ -94,6 +94,7 @@ cc.Class({
         this._itemFrameCom.framePre = cfg.framePre;
         this.itemDescTxt.string = cfg.desc;
         this.itemEffTxt.string = cfg.effect;
+        this.itemNameTxt.string = cfg.name;
 
         var countNum = Common.getDataCount(cfg.key);
 
