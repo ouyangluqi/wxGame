@@ -95,14 +95,17 @@ var Common = cc.Class({
 
             Common._initItem(ParamConst.countKeyRoleSkin,"cat");
 
-            Common._initItem(ParamConst.countKeyXGold, 0);
+            Common._initItem(ParamConst.countKeyXGold, 10000);
+
+            Common._initItem(ParamConst.countKeyMagnet, 1);
+            Common._initItem(ParamConst.countKeyShield, 1);
         },
 
         _initItem:function(key,defaultValue) {
             var value = cc.sys.localStorage.getItem(key);
-            if(value == null || value == "" || isNaN(value)) {
+            if(value == null || value == "") {
                 Log.logD("==store== value is null" + key + "==" + value)
-                cc.sys.localStorage.setItem(key, defaultValue);
+                cc.sys.localStorage.setItem(key, defaultValue+"");
             }
             else {
                 Log.logD("==store== value is not null" + key + " " + value);
@@ -127,7 +130,7 @@ var Common = cc.Class({
         },
 
         setDataCount:function(countKey, countValue) {
-            cc.sys.localStorage.setItem(countKey, countValue);
+            cc.sys.localStorage.setItem(countKey, countValue+"");
         },
 
         getDataCount:function(countKey) {
@@ -143,7 +146,7 @@ var Common = cc.Class({
         },
 
         setAchIndex:function(achKey,index) {
-            cc.sys.localStorage.setItem(achKey+"Index", index);
+            cc.sys.localStorage.setItem(achKey+"Index", index+"");
         },
 
         //只有开发的时候可以使用

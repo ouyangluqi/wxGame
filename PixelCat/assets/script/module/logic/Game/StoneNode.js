@@ -59,6 +59,9 @@ cc.Class({
         if(this.node.x<-810){
             this.reset();
         }
+        if(this.node.x<=-650) {
+            this.goldCom.magnetTag = true;
+        }
     },
 
     addStoneWithHole:function(holeNum) {

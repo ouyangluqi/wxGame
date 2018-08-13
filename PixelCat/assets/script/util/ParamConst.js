@@ -15,9 +15,12 @@ var ParamConst = cc.Class({
         countKeyRoleWhite:"cat_white",
         countKeyRoleFish:"cat_fish",
 
-        countKeyRoleSkin:"cat",
+        countKeyRoleSkin:"catSkin",
 
         countKeyXGold:"xGold",
+
+        countKeyMagnet:"item_magnet",
+        countKeyShield:"item_shield",
 
         achIndexLogin: "loginIndex",
         achIndexMaxScore: "maxScoreIndex",
@@ -25,5 +28,10 @@ var ParamConst = cc.Class({
         achIndexTotalScore: "totalScoreIndex",
         achIndexTotalCoin: "totalCoinIndex",
         achIndexShare: "shareIndex",
+
+
+        buffItemMagnet:"buffItemMagnet",
+        buffItemShield:"buffItemShield",
+        buffForeverMagnet:"buffForeverMagnet",
     }
 })

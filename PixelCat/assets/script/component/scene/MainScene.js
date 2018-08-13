@@ -88,6 +88,8 @@ cc.Class({
         Singleton.PrefabLoader.addRes(Res.PREFAB_GAME_VIEW_PATH)
         Singleton.PrefabLoader.addRes(Res.PREFAB_ACH_ITEM_PATH);
         Singleton.PrefabLoader.addRes(Res.PREFAB_SHOP_ITEM_PATH);
+        Singleton.PrefabLoader.addRes(Res.PREFAB_GOODS_ITEM_PATH);
+        Singleton.PrefabLoader.addRes(Res.PREFAB_GAME_ITEM_PATH);
         Singleton.PrefabLoader.startLoad(false, this._completeLoadPrefabHandler.bind(this))
     },
 
@@ -133,7 +135,7 @@ cc.Class({
         // Common.initAchIndex();
         if (this._isPrefabComplete && this._isSpriteAtlasComplete && this._isRawAssetComplete) {
             if (this._gameView == null) {
-                // Common.clearAllData();
+                //Common.clearAllData();
                 Common.getHistoryScore();
                 Common.initDataCount();
                 Common.initAchIndex();

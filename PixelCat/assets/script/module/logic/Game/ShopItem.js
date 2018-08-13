@@ -45,7 +45,6 @@ cc.Class({
     onLoad () {
         this._itemFrameCom = this.itemImage.getComponent("FrameAnimation");
         this.operaBtn.on('click', this._onOperaBtnClick, this);
-        this.node.on("changeSkin",this._changeSkin, this);
     },
 
     start () {
@@ -63,6 +62,7 @@ cc.Class({
                 var eventParam = new cc.Event.EventCustom("changeSkin",true);
                 var eventData = {};
                 eventData["skin"] = this.data.cfg.framePre;
+                eventData["speed"] = this.data.cfg.frameSpeed;
                 eventParam.setUserData(eventData);
                 this.node.dispatchEvent(eventParam);
                 break;
@@ -92,6 +92,7 @@ cc.Class({
         this.operaType = 0;
         var cfg = data.cfg;
         this._itemFrameCom.framePre = cfg.framePre;
+        this._itemFrameCom.speed = cfg.frameSpeed;
         this.itemDescTxt.string = cfg.desc;
         this.itemEffTxt.string = cfg.effect;
         this.itemNameTxt.string = cfg.name;
@@ -114,7 +115,7 @@ cc.Class({
                 this.operaTxt.string = "购买";
             }
         }
-    }
+    },
 
     // update (dt) {},
 });

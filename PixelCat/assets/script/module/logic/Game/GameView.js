@@ -177,6 +177,26 @@ cc.Class({
         alertTxt: {
             default: null,
             type: cc.Label
+        },
+        roleShopBtn: {
+            default: null,
+            type: cc.Node
+        },
+        itemShopBtn: {
+            default: null,
+            type: cc.Node
+        },
+        gameItemContainer: {
+            default: null,
+            type: cc.Node
+        },
+        magentEff: {
+            default: null,
+            type: cc.Node
+        },
+        shieldEff: {
+            default: null,
+            type: cc.Node
         }
     },
 
@@ -205,6 +225,8 @@ cc.Class({
         this.rankViewCom = this.rankViewNode.getComponent("RankView");
         this.commboTxt = this.commboTxtNode.getComponent("ImageLabel");
         this.catCom = this.catNode.getComponent("FrameAnimation");
+        this.roleShopSprite = this.roleShopBtn.getComponent(cc.Sprite);
+        this.itemShopSprite = this.itemShopBtn.getComponent(cc.Sprite);
 
         this.cfg = Singleton.Config.stage;
         this.ach = Singleton.Config.ach;
@@ -218,7 +240,15 @@ cc.Class({
         this.commboTxtNode.opacity = 0;
         this.stoneNode1.x = this.cfg.stoneStartPosX.value;
         var catSkin = Common.getDataCountStr(ParamConst.countKeyRoleSkin);
+        var skinSpeed = 0;
+        this.shop.role.forEach(element => {
+            if(element.framePre == catSkin) {
+                skinSpeed = element.frameSpeed;
+            }
+        });
         this.catCom.framePre = catSkin;
+        this.catCom.speed = skinSpeed;
+        this.buffList = [];
     },
 
     _initScene:function() {
@@ -251,6 +281,8 @@ cc.Class({
         this.sumHomeBtn.on('click',this._onSumHomeBtnClick, this);
         this.alertConfirmBtn.on('click',this._onAlertComfirmBtnClick, this);
         this.alertCancelBtn.on('click',this._onAlertCancelBtnClick, this);
+        this.roleShopBtn.on('click',this._onRoleShopBtnClick, this);
+        this.itemShopBtn.on('click',this._onItemShopBtnClick, this);
 
 
         this.node.on("stoneOut",this._onStoneOut, this);
@@ -259,6 +291,38 @@ cc.Class({
         this.node.on("buileGold",this._buildGold, this);
         this.node.on("changeSkin",this._changeSkin, this);
         this.node.on("buyItem",this._buyItem, this);
+        this.node.on("addBuff",this._addBuffCallBack, this);
+        this.node.on("removeBuff",this._removeBuffCallBack, this);
+    },
+
+    _addBuffCallBack:function(event) {
+        var buffType = event.getUserData()["buffType"];
+        this._addBuff(buffType);
+    },
+
+    _removeBuffCallBack:function(event) {
+        var buffType = event.getUserData()["buffType"];
+        this._removeBuff(buffType);
+    },
+
+    _onRoleShopBtnClick:function() {
+        var self = this;
+        cc.loader.loadRes("atlas/gameRes/gameRes", cc.SpriteAtlas, function(err, atlas) {
+            self.roleShopSprite.spriteFrame = atlas.getSpriteFrame("shopItem_selected");
+            self.itemShopSprite.spriteFrame = atlas.getSpriteFrame("shopItem"); 
+        });
+        this._showRoleShop();
+        this.curShopType = "Role";
+    },
+
+    _onItemShopBtnClick:function() {
+        var self = this;
+        cc.loader.loadRes("atlas/gameRes/gameRes", cc.SpriteAtlas, function(err, atlas) {
+            self.roleShopSprite.spriteFrame = atlas.getSpriteFrame("shopItem");
+            self.itemShopSprite.spriteFrame = atlas.getSpriteFrame("shopItem_selected"); 
+        });
+        this._showItemShop();
+        this.curShopType = "Item";
     },
 
     _buyItem:function(event) {
@@ -278,7 +342,11 @@ cc.Class({
             Common.setDataCount(this.buyCfg.key,storeNum);
             Common.setDataCount(ParamConst.countKeyXGold, (coinNum-price));
         }
-        this._showRoleShop();
+        if(this.curShopType=="Role") {
+            this._showRoleShop();
+        } else if (this.curShopType=="Item") {
+            this._showItemShop();
+        }
     },  
 
     _onAlertCancelBtnClick:function(event) {
@@ -304,7 +372,9 @@ cc.Class({
 
     _changeSkin:function(event) {
         var skin = event.getUserData()["skin"];
+        var speed = event.getUserData()["speed"];
         this.catCom.framePre = skin;
+        this.catCom.speed = speed;
         Common.setDataCount(ParamConst.countKeyRoleSkin, skin);
         this._showRoleShop();
     },  
@@ -320,7 +390,7 @@ cc.Class({
 
     _onShopBtnClick:function(event) {
         this.shopView.active = true;
-        this._showRoleShop();
+        this._onRoleShopBtnClick()
     },
 
     _onShopBackBtnClick:function(event) {
@@ -429,6 +499,7 @@ cc.Class({
         this.guideView.active = true;
         var act = cc.repeatForever(cc.blink(1,2));
         this.guideBlinNode.runAction(act);
+        this._showGameItem();
     },
 
     _startGame:function() {
@@ -478,28 +549,36 @@ cc.Class({
     },
 
     _restart:function() {
+        this.buffList = [];
         this.isCatDie = false;
         this.startTag = false;
         this.scoreNum = 0;
         this.commboNum = 0;
         this.commboTag = 0;
         this.commboTxtNode.opacity = 0;
-        this.gameScoreCom.setString("0");
+        this.gameScoreCom.setString("");
         this.catComponent.reset();
         this.stoneNodeCom1.restartSet();
         this.stoneNodeCom2.reset();
-        this._onMainNodeClick();
-        this.stoneNodeCom1.addStoneWithHole(Random.getRandom(this.cfg.holeMinSize.value,this.cfg.holeMaxSize.value));
+        // this._onMainNodeClick();
+        // this.stoneNodeCom1.addStoneWithHole(Random.getRandom(this.cfg.holeMinSize.value,this.cfg.holeMaxSize.value));
+        this.catComponent.startTag = false;
+        this._showGuideView();
     },
 
     _showSumView:function() {
         this.newRecordSp.stopAllActions();
         this.newRecordSp.active = false;
+        this.sumShareBtn.stopAllActions();
         this.sumView.active = true;
         this.curScoreCom.setString(this.scoreNum + "");
 
         var historyScore = Number(Common.getHistoryScore());
         this.bestScoreCom.setString(this.scoreNum>historyScore ? this.scoreNum+"" : historyScore+"");
+
+        var act1 = cc.scaleTo(0.4,1.05);
+        var act2 = cc.scaleTo(0.4,0.95);
+        this.sumShareBtn.runAction(cc.repeatForever(cc.sequence(act1,act2)));
         
         Common.checkScoreAndSave(this.scoreNum);
 
@@ -585,7 +664,7 @@ cc.Class({
             return;   
         }
 
-        if(countValue>nextAchData.value) {
+        if(countValue>=nextAchData.value) {
             this._reachNewAch(countKey, nextAchData.index);
         }
     },
@@ -761,5 +840,65 @@ cc.Class({
 
         var curGold = Common.getDataCount(ParamConst.countKeyXGold);
         this.coinNumTxt.string = curGold;
+    },
+
+    _showItemShop:function() {
+        this.shopList.removeAllChildren();
+
+        var dataArr = [];
+        this.shop.item.forEach(element => {
+            var data = {};
+            data.type = "item",
+            data.cfg = element;
+            dataArr[dataArr.length] = data;
+        });
+
+        var dataArrLen = dataArr.length;
+
+        var goodsItemPrefab = Singleton.PrefabLoader.getRes(Res.PREFAB_GOODS_ITEM_PATH);
+        for (let index = 0; index < dataArrLen; index++) {
+            var prefabNode = cc.instantiate(goodsItemPrefab);
+            var prefabCom = prefabNode.getComponent("GoodsItem");
+            this.shopList.addChild(prefabNode);
+            prefabCom.setData(dataArr[index]);
+        }
+
+        var curGold = Common.getDataCount(ParamConst.countKeyXGold);
+        this.coinNumTxt.string = curGold;
+    },
+
+    _addBuff:function(buffType) {
+        this.buffList[this.buffList.length] = buffType;
+    },
+
+    _removeBuff:function(buffType) {
+        var newBuffArr = [];
+        this.buffList.forEach(element => {
+            if(element!=buffType) {
+                var leftBuff = element;
+                newBuffArr[newBuffArr.length] = leftBuff;
+            }
+        });
+        this.buffList = newBuffArr;
+    },
+
+    _checkHasBuff:function(buffType) {
+        this.buffList.forEach(element => {
+            if(element==buffType) {
+                return true;
+            }
+        });
+        return false;
+    },
+
+    _showGameItem:function() {
+        this.gameItemContainer.removeAllChildren();
+        var gameItemPrefab = Singleton.PrefabLoader.getRes(Res.PREFAB_GAME_ITEM_PATH);
+        this.shop.item.forEach(element => {
+            var prefabNode = cc.instantiate(gameItemPrefab);
+            var prefabCom = prefabNode.getComponent("GameItem");
+            prefabCom.setData(element);
+            this.gameItemContainer.addChild(prefabNode);
+        });
     }
 });

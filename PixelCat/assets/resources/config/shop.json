@@ -4,6 +4,7 @@
             "key":"cat_pix",
             "name":"像素猫",
             "framePre":"cat",
+            "frameSpeed":"10",
             "desc":"一看就是标准主角样子",
             "effect":"特殊效果：无",
             "price":0
@@ -12,6 +13,7 @@
             "key":"cat_white",
             "name":"小白",
             "framePre":"cat_white",
+            "frameSpeed":"4",
             "desc":"或者称呼为大白更合适",
             "effect":"特殊效果：无",
             "price":1000
@@ -20,12 +22,28 @@
             "key":"cat_fish",
             "name":"美人猫",
             "framePre":"cat_fish",
+            "frameSpeed":"7",
             "desc":"看着就很吸引人...吗",
             "effect":"特殊效果：无",
-            "price":1000
+            "price":1
         }
     ],
     "item": [
-
+        {
+            "key":"item_magnet",
+            "name":"磁铁",
+            "framePre":"item_mag",
+            "desc":"看着就很吸引人...吗",
+            "effect":"特殊效果：无",
+            "price":100
+        },
+        {
+            "key":"item_shield",
+            "name":"护盾",
+            "framePre":"item_shield",
+            "desc":"看着就很吸引人...吗",
+            "effect":"特殊效果：无",
+            "price":100
+        }
     ]
 }
