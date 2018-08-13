@@ -28,14 +28,15 @@
     "commboNum": {
         "note": "连续吃币",
         "detail": [
-            {"note":"首次连续吃到5个金币", "value":5, "reward":1},
-            {"note":"首次连续吃到10个金币", "value":10, "reward":5},
-            {"note":"首次连续吃到20个金币", "value":20, "reward":10},
-            {"note":"首次连续吃到30个金币", "value":30, "reward":15},
-            {"note":"首次连续吃到50个金币", "value":50, "reward":20},
-            {"note":"首次连续吃到100个金币", "value":100, "reward":30},
-            {"note":"首次连续吃到150个金币", "value":150, "reward":50},
-            {"note":"首次连续吃到200个金币", "value":200, "reward":100}
+            {"note":"首次连续获得5个金币", "value":5, "reward":1},
+            {"note":"首次连续获得10个金币", "value":10, "reward":5},
+            {"note":"首次连续获得20个金币", "value":20, "reward":10},
+            {"note":"首次连续获得30个金币", "value":30, "reward":15},
+            {"note":"首次连续获得50个金币", "value":50, "reward":20},
+            {"note":"首次连续获得100个金币", "value":100, "reward":30},
+            {"note":"首次连续获得150个金币", "value":150, "reward":50},
+            {"note":"首次连续获得200个金币", "value":200, "reward":100},
+            {"note":"首次连续获得500个金币", "value":500, "reward":500}
         ]
     },
     "totalScore": {
@@ -70,29 +71,35 @@
             {"note":"累计获得90000分", "value":90000, "reward":20},
             {"note":"累计获得95000分", "value":95000, "reward":20},
             {"note":"累计获得100000分", "value":100000, "reward":20},
+            {"note":"累计获得300000分", "value":300000, "reward":20},
+            {"note":"累计获得500000分", "value":500000, "reward":20},
+            {"note":"累计获得700000分", "value":700000, "reward":20},
+            {"note":"累计获得900000分", "value":900000, "reward":20},
             {"note":"累计获得999999分", "value":999999, "reward":500}
         ]
     },
     "totalCoin": {
         "note": "累计金币",
         "detail": [
-            {"note":"累计吃了10个金币", "value":10, "reward":1},
-            {"note":"累计吃了100个金币", "value":100, "reward":10},
-            {"note":"累计吃了200个金币", "value":200, "reward":10},
-            {"note":"累计吃了300个金币", "value":300, "reward":10},
-            {"note":"累计吃了400个金币", "value":400, "reward":10},
-            {"note":"累计吃了500个金币", "value":500, "reward":10},
-            {"note":"累计吃了600个金币", "value":600, "reward":10},
-            {"note":"累计吃了700个金币", "value":700, "reward":10},
-            {"note":"累计吃了800个金币", "value":800, "reward":10},
-            {"note":"累计吃了900个金币", "value":900, "reward":10},
-            {"note":"累计吃了1000个金币", "value":1000, "reward":10},
-            {"note":"累计吃了1100个金币", "value":1100, "reward":10},
-            {"note":"累计吃了1200个金币", "value":1200, "reward":10},
-            {"note":"累计吃了1300个金币", "value":1300, "reward":10},
-            {"note":"累计吃了1400个金币", "value":1400, "reward":10},
-            {"note":"累计吃了1500个金币", "value":1500, "reward":10},
-            {"note":"累计吃了9999个金币", "value":9999, "reward":500}
+            {"note":"累计获得10个金币", "value":10, "reward":1},
+            {"note":"累计获得100个金币", "value":100, "reward":10},
+            {"note":"累计获得200个金币", "value":200, "reward":10},
+            {"note":"累计获得300个金币", "value":300, "reward":10},
+            {"note":"累计获得400个金币", "value":400, "reward":10},
+            {"note":"累计获得500个金币", "value":500, "reward":10},
+            {"note":"累计获得600个金币", "value":600, "reward":10},
+            {"note":"累计获得700个金币", "value":700, "reward":10},
+            {"note":"累计获得800个金币", "value":800, "reward":10},
+            {"note":"累计获得900个金币", "value":900, "reward":10},
+            {"note":"累计获得1000个金币", "value":1000, "reward":10},
+            {"note":"累计获得1100个金币", "value":1100, "reward":10},
+            {"note":"累计获得1200个金币", "value":1200, "reward":10},
+            {"note":"累计获得1300个金币", "value":1300, "reward":10},
+            {"note":"累计获得1400个金币", "value":1400, "reward":10},
+            {"note":"累计获得1500个金币", "value":1500, "reward":10},
+            {"note":"累计获得5000个金币", "value":5000, "reward":10},
+            {"note":"累计获得7000个金币", "value":7000, "reward":10},
+            {"note":"累计获得9999个金币", "value":9999, "reward":500}
         ]
     },
     "share": {
