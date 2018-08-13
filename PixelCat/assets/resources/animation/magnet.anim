@@ -3,97 +3,309 @@
   "_name": "magnet",
   "_objFlags": 0,
   "_rawFiles": null,
-  "_duration": 0.3333333333333333,
+  "_duration": 0.6666666666666666,
   "sample": 60,
   "speed": 1,
   "wrapMode": "2",
   "curveData": {
     "paths": {
-      "magnet_ani1": {
+      "magnet_ani1_1": {
         "props": {
           "position": [
             {
               "frame": 0,
               "value": [
-                0,
-                0
+                58.2,
+                50.2
               ]
             },
             {
-              "frame": 0.3333333333333333,
-              "value": [
-                134,
-                77
-              ]
-            }
-          ],
-          "opacity": [
-            {
-              "frame": 0.21666666666666667,
-              "value": 255
-            },
-            {
-              "frame": 0.3333333333333333,
-              "value": 0
-            }
-          ]
-        }
-      },
-      "magnet_ani2": {
-        "props": {
-          "position": [
-            {
-              "frame": 0,
+              "frame": 0.6666666666666666,
               "value": [
                 0,
-                0
-              ]
-            },
-            {
-              "frame": 0.3333333333333333,
-              "value": [
-                148,
                 0
               ]
             }
           ],
           "opacity": [
             {
-              "frame": 0.21666666666666667,
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 0.08333333333333333,
               "value": 255
             },
             {
-              "frame": 0.3333333333333333,
+              "frame": 0.4,
+              "value": 255
+            },
+            {
+              "frame": 0.5666666666666667,
               "value": 0
             }
           ]
         }
       },
-      "magnet_ani3": {
+      "magnet_ani1_2": {
         "props": {
           "position": [
             {
               "frame": 0,
               "value": [
-                0,
-                0
+                -27.3,
+                99.3
               ]
             },
             {
-              "frame": 0.3333333333333333,
+              "frame": 0.6666666666666666,
+              "value": [
+                0,
+                0
+              ]
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 0.13333333333333333,
+              "value": 255
+            },
+            {
+              "frame": 0.5,
+              "value": 255
+            },
+            {
+              "frame": 0.6666666666666666,
+              "value": 0
+            }
+          ]
+        }
+      },
+      "magnet_ani1_3": {
+        "props": {
+          "position": [
+            {
+              "frame": 0,
+              "value": [
+                -73,
+                -54
+              ],
+              "curve": "circInOut"
+            },
+            {
+              "frame": 0.6666666666666666,
+              "value": [
+                0,
+                0
+              ]
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 0.18333333333333332,
+              "value": 255
+            },
+            {
+              "frame": 0.6,
+              "value": 255
+            },
+            {
+              "frame": 0.6666666666666666,
+              "value": 0
+            }
+          ]
+        }
+      },
+      "magnet_ani1_4": {
+        "props": {
+          "position": [
+            {
+              "frame": 0,
+              "value": [
+                69,
+                -57
+              ],
+              "curve": "quadInOut"
+            },
+            {
+              "frame": 0.6666666666666666,
+              "value": [
+                0,
+                0
+              ]
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 0.21666666666666667,
+              "value": 255
+            },
+            {
+              "frame": 0.6666666666666666,
+              "value": 0
+            }
+          ]
+        }
+      },
+      "magnet_ani1_5": {
+        "props": {
+          "position": [
+            {
+              "frame": 0,
+              "value": [
+                -4,
+                -109
+              ]
+            },
+            {
+              "frame": 0.6666666666666666,
+              "value": [
+                0,
+                0
+              ]
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 0.15,
+              "value": 255
+            },
+            {
+              "frame": 0.5833333333333334,
+              "value": 255
+            },
+            {
+              "frame": 0.6666666666666666,
+              "value": 0
+            }
+          ]
+        }
+      },
+      "magnet_ani2_1": {
+        "props": {
+          "position": [
+            {
+              "frame": 0,
               "value": [
                 112,
-                -65
+                43
+              ]
+            },
+            {
+              "frame": 0.6666666666666666,
+              "value": [
+                0,
+                0
               ]
             }
           ],
           "opacity": [
             {
-              "frame": 0.21666666666666667,
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 0.15,
               "value": 255
             },
             {
-              "frame": 0.3333333333333333,
+              "frame": 0.45,
+              "value": 255
+            },
+            {
+              "frame": 0.6666666666666666,
+              "value": 0
+            }
+          ]
+        }
+      },
+      "magnet_ani2_2": {
+        "props": {
+          "position": [
+            {
+              "frame": 0,
+              "value": [
+                -126,
+                37
+              ]
+            },
+            {
+              "frame": 0.6666666666666666,
+              "value": [
+                0,
+                0
+              ]
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 0.13333333333333333,
+              "value": 255
+            },
+            {
+              "frame": 0.5,
+              "value": 255
+            },
+            {
+              "frame": 0.6666666666666666,
+              "value": 0
+            }
+          ]
+        }
+      },
+      "magnet_ani2_3": {
+        "props": {
+          "position": [
+            {
+              "frame": 0,
+              "value": [
+                -79,
+                -82
+              ]
+            },
+            {
+              "frame": 0.6666666666666666,
+              "value": [
+                0,
+                0
+              ]
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 0.16666666666666666,
+              "value": 255
+            },
+            {
+              "frame": 0.5,
+              "value": 255
+            },
+            {
+              "frame": 0.6666666666666666,
               "value": 0
             }
           ]
