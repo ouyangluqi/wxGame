@@ -112,11 +112,11 @@ var Common = cc.Class({
         _initItem:function(key,defaultValue) {
             var value = cc.sys.localStorage.getItem(key);
             if(value == null || value == "") {
-                //Log.logD("==store== value is null" + key + "==" + value)
+                Log.logD("==store== value is null" + key + "==" + value)
                 cc.sys.localStorage.setItem(key, defaultValue+"");
             }
             else {
-                //Log.logD("==store== value is not null" + key + " " + value);
+                Log.logD("==store== value is not null" + key + " " + value);
             }
         },
 
