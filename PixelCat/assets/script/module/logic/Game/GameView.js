@@ -218,6 +218,14 @@ cc.Class({
             default: null,
             type: cc.Node
         },
+        tipNode: {
+            default: null,
+            type: cc.Node
+        },
+        tipStr: {
+            default: null,
+            type: cc.Label
+        }
     },
 
     onLoad () {
@@ -407,14 +415,17 @@ cc.Class({
             storeNum = storeNum + 1;
             Common.setDataCount(this.buyCfg.key,storeNum);
             Common.setDataCount(ParamConst.countKeyXGold, (coinNum-price));
-        }
-        if(this.curShopType=="Role") {
-            this.catCom.framePre = this.buyCfg.framePre;
-            this.catCom.speed = this.buyCfg.frameSpeed;
-            Common.setDataCount(ParamConst.countKeyRoleSkin, this.buyCfg.framePre);
-            this._showRoleShop();
-        } else if (this.curShopType=="Item") {
-            this._showItemShop();
+
+            if(this.curShopType=="Role") {
+                this.catCom.framePre = this.buyCfg.framePre;
+                this.catCom.speed = this.buyCfg.frameSpeed;
+                Common.setDataCount(ParamConst.countKeyRoleSkin, this.buyCfg.framePre);
+                this._showRoleShop();
+            } else if (this.curShopType=="Item") {
+                this._showItemShop();
+            }
+        } else {
+            this._showTip("货币不足");
         }
     },  
 
@@ -1043,5 +1054,13 @@ cc.Class({
                 this.adAlert.active = false;
             }
         }.bind(this),1000);
+    },
+
+    _showTip:function(str) {
+        this.tipNode.stopAllActions();
+        this.tipNode.opacity = 255;
+        this.tipNode.active = true;
+        this.tipStr.string = str;
+        this.tipNode.runAction(cc.sequence(cc.delayTime(0.8), cc.fadeOut(0.5)));
     }
 });
