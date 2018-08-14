@@ -102,6 +102,7 @@ cc.Class({
         Singleton.RawAssetLoader.addRes(Res.CONFIG_STAGE_PATH)
         Singleton.RawAssetLoader.addRes(Res.COFING_ACH_PATH)
         Singleton.RawAssetLoader.addRes(Res.COFING_SHOP_PATH)
+        Singleton.RawAssetLoader.addRes(Res.COFING_SHARE_PATH)
         Singleton.RawAssetLoader.startLoad(false, this._completeLoadRawAssetHandler.bind(this))
     },
 
@@ -124,6 +125,7 @@ cc.Class({
         Singleton.Config.initStage(Singleton.RawAssetLoader.getRes(Res.CONFIG_STAGE_PATH))
         Singleton.Config.initAch(Singleton.RawAssetLoader.getRes(Res.COFING_ACH_PATH))
         Singleton.Config.initShop(Singleton.RawAssetLoader.getRes(Res.COFING_SHOP_PATH))
+        Singleton.Config.initShare(Singleton.RawAssetLoader.getRes(Res.COFING_SHARE_PATH));
 
         this._checkAllLoadComplete()
     },

@@ -21,6 +21,14 @@ var Common = cc.Class({
             })
         },
 
+        _showPreview:function(viewUrlArr) {
+            if(CC_WECHATGAME) {
+                wx.previewImage({
+                    urls: [viewUrlArr]
+                })
+            }
+        },
+
         getHistoryScore:function () {
             Log.logD("getHistroyScore")
             var result = cc.sys.localStorage.getItem(ParamConst.wxKey);
