@@ -39,7 +39,7 @@
         },
         {
             "key":"item_shield",
-            "name":"护盾",
+            "name":"春哥盾",
             "framePre":"item_shield",
             "desc":"春哥盾",
             "effect":"效果：开局获得护盾，可以原地复活一次",
