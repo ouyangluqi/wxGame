@@ -19,23 +19,23 @@
     "portrait": false,
     "upsideDown": false
   },
-  "packageName": "org.cocos2d.PixelDog",
+  "packageName": "org.cocos2d.PixelDog_OpenData",
   "privateKey": "",
   "qqplay": {
     "REMOTE_SERVER_ROOT": "",
     "orientation": "portrait"
   },
-  "renderMode": "0",
-  "startScene": "",
-  "title": "PixelDog",
+  "renderMode": "1",
+  "startScene": "549b2f9b-b176-4bda-b002-c59acbc80872",
+  "title": "PixelDog_OpenData",
   "webOrientation": "auto",
   "wechatgame": {
     "REMOTE_SERVER_ROOT": "",
-    "appid": "wxafeb0b81d1a398b4",
-    "isSubdomain": false,
+    "appid": "wx6ac3f5090a6b99c5",
+    "isSubdomain": true,
     "orientation": "portrait",
     "subContext": ""
   },
-  "xxteaKey": "66060f89-e5e8-4c",
+  "xxteaKey": "cb16dc22-3981-49",
   "zipCompressJs": true
 }
