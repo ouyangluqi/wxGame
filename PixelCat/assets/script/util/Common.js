@@ -95,7 +95,7 @@ var Common = cc.Class({
 
             Common._initItem(ParamConst.countKeyRoleSkin,"cat");
 
-            Common._initItem(ParamConst.countKeyXGold, 10000);
+            Common._initItem(ParamConst.countKeyXGold, 0);
 
             Common._initItem(ParamConst.countKeyMagnet, 1);
             Common._initItem(ParamConst.countKeyShield, 1);
