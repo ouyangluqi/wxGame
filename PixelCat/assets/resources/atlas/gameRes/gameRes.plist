@@ -20,7 +20,7 @@
             <key>achievement_PB.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{948,426},{42,41}}</string>
+                <string>{{971,2},{42,41}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -189,7 +189,7 @@
             <key>fish_1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{961,469},{66,33}}</string>
+                <string>{{961,546},{66,33}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -202,11 +202,11 @@
             <key>fish_2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{273,569},{66,33}}</string>
+                <string>{{961,478},{66,33}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{66,33}}</string>
                 <key>sourceSize</key>
@@ -215,7 +215,7 @@
             <key>fish_3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{906,2},{66,33}}</string>
+                <string>{{273,569},{66,33}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -302,6 +302,45 @@
                 <string>{{0,0},{657,197}}</string>
                 <key>sourceSize</key>
                 <string>{657,197}</string>
+            </dict>
+            <key>magnet_ani.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{906,2},{63,37}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{63,37}}</string>
+                <key>sourceSize</key>
+                <string>{63,37}</string>
+            </dict>
+            <key>magnet_ani1.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,608},{5,40}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{5,40}}</string>
+                <key>sourceSize</key>
+                <string>{5,40}</string>
+            </dict>
+            <key>magnet_ani2.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{643,201},{5,5}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{5,5}}</string>
+                <key>sourceSize</key>
+                <string>{5,5}</string>
             </dict>
             <key>main.png</key>
             <dict>
@@ -407,6 +446,19 @@
                 <key>sourceSize</key>
                 <string>{180,100}</string>
             </dict>
+            <key>shield_ani.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{948,426},{50,50}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{50,50}}</string>
+                <key>sourceSize</key>
+                <string>{50,50}</string>
+            </dict>
             <key>shopItem.png</key>
             <dict>
                 <key>frame</key>
@@ -508,7 +560,7 @@
             <key>size</key>
             <string>{1015,618}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:d6757432bf8f3f5119840599bb1b07d9$</string>
+            <string>$TexturePacker:SmartUpdate:660716d08c7e4177fdb5022df0f96e12$</string>
             <key>textureFileName</key>
             <string>gameRes.png</string>
         </dict>
