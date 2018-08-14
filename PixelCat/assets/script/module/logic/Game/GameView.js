@@ -74,6 +74,10 @@ cc.Class({
             default: null,
             type: cc.Node
         },
+        xingBiTxt: {
+            default: null,
+            type: cc.Node
+        },
         sumRankBtn: {
             default: null,
             type: cc.Node
@@ -197,7 +201,23 @@ cc.Class({
         shieldEff: {
             default: null,
             type: cc.Node
-        }
+        },
+        adAlert: {
+            default: null,
+            type: cc.Node
+        },
+        adCancelBtn: {
+            default: null,
+            type: cc.Node
+        },
+        adGotoBtn: {
+            default: null,
+            type: cc.Node
+        },
+        adLeftTimeBtn: {
+            default: null,
+            type: cc.Node
+        },
     },
 
     onLoad () {
@@ -226,6 +246,8 @@ cc.Class({
         this.gameScoreCom = this.scoreTxt.getComponent("ImageLabel");
         this.curScoreCom = this.curScoreTxt.getComponent("ImageLabel");
         this.bestScoreCom = this.bestScoreTxt.getComponent("ImageLabel");
+        this.adLeftTimeCom = this.adLeftTimeBtn.getComponent("ImageLabel");
+        this.xingBiCom = this.xingBiTxt.getComponent("ImageLabel");
         this.rankViewCom = this.rankViewNode.getComponent("RankView");
         this.commboTxt = this.commboTxtNode.getComponent("ImageLabel");
         this.catCom = this.catNode.getComponent("FrameAnimation");
@@ -235,6 +257,7 @@ cc.Class({
         this.cfg = Singleton.Config.stage;
         this.ach = Singleton.Config.ach;
         this.shop = Singleton.Config.shop;
+        this.share = Singleton.Config.share;
 
         this.isCatDie = false;
         this.startTag = false;
@@ -254,6 +277,8 @@ cc.Class({
         this.catCom.speed = skinSpeed;
         this.buffList = [];
         this.magnetLoopKey = -1;
+        this.skinLoopKey = -1;
+        this.adLeftKey = -1;
     },
 
     _initScene:function() {
@@ -288,6 +313,8 @@ cc.Class({
         this.alertCancelBtn.on('click',this._onAlertCancelBtnClick, this);
         this.roleShopBtn.on('click',this._onRoleShopBtnClick, this);
         this.itemShopBtn.on('click',this._onItemShopBtnClick, this);
+        this.adCancelBtn.on('click',this._onAdCancelBtnClick, this);
+        this.adGotoBtn.on('click',this._onAdGotoBtnClick, this);
 
 
         this.node.on("stoneOut",this._onStoneOut, this);
@@ -300,6 +327,18 @@ cc.Class({
         this.node.on("removeBuff",this._removeBuffCallBack, this);
         this.node.on("useShield",this._useShield,this);
         this.node.on("showItemShopByGameItem",this._showItemShopByGameItem,this)
+    },
+
+    _onAdCancelBtnClick:function() {
+        if(this.adLeftKey!=-1) {
+            clearInterval(this.adLeftKey);
+            this.adLeftKey = -1;
+            this.adAlert.active = false;
+        }
+    },
+
+    _onAdGotoBtnClick:function() {
+
     },
 
     _showItemShopByGameItem:function() {
@@ -370,6 +409,9 @@ cc.Class({
             Common.setDataCount(ParamConst.countKeyXGold, (coinNum-price));
         }
         if(this.curShopType=="Role") {
+            this.catCom.framePre = this.buyCfg.framePre;
+            this.catCom.speed = this.buyCfg.frameSpeed;
+            Common.setDataCount(ParamConst.countKeyRoleSkin, this.buyCfg.framePre);
             this._showRoleShop();
         } else if (this.curShopType=="Item") {
             this._showItemShop();
@@ -546,10 +588,28 @@ cc.Class({
             } else if (element==ParamConst.buffItemShield) {
                 this.shieldEff.active = true;
                 Global.itemShieldTag = true;
-            } else if (element==ParamConst.buffForeverMagnet) {
-
             }
         });
+        var skin = Common.getDataCountStr(ParamConst.countKeyRoleSkin);
+        if(skin=="cat_fish") {
+            this.magentEff.active = true;
+            Global.itemMagnetTag = true;
+            var self = this;
+            this.magnetLoopKey = setTimeout(function() {
+                self.magnetLoopKey = -1;
+                Global.itemMagnetTag = false;
+                this.magentEff.active = false;
+            }.bind(this),30000);
+            this.skinLoopKey = setInterval(function() {
+                self.magentEff.active = true;
+                Global.itemMagnetTag = true;
+                self.magnetLoopKey = setTimeout(function() {
+                    self.magnetLoopKey = -1;
+                    Global.itemMagnetTag = false;
+                    self.magentEff.active = false;
+                }.bind(self),30000);
+            }.bind(this),60000);
+        }
     },
 
     _onRankBtnClick:function(event) {
@@ -618,6 +678,10 @@ cc.Class({
             this.magnetLoopKey = -1;
             this.magentEff.active = false;
         }
+        if(this.skinLoopKey!=-1) {
+            clearInterval(this.skinLoopKey);
+            this.skinLoopKey = -1;
+        }
     },
 
     _showSumView:function() {
@@ -647,10 +711,15 @@ cc.Class({
             var getGold = 1;
             var storeGold = Common.getDataCount(ParamConst.countKeyXGold);
             getGold = getGold + Math.round(this.scoreNum/100);
+            this.xingBiCom.setString(getGold+"");
             getGold = getGold + storeGold;
 
             Common.setDataCount(ParamConst.countKeyXGold, getGold);
+        } else {
+            this.xingBiCom.setString("0");
         }
+
+        //this._showAdAlert();
     },
 
     _showRankView:function() {
@@ -660,9 +729,12 @@ cc.Class({
 
     _shareToFriend:function() {
         if (CC_WECHATGAME) {
+            var cfg = this.share.wxshare;
+            var indexValue = Random.getRandom(1,cfg.length);
+
             wx.shareAppMessage({
-                title: "上上下下左右左右BABA！你还记得这串代码么？",
-                imageUrl: "https://shxingwan-down.oss-cn-shenzhen.aliyuncs.com/wechatGame/cocosGameRes/PixelCat/share/miniGame_share_imge.jpg",
+                title: cfg[indexValue].title,
+                imageUrl: cfg[indexValue].imageUrl,
             })
         }
         this._countDataAndCheckAch(ParamConst.countKeyShare, 1);
@@ -954,5 +1026,22 @@ cc.Class({
             prefabCom.setData(element);
             this.gameItemContainer.addChild(prefabNode);
         });
+    },
+
+    _showAdAlert:function() {
+        this.adAlert.active = true;
+        var leftTime = 10;
+        var self = this;
+        this.adLeftTimeCom.setString(leftTime+"");
+        this.adLeftKey = setInterval(function() {
+            leftTime = leftTime - 1;
+            if(leftTime>=0) {
+                this.adLeftTimeCom.setString(leftTime+"");            
+            } else {
+                clearInterval(this.adLeftKey);
+                this.adLeftKey = -1;
+                this.adAlert.active = false;
+            }
+        }.bind(this),1000);
     }
 });

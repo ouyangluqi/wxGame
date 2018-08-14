@@ -21,6 +21,14 @@ var Common = cc.Class({
             })
         },
 
+        _showPreview:function(viewUrlArr) {
+            if(CC_WECHATGAME) {
+                wx.previewImage({
+                    urls: [viewUrlArr]
+                })
+            }
+        },
+
         getHistoryScore:function () {
             Log.logD("getHistroyScore")
             var result = cc.sys.localStorage.getItem(ParamConst.wxKey);
@@ -95,7 +103,7 @@ var Common = cc.Class({
 
             Common._initItem(ParamConst.countKeyRoleSkin,"cat");
 
-            Common._initItem(ParamConst.countKeyXGold, 10000);
+            Common._initItem(ParamConst.countKeyXGold, 0);
 
             Common._initItem(ParamConst.countKeyMagnet, 1);
             Common._initItem(ParamConst.countKeyShield, 1);

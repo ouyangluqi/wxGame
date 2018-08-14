@@ -56,15 +56,16 @@ cc.Class({
 
             this.hasSendMsg = true;
         }
-        if(this.node.x<-810){
-            this.reset();
-        }
+        // if(this.node.x<-810){
+        //     this.reset();
+        // }
         if(this.node.x<=-650) {
             this.goldCom.magnetTag = true;
         }
     },
 
     addStoneWithHole:function(holeNum) {
+        this.reset();
         var stoneNum = 24 - holeNum;
         var topStoneNum = Random.getRandom(this.cfg.stoneMinHeight.value,stoneNum-this.cfg.stoneMinHeight.value);
         var bommtonStoneNum = stoneNum - topStoneNum;

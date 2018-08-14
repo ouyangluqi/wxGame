@@ -3,6 +3,7 @@ var Config = cc.Class({
        this.stage = null
        this.ach = null
        this.shop = null
+       this.share = null
     },
 
     initStage: function (cfg) {
@@ -15,6 +16,10 @@ var Config = cc.Class({
 
     initShop:function (cfg) {
         this.shop = cfg
+    },
+
+    initShare:function (cfg) {
+        this.share = cfg
     },
 
     statics: {

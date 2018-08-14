@@ -11,6 +11,7 @@ var Res = cc.Class({
         CONFIG_STAGE_PATH: "config/stage",
         COFING_ACH_PATH: "config/ach",
         COFING_SHOP_PATH:"config/shop",
+        COFING_SHARE_PATH:"config/share",
 
         // prefab
         PREFAB_GAME_VIEW_PATH: "prefab/gameView",
