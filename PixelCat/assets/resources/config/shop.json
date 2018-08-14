@@ -15,7 +15,7 @@
             "framePre":"cat_white",
             "frameSpeed":"4",
             "desc":"或者称呼为大白更合适",
-            "effect":"特殊效果：无",
+            "effect":"特殊效果：无 第二天登录免费赠送",
             "price":1000
         },
         {
@@ -24,26 +24,26 @@
             "framePre":"cat_fish",
             "frameSpeed":"7",
             "desc":"看着就很吸引人...吗",
-            "effect":"特殊效果：无",
-            "price":1
+            "effect":"特殊效果：每分钟自动获取一个超级磁铁",
+            "price":2333
         }
     ],
     "item": [
         {
             "key":"item_magnet",
-            "name":"磁铁",
+            "name":"超级磁铁",
             "framePre":"item_mag",
-            "desc":"看着就很吸引人...吗",
-            "effect":"特殊效果：无",
-            "price":100
+            "desc":"开局前30秒自动吸取金币",
+            "effect":"效果：开局前30秒自动吸取金币",
+            "price":50
         },
         {
             "key":"item_shield",
             "name":"护盾",
             "framePre":"item_shield",
-            "desc":"看着就很吸引人...吗",
-            "effect":"特殊效果：无",
-            "price":100
+            "desc":"春哥盾",
+            "effect":"效果：开局获得护盾，可以原地复活一次",
+            "price":50
         }
     ]
 }
