@@ -27,12 +27,26 @@ cc.Class({
             return;
         }
         this.node.y -= this.gv*this.dt;
+        if(Math.abs(this.node.y)>=780) {
+            if(!this.catDie) {
+                var eventParam = new cc.Event.EventCustom("catDie",true);
+                this.node.dispatchEvent(eventParam);
+                this.showDieAnimation();
+            }
+            this.catDie = true;
+        }
     },
 
     onCollisionEnter: function (other) {
         if(other.name.indexOf("gold")!=-1) {
             
         } else {
+            if(Global.itemShieldTag) {
+                Global.itemShieldTag = false;
+                var eventParam = new cc.Event.EventCustom("useShield",true);
+                this.node.dispatchEvent(eventParam);
+                return;
+            }
             if(!this.catDie) {
                 var eventParam = new cc.Event.EventCustom("catDie",true);
                 this.node.dispatchEvent(eventParam);

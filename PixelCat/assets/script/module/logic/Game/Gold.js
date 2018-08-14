@@ -28,11 +28,12 @@ cc.Class({
     },
 
     update (dt) {
-        if(this.magnetTag && !this.collectTag) {
+        if(Global.itemMagnetTag && this.magnetTag && !this.collectTag) {
             var act = cc.moveTo(0.1,675,this.catNode.y);
             this.node.runAction(act);
         }
     },
+
     onCollisionEnter: function (other) {
         if(other.name.indexOf("cat")!=-1) {
             this.boxC.enabled = false;

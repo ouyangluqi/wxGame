@@ -53,6 +53,9 @@ cc.Class({
                 eventData["buffType"] = this.cfg.key;
                 eventParam.setUserData(eventData);
                 this.node.dispatchEvent(eventParam);
+            } else {
+                var eventParam = new cc.Event.EventCustom("showItemShopByGameItem",true);
+                this.node.dispatchEvent(eventParam);
             }
         } else {
             this.chooseTag = !this.chooseTag;
