@@ -12,10 +12,6 @@ cc.Class({
             default: null,
             type: cc.Label
         },
-        itemDescTxt: {
-            default: null,
-            type: cc.Label
-        },
         itemEffTxt: {
             default: null,
             type: cc.Label
@@ -78,7 +74,6 @@ cc.Class({
         cc.loader.loadRes("atlas/gameRes/gameRes", cc.SpriteAtlas, function(err, atlas) {
             self.itemImage.spriteFrame = atlas.getSpriteFrame(cfg.framePre);
         });
-        this.itemDescTxt.string = cfg.desc;
         this.itemEffTxt.string = cfg.effect;
         this.itemNameTxt.string = cfg.name;
 
