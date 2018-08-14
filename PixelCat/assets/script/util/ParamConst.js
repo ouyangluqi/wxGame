@@ -30,8 +30,8 @@ var ParamConst = cc.Class({
         achIndexShare: "shareIndex",
 
 
-        buffItemMagnet:"buffItemMagnet",
-        buffItemShield:"buffItemShield",
-        buffForeverMagnet:"buffForeverMagnet",
+        buffItemMagnet:"item_magnet",
+        buffItemShield:"item_shield",
+        buffForeverMagnet:"skin_magnet",
     }
 })

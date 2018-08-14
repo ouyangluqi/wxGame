@@ -201,7 +201,11 @@ cc.Class({
     },
 
     onLoad () {
-
+        window.Global = {
+            itemMagnetTag: false,
+            itemShieldTag: false,
+            skinMagnetTag: false,
+        };
     },
 
     start () {
@@ -249,6 +253,7 @@ cc.Class({
         this.catCom.framePre = catSkin;
         this.catCom.speed = skinSpeed;
         this.buffList = [];
+        this.magnetLoopKey = -1;
     },
 
     _initScene:function() {
@@ -293,6 +298,12 @@ cc.Class({
         this.node.on("buyItem",this._buyItem, this);
         this.node.on("addBuff",this._addBuffCallBack, this);
         this.node.on("removeBuff",this._removeBuffCallBack, this);
+        this.node.on("useShield",this._useShield,this);
+    },
+
+    _useShield:function() {
+        Global.itemShieldTag = false;
+        this.shieldEff.active = false;
     },
 
     _addBuffCallBack:function(event) {
@@ -356,17 +367,7 @@ cc.Class({
 
     _onSumHomeBtnClick:function(event) {
         this.sumView.active = false;
-        this.isCatDie = false;
-        this.startTag = false;
-        this.catComponent.startTag = false;
-        this.scoreNum = 0;
-        this.commboNum = 0;
-        this.commboTag = 0;
-        this.commboTxtNode.opacity = 0;
-        this.gameScoreCom.setString("");
-        this.catComponent.reset();
-        this.stoneNodeCom1.restartSet();
-        this.stoneNodeCom2.reset();
+        this._reset();
         this.startView.active = true;
     },
 
@@ -503,11 +504,33 @@ cc.Class({
     },
 
     _startGame:function() {
+        this._checkBuff();
         this.gameScoreCom.setString("0");
         this.scoreTxt.active = true;
         this._onMainNodeClick();
         this.stoneNodeCom1.restartSet();
         this.stoneNodeCom1.addStoneWithHole(Random.getRandom(this.cfg.holeMinSize.value,this.cfg.holeMaxSize.value));
+    },
+
+    
+    _checkBuff:function() {
+        this.buffList.forEach(element => {
+            if(element==ParamConst.buffItemMagnet) {
+                this.magentEff.active = true;
+                Global.itemMagnetTag = true;
+                var self = this;
+                this.magnetLoopKey = setTimeout(function() {
+                    self.magnetLoopKey = -1;
+                    Global.itemMagnetTag = false;
+                    this.magentEff.active = false;
+                }.bind(this),30000);
+            } else if (element==ParamConst.buffItemShield) {
+                this.shieldEff.active = true;
+                Global.itemShieldTag = true;
+            } else if (element==ParamConst.buffForeverMagnet) {
+
+            }
+        });
     },
 
     _onRankBtnClick:function(event) {
@@ -549,7 +572,17 @@ cc.Class({
     },
 
     _restart:function() {
+        this._reset();
+        this._showGuideView();
+    },
+
+    _reset:function() {
         this.buffList = [];
+        Global.itemMagnetTag = false;
+        Global.itemShieldTag = false;
+        Global.skinMagnetTag = false;
+        this.magentEff.active = false;
+        this.shieldEff.active = false;
         this.isCatDie = false;
         this.startTag = false;
         this.scoreNum = 0;
@@ -560,10 +593,12 @@ cc.Class({
         this.catComponent.reset();
         this.stoneNodeCom1.restartSet();
         this.stoneNodeCom2.reset();
-        // this._onMainNodeClick();
-        // this.stoneNodeCom1.addStoneWithHole(Random.getRandom(this.cfg.holeMinSize.value,this.cfg.holeMaxSize.value));
         this.catComponent.startTag = false;
-        this._showGuideView();
+        if(this.magnetLoopKey!=-1) {
+            clearTimeout(this.magnetLoopKey);
+            this.magnetLoopKey = -1;
+            this.magentEff.active = false;
+        }
     },
 
     _showSumView:function() {

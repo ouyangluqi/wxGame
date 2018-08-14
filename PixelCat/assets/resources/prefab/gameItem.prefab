@@ -201,7 +201,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 102,
+      "width": 105,
       "height": 30
     },
     "_rotationX": 0,
@@ -233,8 +233,10 @@
     "_fontSize": 30,
     "_lineHeight": 30,
     "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "809e8461-2d34-4d73-875a-a3b8e2b2baa6"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
     "_N$string": "拥有:10",
     "_N$horizontalAlign": 1,

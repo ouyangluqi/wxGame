@@ -33,6 +33,16 @@ cc.Class({
         if(other.name.indexOf("gold")!=-1) {
             
         } else {
+            if(Global.itemShieldTag) {
+                Global.itemShieldTag = false;
+                cc.director.getCollisionManager().enabled = false;
+                var eventParam = new cc.Event.EventCustom("useShield",true);
+                this.node.dispatchEvent(eventParam);
+                setTimeout(function() {
+                    cc.director.getCollisionManager().enabled = true;
+                }.bind(this),600);
+                return;
+            }
             if(!this.catDie) {
                 var eventParam = new cc.Event.EventCustom("catDie",true);
                 this.node.dispatchEvent(eventParam);
