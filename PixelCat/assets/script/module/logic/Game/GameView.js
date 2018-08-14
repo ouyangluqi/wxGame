@@ -299,6 +299,12 @@ cc.Class({
         this.node.on("addBuff",this._addBuffCallBack, this);
         this.node.on("removeBuff",this._removeBuffCallBack, this);
         this.node.on("useShield",this._useShield,this);
+        this.node.on("showItemShopByGameItem",this._showItemShopByGameItem,this)
+    },
+
+    _showItemShopByGameItem:function() {
+        this.shopView.active = true;
+        this._onItemShopBtnClick();
     },
 
     _useShield:function() {
@@ -309,11 +315,21 @@ cc.Class({
     _addBuffCallBack:function(event) {
         var buffType = event.getUserData()["buffType"];
         this._addBuff(buffType);
+        if(buffType == ParamConst.buffItemMagnet) {
+            this.magentEff.active = true;
+        } else if (buffType == ParamConst.buffItemShield) {
+            this.shieldEff.active = true;
+        }
     },
 
     _removeBuffCallBack:function(event) {
         var buffType = event.getUserData()["buffType"];
         this._removeBuff(buffType);
+        if(buffType == ParamConst.buffItemMagnet) {
+            this.magentEff.active = false;
+        } else if (buffType == ParamConst.buffItemShield) {
+            this.shieldEff.active = false;
+        }
     },
 
     _onRoleShopBtnClick:function() {
@@ -396,6 +412,9 @@ cc.Class({
 
     _onShopBackBtnClick:function(event) {
         this.shopView.active = false;
+        if(this.guideView.active==true) {
+            this._showGameItem();
+        }
     },
 
     _buildGold:function(event) {

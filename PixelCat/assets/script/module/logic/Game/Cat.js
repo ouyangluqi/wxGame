@@ -27,6 +27,14 @@ cc.Class({
             return;
         }
         this.node.y -= this.gv*this.dt;
+        if(Math.abs(this.node.y)>=780) {
+            if(!this.catDie) {
+                var eventParam = new cc.Event.EventCustom("catDie",true);
+                this.node.dispatchEvent(eventParam);
+                this.showDieAnimation();
+            }
+            this.catDie = true;
+        }
     },
 
     onCollisionEnter: function (other) {
@@ -35,12 +43,8 @@ cc.Class({
         } else {
             if(Global.itemShieldTag) {
                 Global.itemShieldTag = false;
-                cc.director.getCollisionManager().enabled = false;
                 var eventParam = new cc.Event.EventCustom("useShield",true);
                 this.node.dispatchEvent(eventParam);
-                setTimeout(function() {
-                    cc.director.getCollisionManager().enabled = true;
-                }.bind(this),600);
                 return;
             }
             if(!this.catDie) {
