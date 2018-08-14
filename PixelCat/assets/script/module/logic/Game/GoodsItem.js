@@ -76,6 +76,7 @@ cc.Class({
         });
         this.itemEffTxt.string = cfg.effect;
         this.itemNameTxt.string = cfg.name;
+        this.coinTxt.string = cfg.price;
 
         var countNum = Common.getDataCount(cfg.key);
         this.hasNumTxt.string = "拥有:"+countNum;
