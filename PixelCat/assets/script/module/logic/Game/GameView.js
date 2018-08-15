@@ -632,7 +632,7 @@ cc.Class({
     },
 
     _onSumShareBtnClick:function(event) {
-        this._shareToFriend();
+        this._shareToFriend(this.share.wxshare.length-1);
     },
 
     _onSumRankBtnClick:function(event) {
@@ -738,10 +738,10 @@ cc.Class({
         this.rankViewCom.showRank();
     },
 
-    _shareToFriend:function() {
+    _shareToFriend:function(defaultIndex) {
         if (CC_WECHATGAME) {
             var cfg = this.share.wxshare;
-            var indexValue = Random.getRandom(1,cfg.length);
+            var indexValue = defaultIndex!=null ? defaultIndex : Random.getRandom(1,cfg.length);
 
             wx.shareAppMessage({
                 title: cfg[indexValue].title,
