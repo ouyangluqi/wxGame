@@ -160,6 +160,7 @@ cc.Class({
                             var midPos = 0;
                             if(data.length<4) {
                                 sumData = data;
+                                midPos = 1;
                             } else {
                                 var dataLen = data.length;
                                 var selfPos = 0;
