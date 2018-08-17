@@ -11,6 +11,7 @@ var RankView = cc.Class({
         this.backBtn.node.on(cc.Node.EventType.TOUCH_END, this._backClickHandler.bind(this))
 
         this.display = this.node.getChildByName("rankScrollViewSprite").getComponent(cc.Sprite)
+        // this.display.node.setContentSize(cc.director.getVisibleSize())
     },
 
     update(dt) {
@@ -31,6 +32,7 @@ var RankView = cc.Class({
             this.tex.initWithElement(sharedCanvas)
             this.tex.handleLoadedTexture()
             this.display.spriteFrame = new cc.SpriteFrame(this.tex)
+            this.display.node.setContentSize(cc.director.getVisibleSize())
         }
     },
 
