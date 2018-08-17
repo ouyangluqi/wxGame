@@ -193,7 +193,7 @@
             "timeLimit": 30,
             "initBullet": 25,
             "lvdai": [
-                {"lvdaiId":1,"speed": 5},
+                {"lvdaiId":1,"speed": 4},
                 {"lvdaiId":2,"speed": -5}
             ]
         },
@@ -254,7 +254,7 @@
             "initBullet": 25,
             "lvdai": [
                 {"lvdaiId":1,"speed": 5},
-                {"lvdaiId":2,"speed": -5}
+                {"lvdaiId":2,"speed": -6}
             ]
         },
         "19": {
@@ -268,7 +268,7 @@
             "timeLimit": 30,
             "initBullet": 25,
             "lvdai": [
-                {"lvdaiId":1,"speed": -5},
+                {"lvdaiId":1,"speed": -6},
                 {"lvdaiId":2,"speed": 5}
             ]
         },
@@ -283,8 +283,8 @@
             "timeLimit": 30,
             "initBullet": 25,
             "lvdai": [
-                {"lvdaiId":1,"speed": 6},
-                {"lvdaiId":2,"speed": -6}
+                {"lvdaiId":1,"speed": 7},
+                {"lvdaiId":2,"speed": -8}
             ]
         }
     }
