@@ -311,7 +311,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 714,
-      "height": 974
+      "height": 120
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -340,7 +340,7 @@
     "_layoutSize": {
       "__type__": "cc.Size",
       "width": 714,
-      "height": 974
+      "height": 120
     },
     "_resize": 1,
     "_N$layoutType": 2,
