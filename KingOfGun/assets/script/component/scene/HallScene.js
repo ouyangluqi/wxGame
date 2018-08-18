@@ -7,6 +7,20 @@ var HallScene = cc.Class({
     extends: cc.Component,
 
     onLoad: function() {
+        let _canvas = cc.Canvas.instance;
+        var windowSize = cc.director.getVisibleSize();
+        var dafaultPer = _canvas.designResolution.height / _canvas.designResolution.width
+        var sizePer = windowSize.height / windowSize.width
+        cc.log("dafaultPer" + dafaultPer + "windowSize.height" + windowSize.height + "windowSize.width" + windowSize.width)
+        if(sizePer > dafaultPer) {
+            _canvas.fitWidth = true
+            _canvas.fitHeight = false
+            cc.Canvas.height = windowSize.width * dafaultPer;
+        } else {
+            _canvas.fitWidth = false
+            _canvas.fitHeight = true
+        }
+        
         Log.logD("The HallScene is start")
         this._isPrefabComplete = false
         this._isSpriteAtlasComplete = false
