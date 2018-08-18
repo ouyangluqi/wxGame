@@ -22,12 +22,14 @@ var BootScene = cc.Class({
     _loadRawAsset: function () {
         Log.logD("_loadRawAsset")
         Singleton.RawAssetLoader.addRes(Res.CONFIG_STAGE_PATH)
+        Singleton.RawAssetLoader.addRes(Res.CONFIG_SHARE_PATH)
         Singleton.RawAssetLoader.startLoad(false, this._rawAssetCompleteHandler.bind(this))
     },
 
     _rawAssetCompleteHandler: function (error) {
         Log.logD("_rawAssetCompleteHandler")
         Singleton.Config.initStage(Singleton.RawAssetLoader.getRes(Res.CONFIG_STAGE_PATH))
+        Singleton.Config.initShare(Singleton.RawAssetLoader.getRes(Res.CONFIG_SHARE_PATH));
         this._isRawAssetComplete = true
         this._checkAllComplete()
     },

@@ -4,6 +4,8 @@ const Log = require('Log')
 const RankView = require('RankView')
 const Res = require('Res')
 const Common = require('Common')
+const Singleton = require('Singleton')
+const Random = require('Random')
 
 var HallView = cc.Class({
     extends: BaseView,
@@ -32,6 +34,8 @@ var HallView = cc.Class({
         this.shareBtn.node.on(cc.Node.EventType.TOUCH_END, this._shareClickHandler.bind(this))
 
         this.rankView = null
+
+        this.share = Singleton.Config.share;
     },
 
     onStart: function() {
@@ -67,10 +71,17 @@ var HallView = cc.Class({
     },
 
     _shareClickHandler: function() {
+        this._shareToFriend();
+    },
+
+    _shareToFriend:function(defaultIndex) {
         if (CC_WECHATGAME) {
+            var cfg = this.share.wxshare;
+            var indexValue = defaultIndex!=null ? defaultIndex : Random.getRandom(0,cfg.length-1);
+
             wx.shareAppMessage({
-                title: "夏日炎炎，不如一起来爆个樽",
-                imageUrl: "https://shxingwan-down.oss-cn-shenzhen.aliyuncs.com/wechatGame/cocosGameRes/TheKingOfGun/share/miniGame_share_imge.jpg",
+                title: cfg[indexValue].title,
+                imageUrl: cfg[indexValue].imageUrl,
             })
         }
     },

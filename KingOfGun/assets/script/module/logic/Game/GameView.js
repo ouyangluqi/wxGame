@@ -158,6 +158,46 @@ var GameView = cc.Class({
             default:null,
             type: cc.Node
         },
+        bulletTagSprite: {
+            default:null,
+            type: cc.Node
+        },
+        tipNode:{
+            default:null,
+            type: cc.Node
+        },
+        tipStr:{
+            default:null,
+            type: cc.Label
+        },
+        adView:{
+            default:null,
+            type:cc.Node
+        },
+        adVideoBtn:{
+            default:null,
+            type:cc.Node
+        },
+        adShareBtn:{
+            default:null,
+            type:cc.Node
+        },
+        adCloseBtn:{
+            default:null,
+            type:cc.Node
+        },
+        adVideoLeftTimeTxt: {
+            default:null,
+            type:cc.Label
+        },
+        adShareLeftTimeTxt: {
+            default:null,
+            type:cc.Label
+        },
+        adMsgTxt:{
+            default:null,
+            type:cc.Label
+        },
 
         isBulletNoLimit : false,
         isTimeNoLimit : false,
@@ -179,7 +219,7 @@ var GameView = cc.Class({
         this._initScene();
         this._initListener();
         var windowSize=cc.view.getVisibleSize();
-        Log.logD("ScreenWidth:"+windowSize.width+"  ScreenHeight:"+windowSize.height);;
+        Log.logD("ScreenWidth:"+windowSize.width+"  ScreenHeight:"+windowSize.height);
     },
 
     start () {
@@ -239,7 +279,10 @@ var GameView = cc.Class({
        this.leftBulletNum = 0,
        this.curStage = 1,
        this.commobNum = 0,
-       this.commobTag = 0
+       this.commobTag = 0,
+
+       this.videoAd = null,
+       this.share = Singleton.Config.share;
     },
 
     //初始化监听
@@ -257,8 +300,20 @@ var GameView = cc.Class({
             if (self.isBulletNoLimit==false && self.leftBulletNum>0) {
                 self.leftBulletNum = self.leftBulletNum - 1;
                 self.bulletLeftNumTxt.string = self.leftBulletNum;
-                if(self.leftBulletNum==0) {
-                    self._showSumView();
+                if(self.leftBulletNum<=5) {
+                    var act1 = cc.fadeOut(0.1);
+                    var act2 = cc.fadeIn(0.1);
+                    var act3 = cc.sequence(act1,act2);
+                    self.bulletTagSprite.runAction(cc.repeatForever(act3));
+                }
+                if(self.leftBulletNum<=0) {
+                    self.bulletTagSprite.stopAllActions();
+                    self.bulletTagSprite.opacity = 255;
+                    if(self.adLeftTime>0 || self.shareLeftTime>0) {
+                        self._showAdView("还有复活次数没用完，是否使用？",true);
+                    } else {
+                        self._showSumView();
+                    }
                 }
             }
 
@@ -318,9 +373,97 @@ var GameView = cc.Class({
         this.restartBtn.node.on('click', this._onRestartBtnClick, this);
         this.challgeBtn.node.on('click', this._onChanngleBtnClick, this);
         this.homeBtn.node.on('click', this._onHomeBtnClick, this);
+        this.adBtn.node.on('click', this._adBtnClick, this);
+        this.adVideoBtn.on('click', this._adVideoBtnClick, this);
+        this.adShareBtn.on('click', this._adShareBtnClick, this);
+        this.adCloseBtn.on('click', this._adCloseBtnClick, this);
 
         //注册引导页点击事件
         this.guideNode.on(cc.Node.EventType.TOUCH_END, this._onGuideNodeClick, this);
+    },
+
+    _adCloseBtnClick:function(event) {
+        this.adView.active = false;
+        if(this.adCloseOpenSumTag) {
+            this._showSumView();
+        }
+    },
+
+    _adVideoBtnClick:function(event) {
+        //////////////////////////
+        this._showTip("暂未开放");
+        return;
+        //////////////////////////
+        if(this.adLeftTime>0) {
+            if(CC_WECHATGAME) {
+                var self = this;
+                if(this.videoAd==null) {
+                    this.videoAd = wx.createRewardedVideoAd({
+                        adUnitId: 'adunit-1df71dd00856fc4a'
+                    });
+                    this.videoAd.onClose(()=>{
+                        self.adLeftTime = self.adLeftTime - 1;
+                        self.leftBulletNum = self.adLeftTime + 10;
+                        self._showTip("成功获得10颗子弹")
+                        self.adView.active == false;
+                    });
+                    this.videoAd.onError((e)=>{
+                        self._showTip("视频观看失败")
+                        Log.logE("code:" + e.errCode + " msg:" + e.errMsg);
+                    });
+                }
+
+                this.videoAd.load().then(() => {
+                    videoAd.show();
+                }).catch(err => {
+    
+                })
+            } else {
+                this.adLeftTime = this.adLeftTime - 1;
+                this.leftBulletNum = this.leftBulletNum + 10;
+                this.bulletLeftNumTxt.string = this.leftBulletNum;
+                this._showTip("成功获得10颗子弹")
+                if(this.adView.active == true) {
+                    this.adView.active = false;
+                }
+            }
+        } else {
+            this._showTip("本局次数已用完");
+        }
+        
+    },
+
+    _adShareBtnClick:function(event) {
+        if(this.shareLeftTime>0) {
+            this.shareLeftTime = this.shareLeftTime - 1;
+            this.adView.active = false;
+            this.leftBulletNum = this.leftBulletNum+10;
+            this.bulletLeftNumTxt.string = this.leftBulletNum;
+            this._showTip("成功获得10颗子弹")
+            this._shareToFriend(8);
+        } else {
+            this._showTip("本局次数已用完")
+        }
+    },
+
+    _adBtnClick:function(event) {
+        if(this.curStage<3) {
+            this._showTip("第三关开始可以获得额外子弹");
+            return;
+        }
+        if(this.adLeftTime>0 || this.shareLeftTime>0) {
+            this._showAdView("获得额外子弹",false);
+        } else {
+            this._showTip("本局次数已用完");
+        }
+    },
+
+    _showTip:function(str) {
+        this.tipNode.stopAllActions();
+        this.tipNode.opacity = 255;
+        this.tipNode.active = true;
+        this.tipStr.string = str;
+        this.tipNode.runAction(cc.sequence(cc.delayTime(0.8), cc.fadeOut(0.5)));
     },
 
     //点击引导页
@@ -349,7 +492,36 @@ var GameView = cc.Class({
 
     },
 
+    _showAdBanner:function() {
+        if(1) return;
+        if(CC_WECHATGAME) {
+            var windowSize=cc.view.getVisibleSize();
+            var tarLeft = (windowSize.width-600)/2;
+
+            this.bannerAd = wx.createBannerAd({
+                adUnitId: '',
+                style: {
+                    left: tarLeft,
+                    top: 900,
+                    width: 600
+                }
+            })
+            this.bannerAd.show();
+        }
+    },
+
+    _destroyAdBanner:function() {
+        if(1) return;
+        if(CC_WECHATGAME) {
+            this.bannerAd.destroy();
+        }
+    },
+
     _loadStage: function(stageNum) {
+        if(stageNum == 1) {
+            this.adLeftTime = 1;
+            this.shareLeftTime = 1;
+        }
         var self = this;
         self.summingTag = true;
         this.bulletLineNode.active = false;
@@ -359,6 +531,15 @@ var GameView = cc.Class({
             this.bulletLineNode.active = stageNum<=2 ? true : false;
             self._realLoadStage(stageNum);
         }.bind(self),2000);
+    },
+
+    _showAdView:function(msg,adCloseOpenSum) {
+        this.adView.active = true;
+        this.adMsgTxt.string = msg;
+        this.adCloseOpenSumTag = adCloseOpenSum;
+
+        this.adVideoLeftTimeTxt.string = "剩余次数:" + this.adLeftTime + "/1";
+        this.adShareLeftTimeTxt.string = "剩余次数:" + this.shareLeftTime + "/1";
     },
 
     //加载关卡
@@ -553,10 +734,13 @@ var GameView = cc.Class({
         } else {
             cc.log("获取结算展示排行榜数据。xw_miniGame_x1");
         }
+
+        this._showAdBanner();
     },
 
     //点击再来一局
     _onRestartBtnClick: function (event) {
+        this._destroyAdBanner();
         this.summingTag = false;
         this.sumViewBg.active = false;
         this._initScene();
@@ -565,16 +749,27 @@ var GameView = cc.Class({
 
     //点击挑战好友
     _onChanngleBtnClick: function (event) {
-        if (CC_WECHATGAME) {
-            wx.shareAppMessage({
-                title: "夏日炎炎，不如一起来爆个樽",
-                imageUrl: "https://shxingwan-down.oss-cn-shenzhen.aliyuncs.com/wechatGame/cocosGameRes/TheKingOfGun/share/miniGame_share_imge.jpg",
-            })
-        }
+        this._shareToFriend(9);
     },  
+
+    _shareToFriend:function(defaultIndex) {
+        if (CC_WECHATGAME) {
+            var cfg = this.share.wxshare;
+            var indexValue = defaultIndex!=null ? defaultIndex : Random.getRandom(0,cfg.length-1);
+
+            wx.shareAppMessage({
+                title: cfg[indexValue].title,
+                imageUrl: cfg[indexValue].imageUrl,
+            })
+        } else {
+            var cfg = this.share.wxshare;
+            var indexValue = defaultIndex!=null ? defaultIndex : Random.getRandom(0,cfg.length-1);
+        }
+    },
 
     //点击返回主界面
     _onHomeBtnClick: function (event) {
+        this._destroyAdBanner();
         cc.director.loadScene(Scene.HALL);
     },
 
