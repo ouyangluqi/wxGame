@@ -352,8 +352,9 @@ var GameView = cc.Class({
 
             self.commobTag -= 1;
 
-            if (self.commobTag == 0) {
-                self.commobNum += 1;            
+            if (self.commobTag <= 0) {
+                self.commobNum += 1;    
+                self.commobTag = 0;        
             } else {
                 self.commobNum = 1;
                 self.commobTag = 0;
