@@ -49,7 +49,8 @@ var HallView = cc.Class({
                     width: 40,
                     height: 40
                 }
-            })
+            });
+            this._showAdBanner();
         }
     },
 
@@ -57,7 +58,9 @@ var HallView = cc.Class({
         Log.logD("click start")
         if(CC_WECHATGAME) {
             this.wxButton.hide();
+            this._destroyAdBanner();
         }
+
         cc.director.loadScene(Scene.GAME)
     },
 
@@ -103,5 +106,33 @@ var HallView = cc.Class({
 
     _checkBgmAudio:function() {
         Common.canPlayAudioTag ? this.audio.play() : this.audio.pause();
-    }
+    },
+
+    _showAdBanner:function() {
+        //if(1) return;
+        if(CC_WECHATGAME) {
+            Log.logD("show banner ---")
+            var windowSize=cc.view.getVisibleSize();
+            var tarLeft = (windowSize.width-600)/2;
+
+            this.bannerAd = wx.createBannerAd({
+                adUnitId: 'adunit-9b5f37fef8619f53',
+                style: {
+                    left: tarLeft,
+                    top: 1145,
+                    width: 600
+                }
+            })
+            this.bannerAd.show();
+        }
+    },
+
+    _destroyAdBanner:function() {
+        //if(1) return;
+        if(CC_WECHATGAME) {
+            Log.logD("destroy banner ---")
+            this.bannerAd.destroy();
+        }
+    },
+
 })
