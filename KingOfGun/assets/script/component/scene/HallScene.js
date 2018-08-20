@@ -41,19 +41,19 @@ var HallScene = cc.Class({
             success: function (res) {
                 var authSetting = res.authSetting
                 if (authSetting['scope.userInfo'] === true) {
-                    // wx.login({
-                    //     success: function(res) {
-                    //         Log.logD("The code is: " + res.code)
-                    //     },
-                    //     fail: function() {
+                    wx.login({
+                        success: function(res) {
+                            Log.logD("The code is: " + res.code)
+                        },
+                        fail: function() {
 
-                    //     },
-                    //     complete: function() {
-                    //         self._startLoadResHandler()
-                    //     },
+                        },
+                        complete: function() {
+                            self._startLoadResHandler()
+                        },
 
-                    // })
-                    self._startLoadResHandler()
+                    })
+                    // self._startLoadResHandler()
                 } else if (authSetting['scope.userInfo'] === false) {
                     wx.showModal({
                         title: '用户未授权',
