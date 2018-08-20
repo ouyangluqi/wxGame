@@ -44,8 +44,8 @@ var HallView = cc.Class({
             this.wxButton = wx.createGameClubButton({
                 icon: 'green',
                 style: {
-                    left: 604,
-                    top: 1185,
+                    left: 0,
+                    top: 100,
                     width: 40,
                     height: 40
                 }
@@ -114,12 +114,13 @@ var HallView = cc.Class({
             Log.logD("show banner ---")
             var windowSize=cc.view.getVisibleSize();
             var tarLeft = (windowSize.width-600)/2;
-
+            let { screenWidth } = wx.getSystemInfoSync()
+            Log.logD("--screenWidth " + screenWidth);
             this.bannerAd = wx.createBannerAd({
                 adUnitId: 'adunit-9b5f37fef8619f53',
                 style: {
-                    left: tarLeft,
-                    top: 1145,
+                    left: 0,
+                    top: 486,
                     width: 600
                 }
             })

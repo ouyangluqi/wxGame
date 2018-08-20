@@ -516,7 +516,7 @@ var GameView = cc.Class({
                 style: {
                     left: 0,
                     top: 0,
-                    width: 600
+                    width: 350
                 }
             })
             this.bannerAd.show();
