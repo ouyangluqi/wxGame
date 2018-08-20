@@ -472,11 +472,14 @@ var GameView = cc.Class({
 
     _adShareBtnClick:function(event) {
         if(this.shareLeftTime>0) {
+            var self = this;
+            setTimeout(() => {
+                this._showTip("成功获得10颗子弹");
+            }, 2000);
             this.shareLeftTime = this.shareLeftTime - 1;
             this.adView.active = false;
             this.leftBulletNum = this.leftBulletNum+10;
             this.bulletLeftNumTxt.string = this.leftBulletNum;
-            this._showTip("成功获得10颗子弹")
             this._shareToFriend(8);
         } else {
             this._showTip("本局次数已用完")
