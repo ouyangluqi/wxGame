@@ -9,14 +9,14 @@ var BootScene = cc.Class({
     onLoad: function() {
         Log.logD("The bootScene is start")
         this._isRawAssetComplete = false
-        this._isAnimationComplete = false
+        this._isAnimationComplete = true
     },
 
     //init
     start () {
         Singleton.init()
         this._loadRawAsset()
-        this.scheduleOnce(this._animationCompleteHandler.bind(this), 1)
+        // this.scheduleOnce(this._animationCompleteHandler.bind(this), 1)
     },
 
     _loadRawAsset: function () {

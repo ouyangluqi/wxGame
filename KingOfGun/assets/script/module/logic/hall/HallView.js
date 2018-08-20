@@ -143,7 +143,7 @@ var HallView = cc.Class({
             this.bannerAd.onResize(function() {
                 self.bannerAd.style.left = w - self.bannerAd.style.realWidth / 2 + 0.1
                 if (isIPX) {
-                    self.bannerAd.style.top = h - self.bannerAd.style.realHeight - 20
+                    self.bannerAd.style.top = h - self.bannerAd.style.realHeight - 0.1
                 } else {
                     self.bannerAd.style.top = h - self.bannerAd.style.realHeight + 0.1
                 }
