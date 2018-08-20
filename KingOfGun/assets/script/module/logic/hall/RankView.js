@@ -56,6 +56,8 @@ var RankView = cc.Class({
     _backClickHandler: function() {
         this.go.active = false
         clearInterval(this.times)
+        var eventParam = new cc.Event.EventCustom("closeRank", true)
+        this.go.dispatchEvent(eventParam);
     },
 
     _updateSubDomainCanvas: function () {

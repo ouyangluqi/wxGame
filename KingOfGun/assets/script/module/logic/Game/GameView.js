@@ -536,15 +536,28 @@ var GameView = cc.Class({
         //if(1) return;
         if(CC_WECHATGAME) {
             Log.logD("show banner ---")
-            var windowSize=cc.view.getVisibleSize();
-            var tarLeft = (windowSize.width-600)/2;
+            // var windowSize=cc.view.getVisibleSize();
+            // var tarLeft = (windowSize.width-600)/2;
 
+            var phone = wx.getSystemInfoSync()
+            var w = phone.screenWidth / 2
+            var h = phone.screenHeight
+            var isIPX = phone.model.search('iPhone X') != -1
             this.bannerAd = wx.createBannerAd({
                 adUnitId: 'adunit-3ecb1589dbe25455',
                 style: {
                     left: 0,
                     top: 0,
-                    width: 350
+                    width: phone.screenWidth - 60
+                }
+            })
+            var self = this
+            this.bannerAd.onResize(function() {
+                self.bannerAd.style.left = w - self.bannerAd.style.realWidth / 2 + 0.1
+                if (isIPX) {
+                    self.bannerAd.style.top = h - self.bannerAd.style.realHeight - 0.1
+                } else {
+                    self.bannerAd.style.top = h - self.bannerAd.style.realHeight + 0.1
                 }
             })
             this.bannerAd.show();

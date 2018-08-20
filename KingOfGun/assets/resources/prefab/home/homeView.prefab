@@ -469,11 +469,11 @@
     "_enabled": true,
     "isAlignOnce": true,
     "_target": null,
-    "_alignFlags": 21,
+    "_alignFlags": 16,
     "_left": 0,
     "_right": 0,
-    "_top": 621,
-    "_bottom": 621,
+    "_top": 598,
+    "_bottom": 598,
     "_verticalCenter": 0,
     "_horizontalCenter": 0,
     "_isAbsLeft": true,
@@ -1432,7 +1432,7 @@
     },
     "_children": [],
     "_tag": -1,
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 42
