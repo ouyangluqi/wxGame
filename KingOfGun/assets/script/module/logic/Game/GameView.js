@@ -428,7 +428,7 @@ var GameView = cc.Class({
                 this.videoAd.load().then(() => {
                     videoAd.show();
                 }).catch(err => {
-    
+                    Log.logD(err.errMsg);
                 })
             } else {
                 this.adLeftTime = this.adLeftTime - 1;
