@@ -436,11 +436,14 @@ var GameView = cc.Class({
                     this.videoAd = wx.createRewardedVideoAd({
                         adUnitId: 'adunit-e25ae0ff433ac212'
                     });
-                    this.videoAd.onClose(()=>{
-                        self.adLeftTime = self.adLeftTime - 1;
-                        self.leftBulletNum = self.adLeftTime + 10;
-                        self._showTip("成功获得10颗子弹")
-                        self.adView.active == false;
+                    this.videoAd.onClose(res=>{
+                        if(res && res.isEnded || res === undefined) {
+                            self.adLeftTime = self.adLeftTime - 1;
+                            self.leftBulletNum = self.leftBulletNum + 10;
+                            this.bulletLeftNumTxt.string = this.leftBulletNum;
+                            self._showTip("成功获得10颗子弹")
+                            self.adView.active = false;
+                        }
                     });
                     this.videoAd.onError((e)=>{
                         self._showTip("视频观看失败")
@@ -449,7 +452,7 @@ var GameView = cc.Class({
                 }
 
                 this.videoAd.load().then(() => {
-                    videoAd.show();
+                    self.videoAd.show();
                 }).catch(err => {
                     Log.logD(err.errMsg);
                 })
@@ -465,7 +468,6 @@ var GameView = cc.Class({
         } else {
             this._showTip("本局次数已用完");
         }
-        
     },
 
     _adShareBtnClick:function(event) {
