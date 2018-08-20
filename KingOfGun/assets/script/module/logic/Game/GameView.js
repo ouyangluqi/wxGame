@@ -198,6 +198,18 @@ var GameView = cc.Class({
             default:null,
             type:cc.Label
         },
+        newRecordView:{
+            default:null,
+            type:cc.Node
+        },
+        reCancleBtn:{
+            default:null,
+            type:cc.Node
+        },
+        reShareBtn:{
+            default:null,
+            type:cc.Node
+        },
 
         isBulletNoLimit : false,
         isTimeNoLimit : false,
@@ -389,9 +401,20 @@ var GameView = cc.Class({
         this.adVideoBtn.on('click', this._adVideoBtnClick, this);
         this.adShareBtn.on('click', this._adShareBtnClick, this);
         this.adCloseBtn.on('click', this._adCloseBtnClick, this);
+        this.reCancleBtn.on('click',this._reCancleBtnClick, this);
+        this.reShareBtn.on('click',this._reShareBtnClick, this);
 
         //注册引导页点击事件
         this.guideNode.on(cc.Node.EventType.TOUCH_END, this._onGuideNodeClick, this);
+    },
+
+    _reCancleBtnClick:function(event) {
+        this.newRecordView.active = false;
+    },
+
+    _reShareBtnClick:function(event) {
+        this._shareToFriend(9);
+        this.newRecordView.active = false;
     },
 
     _adCloseBtnClick:function(event) {
@@ -733,6 +756,7 @@ var GameView = cc.Class({
         this.summingTag = true;
         this._pauseView();
         this.sumView.y = 404;
+        let maxScore = Number(Common.getHistoryScore());
         this.sumScoreTxt.string = this.curScoreTxt.string;
         Common.checkScoreAndSave(this.curScoreTxt.string);
         this.sumViewBg.active = true;
@@ -750,6 +774,13 @@ var GameView = cc.Class({
         }
 
         this._showAdBanner();
+
+        var self = this;
+        if(Number(this.curScoreTxt.string)>maxScore){
+            setTimeout(() => {
+                this.newRecordView.active = true;
+            }, 800);        
+        }
     },
 
     //点击再来一局
