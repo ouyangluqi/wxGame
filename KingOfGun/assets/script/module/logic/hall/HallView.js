@@ -38,11 +38,26 @@ var HallView = cc.Class({
         this.share = Singleton.Config.share;
     },
 
-    onStart: function() {
+    start() {
+        if(CC_WECHATGAME) {
+            Log.logD("--show wx btn")
+            this.wxButton = wx.createGameClubButton({
+                icon: 'green',
+                style: {
+                    left: 604,
+                    top: 1185,
+                    width: 40,
+                    height: 40
+                }
+            })
+        }
     },
 
     _startClickHandler: function() {
         Log.logD("click start")
+        if(CC_WECHATGAME) {
+            this.wxButton.hide();
+        }
         cc.director.loadScene(Scene.GAME)
     },
 

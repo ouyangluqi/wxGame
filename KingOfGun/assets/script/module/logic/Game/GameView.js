@@ -232,6 +232,17 @@ var GameView = cc.Class({
             this._loadStage(this.curStage);
         }
         Common.hasShowGuideTag=true;
+
+
+        if(CC_WECHATGAME) {
+            wx.showShareMenu();
+            wx.onShareAppMessage(function () {
+                // 用户点击了“转发”按钮
+                return {
+                  title: '我的分数超过了本群99%的人，快来挑战我吧'
+                }
+            })
+        }
     },
 
     onDestroy () {
@@ -392,15 +403,15 @@ var GameView = cc.Class({
 
     _adVideoBtnClick:function(event) {
         //////////////////////////
-        this._showTip("暂未开放");
-        return;
+        // this._showTip("暂未开放");
+        // return;
         //////////////////////////
         if(this.adLeftTime>0) {
             if(CC_WECHATGAME) {
                 var self = this;
                 if(this.videoAd==null) {
                     this.videoAd = wx.createRewardedVideoAd({
-                        adUnitId: 'adunit-1df71dd00856fc4a'
+                        adUnitId: 'adunit-e25ae0ff433ac212'
                     });
                     this.videoAd.onClose(()=>{
                         self.adLeftTime = self.adLeftTime - 1;
@@ -494,16 +505,17 @@ var GameView = cc.Class({
     },
 
     _showAdBanner:function() {
-        if(1) return;
+        //if(1) return;
         if(CC_WECHATGAME) {
+            Log.logD("show banner ---")
             var windowSize=cc.view.getVisibleSize();
             var tarLeft = (windowSize.width-600)/2;
 
             this.bannerAd = wx.createBannerAd({
-                adUnitId: '',
+                adUnitId: 'adunit-3ecb1589dbe25455',
                 style: {
                     left: tarLeft,
-                    top: 900,
+                    top: 100,
                     width: 600
                 }
             })
@@ -512,8 +524,9 @@ var GameView = cc.Class({
     },
 
     _destroyAdBanner:function() {
-        if(1) return;
+        //if(1) return;
         if(CC_WECHATGAME) {
+            Log.logD("destroy banner ---")
             this.bannerAd.destroy();
         }
     },
