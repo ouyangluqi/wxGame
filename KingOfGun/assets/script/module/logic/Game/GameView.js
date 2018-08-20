@@ -515,7 +515,7 @@ var GameView = cc.Class({
                 adUnitId: 'adunit-3ecb1589dbe25455',
                 style: {
                     left: 0,
-                    top: 900,
+                    top: 0,
                     width: 600
                 }
             })
