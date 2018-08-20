@@ -514,8 +514,8 @@ var GameView = cc.Class({
             this.bannerAd = wx.createBannerAd({
                 adUnitId: 'adunit-3ecb1589dbe25455',
                 style: {
-                    left: tarLeft,
-                    top: 100,
+                    left: 0,
+                    top: 900,
                     width: 600
                 }
             })
