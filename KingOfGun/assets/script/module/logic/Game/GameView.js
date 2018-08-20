@@ -474,7 +474,7 @@ var GameView = cc.Class({
         if(this.shareLeftTime>0) {
             var self = this;
             setTimeout(() => {
-                this._showTip("成功获得10颗子弹");
+                self._showTip("成功获得10颗子弹");
             }, 2000);
             this.shareLeftTime = this.shareLeftTime - 1;
             this.adView.active = false;
