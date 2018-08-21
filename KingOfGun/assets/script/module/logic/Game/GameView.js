@@ -332,7 +332,7 @@ var GameView = cc.Class({
                 if(self.leftBulletNum<=0) {
                     self.bulletTagSprite.stopAllActions();
                     self.bulletTagSprite.opacity = 255;
-                    if(self.adLeftTime>0 || self.shareLeftTime>0) {
+                    if(self.adLeftTime>0) {
                         self._showAdView("还有复活次数没用完，是否使用？",true);
                     } else {
                         self._showSumView();
@@ -491,7 +491,7 @@ var GameView = cc.Class({
             this._showTip("第三关开始可以获得额外子弹");
             return;
         }
-        if(this.adLeftTime>0 || this.shareLeftTime>0) {
+        if(this.adLeftTime>0) {
             this._showAdView("获得额外子弹",false);
         } else {
             this._showTip("本局次数已用完");
@@ -574,7 +574,7 @@ var GameView = cc.Class({
 
     _loadStage: function(stageNum) {
         if(stageNum == 1) {
-            this.adLeftTime = 1;
+            this.adLeftTime = 2;
             this.shareLeftTime = 1;
         }
         var self = this;
@@ -593,8 +593,8 @@ var GameView = cc.Class({
         this.adMsgTxt.string = msg;
         this.adCloseOpenSumTag = adCloseOpenSum;
 
-        this.adVideoLeftTimeTxt.string = "剩余次数:" + this.adLeftTime + "/1";
-        this.adShareLeftTimeTxt.string = "剩余次数:" + this.shareLeftTime + "/1";
+        this.adVideoLeftTimeTxt.string = "剩余次数:" + this.adLeftTime + "/2";
+    //   this.adShareLeftTimeTxt.string = "剩余次数:" + this.shareLeftTime + "/1";
     },
 
     //加载关卡
