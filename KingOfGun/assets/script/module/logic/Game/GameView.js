@@ -332,7 +332,9 @@ var GameView = cc.Class({
                 if(self.leftBulletNum<=0) {
                     self.bulletTagSprite.stopAllActions();
                     self.bulletTagSprite.opacity = 255;
-                    if(self.adLeftTime>0) {
+                    let curScore = Number(self.curScoreTxt.string);
+                    self.adShareBtn.active = curScore > 500 ? true : false;
+                    if(self.adLeftTime>0 || (self.shareLeftTime>0 && this.adShareBtn.active==true)) {
                         self._showAdView("还有复活次数没用完，是否使用？",true);
                     } else {
                         self._showSumView();
@@ -443,6 +445,8 @@ var GameView = cc.Class({
                             this.bulletLeftNumTxt.string = this.leftBulletNum;
                             self._showTip("成功获得10颗子弹")
                             self.adView.active = false;
+                            self.bulletTagSprite.stopAllActions();
+                            self.bulletTagSprite.opacity = 255;
                         }
                     });
                     this.videoAd.onError((e)=>{
@@ -472,6 +476,8 @@ var GameView = cc.Class({
 
     _adShareBtnClick:function(event) {
         if(this.shareLeftTime>0) {
+            this.bulletTagSprite.stopAllActions();
+            this.bulletTagSprite.opacity = 255;
             var self = this;
             setTimeout(() => {
                 self._showTip("成功获得10颗子弹");
@@ -491,7 +497,9 @@ var GameView = cc.Class({
             this._showTip("第三关开始可以获得额外子弹");
             return;
         }
-        if(this.adLeftTime>0) {
+        let curScore = Number(this.curScoreTxt.string);
+        this.adShareBtn.active = curScore > 500 ? true : false;
+        if(this.adLeftTime>0 || (this.shareLeftTime>0 && this.adShareBtn.active==true)) {
             this._showAdView("获得额外子弹",false);
         } else {
             this._showTip("本局次数已用完");
@@ -574,7 +582,7 @@ var GameView = cc.Class({
 
     _loadStage: function(stageNum) {
         if(stageNum == 1) {
-            this.adLeftTime = 2;
+            this.adLeftTime = 1;
             this.shareLeftTime = 1;
         }
         var self = this;
@@ -593,8 +601,8 @@ var GameView = cc.Class({
         this.adMsgTxt.string = msg;
         this.adCloseOpenSumTag = adCloseOpenSum;
 
-        this.adVideoLeftTimeTxt.string = "剩余次数:" + this.adLeftTime + "/2";
-    //   this.adShareLeftTimeTxt.string = "剩余次数:" + this.shareLeftTime + "/1";
+        this.adVideoLeftTimeTxt.string = "剩余次数:" + this.adLeftTime + "/1";
+        this.adShareLeftTimeTxt.string = "剩余次数:" + this.shareLeftTime + "/1";
     },
 
     //加载关卡
