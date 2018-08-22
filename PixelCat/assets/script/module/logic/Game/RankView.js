@@ -20,6 +20,8 @@ var RankView = cc.Class({
     
     _backClickHandler: function() {
         this.node.active = false
+        var eventParam = new cc.Event.EventCustom("closeRankView",true);
+        this.node.dispatchEvent(eventParam);
     },
 
     _updateSubDomainCanvas: function () {

@@ -4,6 +4,7 @@ const Common = require('Common')
 const Singleton = require('Singleton')
 const ParamConst = require('ParamConst')
 const Res = require('Res');
+const Log = require('Log');
 
 cc.Class({
     extends: BaseView,
@@ -225,6 +226,18 @@ cc.Class({
         tipStr: {
             default: null,
             type: cc.Label
+        },
+        newRecordView: {
+            default: null,
+            type: cc.Node
+        },
+        recordCancelBtn: {
+            default: null,
+            type: cc.Node
+        },
+        recordSureBtn: {
+            default: null,
+            type: cc.Node
         }
     },
 
@@ -240,6 +253,7 @@ cc.Class({
         this._initThings();
         this._initScene();
         this._initListener();  
+        this._showAdBanner();
     },
 
     update (dt) {
@@ -267,6 +281,7 @@ cc.Class({
         this.shop = Singleton.Config.shop;
         this.share = Singleton.Config.share;
 
+        this.videoAd = null;
         this.isCatDie = false;
         this.startTag = false;
         this.scoreNum = 0;
@@ -323,7 +338,8 @@ cc.Class({
         this.itemShopBtn.on('click',this._onItemShopBtnClick, this);
         this.adCancelBtn.on('click',this._onAdCancelBtnClick, this);
         this.adGotoBtn.on('click',this._onAdGotoBtnClick, this);
-
+        this.recordCancelBtn.on('click',this._onRecordCancelBtnClick, this);
+        this.recordSureBtn.on('click',this._onRecordSureBtnClick, this);
 
         this.node.on("stoneOut",this._onStoneOut, this);
         this.node.on("catDie",this._onCatDie, this);
@@ -334,7 +350,21 @@ cc.Class({
         this.node.on("addBuff",this._addBuffCallBack, this);
         this.node.on("removeBuff",this._removeBuffCallBack, this);
         this.node.on("useShield",this._useShield,this);
-        this.node.on("showItemShopByGameItem",this._showItemShopByGameItem,this)
+        this.node.on("showItemShopByGameItem",this._showItemShopByGameItem,this);
+        this.node.on("closeRankView",this._closeRankView, this);
+    },
+
+    _onRecordCancelBtnClick:function(event) {
+        this.newRecordView.active = false;
+    },
+
+    _onRecordSureBtnClick:function(event) {
+        this.newRecordView.active = false;
+        this._shareToFriend(this.share.wxshare.length-1);
+    },
+
+    _closeRankView:function() {
+        this._showAdBanner();
     },
 
     _onAdCancelBtnClick:function() {
@@ -346,7 +376,49 @@ cc.Class({
     },
 
     _onAdGotoBtnClick:function() {
+        if(CC_WECHATGAME) {
+            var self = this;
+            if(this.videoAd==null) {
+                this.videoAd = wx.createRewardedVideoAd({
+                    adUnitId: 'adunit-7f3eeaba72d1de84'
+                });
+                this.videoAd.onClose(res=>{
+                    if(res && res.isEnded || res === undefined) {
+                        self._onAdCancelBtnClick();
+                        var getGold = 1;
+                        var storeGold = Common.getDataCount(ParamConst.countKeyXGold);
+                        getGold = getGold + Math.round(self.scoreNum/100);
+                        self.xingBiCom.setString(getGold*2+"");
 
+                        self._showTip("额外获得 " + getGold + " 星币");
+
+                        getGold = getGold + storeGold;
+                        Common.setDataCount(ParamConst.countKeyXGold, getGold); 
+                    }
+                });
+                this.videoAd.onError((e)=>{
+                    self._showTip("视频观看失败")
+                    Log.logE("code:" + e.errCode + " msg:" + e.errMsg);
+                });
+            }
+
+            this.videoAd.load().then(() => {
+                self.videoAd.show();
+            }).catch(err => {
+                Log.logD(err.errMsg);
+            })
+        } else {
+            this._onAdCancelBtnClick();
+            var getGold = 1;
+            var storeGold = Common.getDataCount(ParamConst.countKeyXGold);
+            getGold = getGold + Math.round(this.scoreNum/100);
+            this.xingBiCom.setString(getGold*2+"");
+
+            this._showTip("额外获得 " + getGold + " 星币");
+
+            getGold = getGold + storeGold;
+            Common.setDataCount(ParamConst.countKeyXGold, getGold); 
+        }
     },
 
     _showItemShopByGameItem:function() {
@@ -450,15 +522,18 @@ cc.Class({
     },  
 
     _onAchBtnClick:function(event) {
+        this._hideAdBanner();
         this.achView.active = true;
         this._drawAchView();
     },
 
     _onAchBackBtnClick:function(event) {
+        this._showAdBanner();
         this.achView.active = false;
     },
 
     _onShopBtnClick:function(event) {
+        this._hideAdBanner();
         this.shopView.active = true;
         this._onRoleShopBtnClick()
     },
@@ -467,6 +542,8 @@ cc.Class({
         this.shopView.active = false;
         if(this.guideView.active==true) {
             this._showGameItem();
+        } else {
+            this._showAdBanner();
         }
     },
 
@@ -552,6 +629,7 @@ cc.Class({
     },
 
     _onStartBtnClick:function(event) {
+        this._destroyAdBanner();
         var self = this;
 
         this.selectAudio.play();
@@ -640,6 +718,7 @@ cc.Class({
     },
 
     _onSumRestartBtnClick:function(event) {
+        this._destroyAdBanner();
         this.sumView.active = false;
         this._restart();
     },
@@ -696,6 +775,7 @@ cc.Class({
     },
 
     _showSumView:function() {
+        this._showAdBanner();
         this.newRecordSp.stopAllActions();
         this.newRecordSp.active = false;
         this.sumShareBtn.stopAllActions();
@@ -716,6 +796,7 @@ cc.Class({
              var act1 = cc.blink(1,3);
              var act = cc.repeatForever(act1);
              this.newRecordSp.runAction(act);
+             this.newRecordView.active = true;
         }
 
         if(this.scoreNum>=50) {
@@ -726,14 +807,15 @@ cc.Class({
             getGold = getGold + storeGold;
 
             Common.setDataCount(ParamConst.countKeyXGold, getGold);
+
+            this._showAdAlert();
         } else {
             this.xingBiCom.setString("0");
         }
-
-        //this._showAdAlert();
     },
 
     _showRankView:function() {
+        this._hideAdBanner();
         this.rankViewNode.active = true;
         this.rankViewCom.showRank();
     },
@@ -1062,5 +1144,53 @@ cc.Class({
         this.tipNode.active = true;
         this.tipStr.string = str;
         this.tipNode.runAction(cc.sequence(cc.delayTime(0.8), cc.fadeOut(0.5)));
-    }
+    },
+
+    _showAdBanner:function() {
+        Log.logD("show banner")
+        if(CC_WECHATGAME) {
+            var phone = wx.getSystemInfoSync()
+            var w = phone.screenWidth / 2
+            var h = phone.screenHeight
+            var isIPX = phone.model.search('iPhone X') != -1
+
+            this.bannerAd = wx.createBannerAd({
+                adUnitId: 'adunit-97ee1b9d8c161915',
+                style: {
+                    left: 0,
+                    top: 0,
+                    width: phone.screenWidth - 60
+                }
+            })
+            var self = this
+            this.bannerAd.onResize(function() {
+                self.bannerAd.style.left = w - self.bannerAd.style.realWidth / 2 + 0.1
+                if (isIPX) {
+                    self.bannerAd.style.top = h - self.bannerAd.style.realHeight - 0.1
+                } else {
+                    self.bannerAd.style.top = h - self.bannerAd.style.realHeight + 0.1
+                }
+            })
+            this.bannerAd.show();
+        }
+    },
+
+    _hideAdBanner: function() {
+        Log.logD("hide banner")
+        if(CC_WECHATGAME) {
+            if (this.bannerAd) {
+                this.bannerAd.hide()                
+            }
+        }
+    },
+
+    _destroyAdBanner:function() {
+        Log.logD("destroy banner")
+        if(CC_WECHATGAME) {
+            if (this.bannerAd) {
+                this.bannerAd.destroy()
+                this.bannerAd = null                
+            }
+        }
+    },
 });
