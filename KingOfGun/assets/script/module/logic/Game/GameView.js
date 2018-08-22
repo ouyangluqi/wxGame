@@ -334,7 +334,7 @@ var GameView = cc.Class({
                     self.bulletTagSprite.opacity = 255;
                     let curScore = Number(self.curScoreTxt.string);
                     self.adShareBtn.active = curScore > 500 ? true : false;
-                    if(self.adLeftTime>0 || (self.shareLeftTime>0 && this.adShareBtn.active==true)) {
+                    if(self.adLeftTime>0 || (self.shareLeftTime>0 && self.adShareBtn.active==true)) {
                         self._showAdView("还有复活次数没用完，是否使用？",true);
                     } else {
                         self._showSumView();
