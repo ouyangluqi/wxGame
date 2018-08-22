@@ -254,6 +254,28 @@ cc.Class({
         this._initScene();
         this._initListener();  
         this._showAdBanner();
+
+        if(CC_WECHATGAME) {
+            var cfg = this.share.wxshare;
+            wx.showShareMenu();
+            wx.onShareAppMessage(function () {
+                // 用户点击了“转发”按钮
+                return {
+                  title: '我的分数超过了本群99%的人，快来挑战我吧',
+                  imageUrl:cfg[this.share.wxshare.length-1].imageUrl,
+                }
+            });
+
+            this.wxButton = wx.createGameClubButton({
+                icon: 'green',
+                style: {
+                    left: 0,
+                    top: 50,
+                    width: 40,
+                    height: 40
+                }
+            });
+        }
     },
 
     update (dt) {
@@ -318,6 +340,18 @@ cc.Class({
         }
     },
 
+    _showWxBtn:function() {
+        if(CC_WECHATGAME && this.wxButton!=null) {
+            this.wxButton.sshow();
+        }
+    },
+
+    _hideWxBtn:function() {
+        if(CC_WECHATGAME && this.wxButton!=null) {
+            this.wxButton.hside();
+        }
+    },
+
     _initListener:function() {
         this.node.on(cc.Node.EventType.TOUCH_END, this._onMainNodeClick, this);
         this.startBtn.on('click', this._onStartBtnClick, this);
@@ -364,6 +398,7 @@ cc.Class({
     },
 
     _closeRankView:function() {
+        this._showWxBtn();
         this._showAdBanner();
     },
 
@@ -380,7 +415,7 @@ cc.Class({
             var self = this;
             if(this.videoAd==null) {
                 this.videoAd = wx.createRewardedVideoAd({
-                    adUnitId: 'adunit-7f3eeaba72d1de84'
+                    adUnitId: 'adunit-b89ab7c82ac0b422'
                 });
                 this.videoAd.onClose(res=>{
                     if(res && res.isEnded || res === undefined) {
@@ -507,6 +542,7 @@ cc.Class({
     },
 
     _onSumHomeBtnClick:function(event) {
+        this._showWxBtn();
         this.sumView.active = false;
         this._reset();
         this.startView.active = true;
@@ -522,17 +558,20 @@ cc.Class({
     },  
 
     _onAchBtnClick:function(event) {
+        this._hideWxBtn();
         this._hideAdBanner();
         this.achView.active = true;
         this._drawAchView();
     },
 
     _onAchBackBtnClick:function(event) {
+        this._showWxBtn();
         this._showAdBanner();
         this.achView.active = false;
     },
 
     _onShopBtnClick:function(event) {
+        this._hideWxBtn();
         this._hideAdBanner();
         this.shopView.active = true;
         this._onRoleShopBtnClick()
@@ -543,6 +582,7 @@ cc.Class({
         if(this.guideView.active==true) {
             this._showGameItem();
         } else {
+            this._showWxBtn();
             this._showAdBanner();
         }
     },
@@ -629,6 +669,7 @@ cc.Class({
     },
 
     _onStartBtnClick:function(event) {
+        this._hideWxBtn();
         this._destroyAdBanner();
         var self = this;
 
@@ -815,6 +856,7 @@ cc.Class({
     },
 
     _showRankView:function() {
+        this._hideWxBtn();
         this._hideAdBanner();
         this.rankViewNode.active = true;
         this.rankViewCom.showRank();
