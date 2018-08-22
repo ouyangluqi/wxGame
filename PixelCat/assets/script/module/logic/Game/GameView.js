@@ -257,12 +257,13 @@ cc.Class({
 
         if(CC_WECHATGAME) {
             var cfg = this.share.wxshare;
+            var self = this;
             wx.showShareMenu();
             wx.onShareAppMessage(function () {
                 // 用户点击了“转发”按钮
                 return {
                   title: '我的分数超过了本群99%的人，快来挑战我吧',
-                  imageUrl:cfg[this.share.wxshare.length-1].imageUrl,
+                  imageUrl:cfg[self.share.wxshare.length-1].imageUrl,
                 }
             });
 
