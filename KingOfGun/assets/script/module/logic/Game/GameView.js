@@ -793,10 +793,10 @@ var GameView = cc.Class({
         if (CC_WECHATGAME) {
             window.wx.postMessage({// 发消息给子域
                 messageType: 2,
-                mainMenuNum: "xw_miniGame_x1"
+                mainMenuNum: "kogScore"
             });
         } else {
-            cc.log("获取结算展示排行榜数据。xw_miniGame_x1");
+            cc.log("获取结算展示排行榜数据。kogScore");
         }
 
         this._showAdBanner();

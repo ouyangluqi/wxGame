@@ -22,14 +22,14 @@ var Common = cc.Class({
 
         getHistoryScore:function () {
             Log.logD("getHistroyScore")
-            var result = cc.sys.localStorage.getItem('xw_miniGame_x1');
+            var result = cc.sys.localStorage.getItem('kogScore');
             if(result == null) {
                 Log.logD("The result is null")
-                cc.sys.localStorage.setItem('xw_miniGame_x1', 0);
+                cc.sys.localStorage.setItem('kogScore', 0);
                 if(CC_WECHATGAME) {
                     var kvDataList = new Array();
                     kvDataList.push({
-                        key: "xw_miniGame_x1",
+                        key: "kogScore",
                         value: "0"
                     });
                     wx.setUserCloudStorage({
@@ -48,13 +48,13 @@ var Common = cc.Class({
         },
 
         checkScoreAndSave:function (scoreNum) {
-            var result = cc.sys.localStorage.getItem('xw_miniGame_x1');
+            var result = cc.sys.localStorage.getItem('kogScore');
             if(scoreNum > result) {
-                cc.sys.localStorage.setItem('xw_miniGame_x1', scoreNum);
+                cc.sys.localStorage.setItem('kogScore', scoreNum);
                 if(CC_WECHATGAME) {
                     var kvDataList = new Array();
                     kvDataList.push({
-                        key: "xw_miniGame_x1",
+                        key: "kogScore",
                         value: scoreNum+""
                     });
                     wx.setUserCloudStorage({
